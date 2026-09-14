@@ -95,5 +95,26 @@ dart analyze . --fatal-infos
 
 ---
 
+## 🤖 Installing Skills via `dart run skills@`
+
+You can install all 110+ production AI agent skills from this repository directly into any of your Dart or Flutter projects using the official [Dart Package Skills](https://dart.dev/ai/package-skills) CLI:
+
+```bash
+# Install all skills for Antigravity:
+dart run skills@ add https://github.com/Vurarddo/flutter_agents --all --agent antigravity
+
+# Install all skills for Cursor:
+dart run skills@ add https://github.com/Vurarddo/flutter_agents --all --agent cursor
+
+# Install all skills for Claude:
+dart run skills@ add https://github.com/Vurarddo/flutter_agents --all --agent claude
+
+# Interactively select specific skills:
+dart run skills@ add https://github.com/Vurarddo/flutter_agents
+```
+
+
+---
+
 ## 📖 Operational Runbook
 For complete day-to-day developer operations, generator commands, flavor setups, and architecture skill navigation, refer to [RUNBOOK.md](RUNBOOK.md).
