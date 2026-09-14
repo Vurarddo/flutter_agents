@@ -1,6 +1,6 @@
 ---
 name: data-repositories
-description: Standards and patterns for Repository Implementations in lib/data/<feature>/repositories/. Covers implementing Domain repository contracts (implements I<Feature>Repository), orchestrating remote API clients and local caches, converting DTOs via toDomain(), mapping DioException to typed Domain Failures, and DI registration via @LazySingleton(as: IRepository).
+description: "Standards and patterns for Repository Implementations in lib/data/<feature>/repositories/. Covers implementing Domain repository contracts (implements I<Feature>Repository), orchestrating remote API clients and local caches, converting DTOs via toDomain(), mapping DioException to typed Domain Failures, and DI registration via @LazySingleton(as: IRepository)."
 ---
 
 # Data Repository Implementations
