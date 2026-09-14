@@ -1,0 +1,39 @@
+{
+  "@@locale": "uk",
+  "appTitle": "Flutter Agents",
+  "@appTitle": {
+    "description": "Назва додатку"
+  },
+  "uikitTitle": "Вітрина Дизайн-системи",
+  "@uikitTitle": {
+    "description": "Заголовок сторінки UI Kit"
+  },
+  "exampleTitle": "Приклади елементів",
+  "@exampleTitle": {
+    "description": "Заголовок сторінки прикладів"
+  },
+  "themeModeSystem": "Системна",
+  "@themeModeSystem": {
+    "description": "Системна тема"
+  },
+  "themeModeLight": "Світла",
+  "@themeModeLight": {
+    "description": "Світла тема"
+  },
+  "themeModeDark": "Темна",
+  "@themeModeDark": {
+    "description": "Темна тема"
+  },
+  "retryButton": "Повторити",
+  "@retryButton": {
+    "description": "Кнопка повторити"
+  },
+  "noData": "Елементи відсутні",
+  "@noData": {
+    "description": "Порожній список"
+  },
+  "errorGeneric": "Щось пішло не так. Спробуйте ще раз.",
+  "@errorGeneric": {
+    "description": "Загальне повідомлення про помилку"
+  }
+}

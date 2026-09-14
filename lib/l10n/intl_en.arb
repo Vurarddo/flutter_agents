@@ -1,0 +1,39 @@
+{
+  "@@locale": "en",
+  "appTitle": "Flutter Agents",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "uikitTitle": "Design System Showcase",
+  "@uikitTitle": {
+    "description": "Title of the UI Kit page"
+  },
+  "exampleTitle": "Example Items",
+  "@exampleTitle": {
+    "description": "Title of the Example items page"
+  },
+  "themeModeSystem": "System",
+  "@themeModeSystem": {
+    "description": "System theme mode"
+  },
+  "themeModeLight": "Light",
+  "@themeModeLight": {
+    "description": "Light theme mode"
+  },
+  "themeModeDark": "Dark",
+  "@themeModeDark": {
+    "description": "Dark theme mode"
+  },
+  "retryButton": "Retry",
+  "@retryButton": {
+    "description": "Retry button label"
+  },
+  "noData": "No items found",
+  "@noData": {
+    "description": "Empty state label"
+  },
+  "errorGeneric": "Something went wrong. Please try again.",
+  "@errorGeneric": {
+    "description": "Generic error message"
+  }
+}
