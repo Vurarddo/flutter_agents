@@ -718,9 +718,9 @@ instead of throwing raw DioException.&quot;
 <td>Use <code class="inline-code">&lt;type&gt;(&lt;scope&gt;): &lt;clear description&gt;</code>.</td>
 </tr>
 <tr>
-<td>Committing code with static analysis or compiler errors</td>
+<td>Committing or pushing code with static analysis or test errors</td>
 <td><strong>CRITICAL</strong></td>
-<td>Run <code class="inline-code">dart analyze</code> and <code class="inline-code">flutter test</code> before committing.</td>
+<td>Run <code class="inline-code">dart run import_sorter:main</code>, <code class="inline-code">dart analyze --fatal-infos</code>, and <code class="inline-code">flutter test</code>.</td>
 </tr>
 <tr>
 <td>Bundling multiple independent features in one giant commit</td>
@@ -779,7 +779,21 @@ instead of throwing raw DioException.&quot;
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text"><code class="inline-code">dart format .</code> and <code class="inline-code">dart analyze</code> pass cleanly before commit creation.</span>
+    <span class="check-text"><code class="inline-code">dart run import_sorter:main</code> and <code class="inline-code">dart format .</code> executed without formatting errors.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text"><code class="inline-code">dart analyze --fatal-infos</code> passes cleanly with zero diagnostics.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text"><code class="inline-code">flutter test</code> passes with 100% success rate before pushing.</span>
   </label>
 </div>
 

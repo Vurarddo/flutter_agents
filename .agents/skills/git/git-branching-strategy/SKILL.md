@@ -59,7 +59,13 @@ git commit -m "feat(wallet): add balance card widget"
 git fetch origin
 git rebase origin/develop
 
-# 5. Push branch
+# 5. Mandatory Pre-Push Quality Gate
+dart run import_sorter:main
+dart format --output=none --set-exit-if-changed .
+dart analyze --fatal-infos
+flutter test
+
+# 6. Push branch (only if all verification commands succeeded)
 git push -u origin feature/PROJ-12-wallet-balance
 ```
 
@@ -85,10 +91,16 @@ git tag -a v1.3.0 -m "Release version 1.3.0"
 git checkout develop
 git merge --no-ff release/v1.3.0 -m "chore(release): sync v1.3.0 back to develop"
 
-# 5. Push branches and tags
+# 5. Mandatory Pre-Push Quality Gate
+dart run import_sorter:main
+dart format --output=none --set-exit-if-changed .
+dart analyze --fatal-infos
+flutter test
+
+# 6. Push branches and tags
 git push origin master develop --tags
 
-# 6. Delete release branch
+# 7. Delete release branch
 git branch -d release/v1.3.0
 ```
 
@@ -114,10 +126,16 @@ git checkout develop
 git pull origin develop
 git merge --no-ff hotfix/v1.3.1 -m "chore(hotfix): sync v1.3.1 to develop"
 
-# 5. Push updates and tags
+# 5. Mandatory Pre-Push Quality Gate
+dart run import_sorter:main
+dart format --output=none --set-exit-if-changed .
+dart analyze --fatal-infos
+flutter test
+
+# 6. Push updates and tags
 git push origin master develop --tags
 
-# 6. Delete hotfix branch
+# 7. Delete hotfix branch
 git branch -d hotfix/v1.3.1
 ```
 
@@ -136,6 +154,7 @@ Follow `v<MAJOR>.<MINOR>.<PATCH>`:
 
 | Anti-Pattern | Severity | Corrective Action |
 | :--- | :--- | :--- |
+| Pushing branches without passing `dart analyze --fatal-infos` & tests | **CRITICAL** | Run the mandatory pre-push quality gate before any `git push`. |
 | Branching a feature directly from `master` | **CRITICAL** | Branch all features strictly from `develop`. |
 | Branching a hotfix from `develop` | **CRITICAL** | Branch hotfixes strictly from `master`. |
 | Forgetting to merge `release` or `hotfix` back into `develop` | **HIGH** | Always merge back into both `master` AND `develop`. |
@@ -151,3 +170,5 @@ Follow `v<MAJOR>.<MINOR>.<PATCH>`:
 - [ ] Branch name uses valid prefix and kebab-case identifier.
 - [ ] Release branch is merged into both `master` AND `develop`.
 - [ ] Release is tagged with an annotated SemVer tag (`git tag -a vX.Y.Z`).
+- [ ] Mandatory Pre-Push Quality Gate passed (`dart run import_sorter:main`, `dart format --output=none --set-exit-if-changed .`, `dart analyze --fatal-infos`, `flutter test`).
+- [ ] AI Agent received explicit user instruction to push (e.g. "запуш", "push").

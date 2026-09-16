@@ -35,40 +35,38 @@ class _ExamplePageView extends StatelessWidget {
         builder: (context, state) {
           return switch (state) {
             ExampleInitialState() || ExampleInProgressState() => const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ExampleSuccessState(:final items) => items.isEmpty
-                ? Center(child: Text(context.l10n.noData))
-                : ListView.separated(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: items.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) =>
-                        ExampleItemCard(item: items[index]),
-                  ),
+              child: CircularProgressIndicator(),
+            ),
+            ExampleSuccessState(:final items) =>
+              items.isEmpty
+                  ? Center(child: Text(context.l10n.noData))
+                  : ListView.separated(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: items.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) => ExampleItemCard(item: items[index]),
+                    ),
             ExampleFailureState(:final failure) => Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      failure.message,
-                      style: context.textTheme.bodyLarge?.copyWith(
-                        color: context.colorScheme.error,
-                      ),
-                      textAlign: TextAlign.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    failure.message,
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      color: context.colorScheme.error,
                     ),
-                    const SizedBox(height: 16),
-                    AppButton(
-                      label: context.l10n.retryButton,
-                      onPressed: () {
-                        context
-                            .read<ExampleBloc>()
-                            .add(const ExampleFetchRequested());
-                      },
-                    ),
-                  ],
-                ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  AppButton(
+                    label: context.l10n.retryButton,
+                    onPressed: () {
+                      context.read<ExampleBloc>().add(const ExampleFetchRequested());
+                    },
+                  ),
+                ],
               ),
+            ),
           };
         },
       ),

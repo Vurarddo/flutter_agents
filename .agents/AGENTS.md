@@ -278,7 +278,14 @@ lib/presentation/state_management/<feature>/
 - **Router Maintenance & Stale Pointer Policy:**
   - When a file moves, an architecture folder is reorganized, or a new module is introduced, the agent MUST update the corresponding router (in `AGENTS.md`, Skill Hubs, or feature index) within the **same turn**.
   - *A stale pointer is worse than no pointer.* Always maintain 100% path accuracy and valid relative links.
-- **Git Push Policy (Strict):** AI agents MUST NEVER automatically execute `git push` to remote repositories unless the user gives direct, explicit instruction (e.g., "запуш", "push", "запуш зміни"). Staging and creating local commits (`git add`, `git commit`) can be done as requested, but pushing to the remote repository is strictly forbidden without explicit permission.
+- **Git Push Policy (Strict):**
+  - AI agents MUST NEVER automatically execute `git push` to remote repositories unless the user gives direct, explicit instruction (e.g., "запуш", "push", "запуш зміни"). Staging and creating local commits (`git add`, `git commit`) can be done as requested, but pushing to the remote repository is strictly forbidden without explicit permission.
+  - **Mandatory Pre-Push Quality Gate:** Even upon receiving explicit push instruction, the AI agent MUST ALWAYS execute and verify the following pre-push check sequence BEFORE running `git push`:
+    1. `dart run import_sorter:main` (ensure import ordering)
+    2. `dart format --output=none --set-exit-if-changed .` (ensure formatting compliance)
+    3. `dart analyze --fatal-infos` (ensure zero errors, warnings, or linter infos)
+    4. `flutter test` (ensure 100% test pass rate)
+    If ANY check fails or reports issues, the push MUST be aborted immediately, the issue resolved, and checks re-verified before pushing.
 - Do NOT introduce any unrequested third-party packages or alternative state management solutions (e.g., Riverpod, Provider).
 - Always ensure generated code strictly complies with `injectable`, `auto_route`, and `reactive_forms` patterns used in the project.
 - Maintain trailing commas in all Dart code snippets to prevent formatting churn.

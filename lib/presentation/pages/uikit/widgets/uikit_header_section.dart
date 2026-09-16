@@ -42,8 +42,8 @@ class UiKitHeaderSection extends StatelessWidget {
               variant: AppConfig.isProd
                   ? AppBadgeVariant.success
                   : AppConfig.isStage
-                      ? AppBadgeVariant.warning
-                      : AppBadgeVariant.info,
+                  ? AppBadgeVariant.warning
+                  : AppBadgeVariant.info,
             ),
           ],
         ),

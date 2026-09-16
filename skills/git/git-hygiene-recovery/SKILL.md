@@ -149,6 +149,17 @@ git clean -fd
 git clean -fdx
 ```
 
+### 6.3 Automated Pre-Push Quality Gate via Git Hooks
+To ensure that broken, unformatted, or non-compliant code is never pushed to remote repositories, configure Git to use the project's native hooks:
+```bash
+git config core.hooksPath .githooks
+```
+This hook automatically executes the mandatory verification pipeline before every push:
+1. `dart run import_sorter:main` (verify import sorting)
+2. `dart format --output=none --set-exit-if-changed .` (zero formatting errors)
+3. `dart analyze --fatal-infos` (zero compilation warnings/infos)
+4. `flutter test` (100% test success rate)
+
 ---
 
 ## 7. Anti-Patterns (Strictly Prohibited)
@@ -169,3 +180,4 @@ git clean -fdx
 - [ ] Stashes are named descriptively (`git stash push -m "..."`).
 - [ ] `git clean` was tested with dry-run before execution.
 - [ ] `git reflog` is referenced when recovering corrupted local state.
+- [ ] Pre-push quality gate configured via `git config core.hooksPath .githooks`.

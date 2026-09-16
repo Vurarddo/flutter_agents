@@ -6,18 +6,18 @@ import 'package:flutter_agents/presentation/theme/app_text_theme.dart';
 
 abstract final class AppTheme {
   static ThemeData get lightTheme => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        colorScheme: AppColorScheme.light,
-        textTheme: AppTextTheme.textTheme,
-        extensions: const [AppCustomColors.light],
-      );
+    useMaterial3: true,
+    brightness: Brightness.light,
+    colorScheme: AppColorScheme.light,
+    textTheme: AppTextTheme.textTheme,
+    extensions: const [AppCustomColors.light],
+  );
 
   static ThemeData get darkTheme => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        colorScheme: AppColorScheme.dark,
-        textTheme: AppTextTheme.textTheme,
-        extensions: const [AppCustomColors.dark],
-      );
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: AppColorScheme.dark,
+    textTheme: AppTextTheme.textTheme,
+    extensions: const [AppCustomColors.dark],
+  );
 }

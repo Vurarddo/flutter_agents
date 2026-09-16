@@ -52,25 +52,25 @@ class AppButton extends StatelessWidget {
 
     return switch (variant) {
       AppButtonVariant.primary => FilledButton(
-          onPressed: onPressed,
-          child: child,
-        ),
+        onPressed: onPressed,
+        child: child,
+      ),
       AppButtonVariant.secondary => ElevatedButton(
-          onPressed: onPressed,
-          child: child,
-        ),
+        onPressed: onPressed,
+        child: child,
+      ),
       AppButtonVariant.tonal => FilledButton.tonal(
-          onPressed: onPressed,
-          child: child,
-        ),
+        onPressed: onPressed,
+        child: child,
+      ),
       AppButtonVariant.outlined => OutlinedButton(
-          onPressed: onPressed,
-          child: child,
-        ),
+        onPressed: onPressed,
+        child: child,
+      ),
       AppButtonVariant.text => TextButton(
-          onPressed: onPressed,
-          child: child,
-        ),
+        onPressed: onPressed,
+        child: child,
+      ),
     };
   }
 }

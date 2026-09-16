@@ -760,6 +760,11 @@ git merge --abort
 <td>Only rebase private feature/bugfix branches.</td>
 </tr>
 <tr>
+<td>Force-pushing without pre-push quality gate verification</td>
+<td><strong>CRITICAL</strong></td>
+<td>Run import sorter, <code class="inline-code">dart analyze --fatal-infos</code>, and <code class="inline-code">flutter test</code> before pushing.</td>
+</tr>
+<tr>
 <td>Force-pushing without <code class="inline-code">--force-with-lease</code></td>
 <td><strong>HIGH</strong></td>
 <td>Use <code class="inline-code">git push --force-with-lease origin &lt;branch&gt;</code>.</td>
@@ -802,7 +807,7 @@ git merge --abort
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text"><code class="inline-code">dart analyze</code> and <code class="inline-code">flutter test</code> pass after resolving conflicts.</span>
+    <span class="check-text">Mandatory Pre-Push Quality Gate passed: <code class="inline-code">dart run import_sorter:main</code>, <code class="inline-code">dart format --output=none --set-exit-if-changed .</code>, <code class="inline-code">dart analyze --fatal-infos</code>, and <code class="inline-code">flutter test</code>.</span>
   </label>
 </div>
 <div class="checklist-item">
@@ -810,6 +815,13 @@ git merge --abort
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
     <span class="check-text">Pushing updated rebased history uses <code class="inline-code">git push --force-with-lease</code>.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">AI Agent received explicit user instruction to push (e.g. &quot;запуш&quot;, &quot;push&quot;).</span>
   </label>
 </div>
 

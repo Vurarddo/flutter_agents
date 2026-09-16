@@ -99,7 +99,7 @@ instead of throwing raw DioException."
 | Anti-Pattern | Severity | Corrective Action |
 | :--- | :--- | :--- |
 | Vague commit messages (`"wip"`, `"fix"`, `"update"`, `"changes"`) | **CRITICAL** | Use `<type>(<scope>): <clear description>`. |
-| Committing code with static analysis or compiler errors | **CRITICAL** | Run `dart analyze` and `flutter test` before committing. |
+| Committing or pushing code with static analysis or test errors | **CRITICAL** | Run `dart run import_sorter:main`, `dart analyze --fatal-infos`, and `flutter test`. |
 | Bundling multiple independent features in one giant commit | **HIGH** | Split into multiple atomic commits using `git add <files>`. |
 | Putting commit subject in past tense (`"fixed issue"`, `"added bloc"`) | **MEDIUM** | Use imperative present tense (`"fix issue"`, `"add bloc"`). |
 | Capitalizing the first letter of subject or adding trailing dot | **MEDIUM** | Use lowercase start and no period: `feat(ui): add button`. |
@@ -113,4 +113,6 @@ instead of throwing raw DioException."
 - [ ] Type accurately reflects the nature of the change (`feat`, `fix`, `refactor`, etc.).
 - [ ] Scope identifies the component/feature (`auth`, `profile`, `theme`, `network`).
 - [ ] Change is atomic and does not contain unrelated modifications.
-- [ ] `dart format .` and `dart analyze` pass cleanly before commit creation.
+- [ ] `dart run import_sorter:main` and `dart format .` executed without formatting errors.
+- [ ] `dart analyze --fatal-infos` passes cleanly with zero diagnostics.
+- [ ] `flutter test` passes with 100% success rate before pushing.

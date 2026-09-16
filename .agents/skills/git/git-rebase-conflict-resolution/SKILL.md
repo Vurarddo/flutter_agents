@@ -140,6 +140,7 @@ git merge --abort
 | :--- | :--- | :--- |
 | Running `git commit` in the middle of a rebase conflict | **CRITICAL** | Use `git add <files>` and then `git rebase --continue`. |
 | Rebasing shared branches (`master` or `develop`) | **CRITICAL** | Only rebase private feature/bugfix branches. |
+| Force-pushing without pre-push quality gate verification | **CRITICAL** | Run import sorter, `dart analyze --fatal-infos`, and `flutter test` before pushing. |
 | Force-pushing without `--force-with-lease` | **HIGH** | Use `git push --force-with-lease origin <branch>`. |
 | Leaving uncommitted conflict markers in code | **HIGH** | Search for `<<<<<<<` before staging. |
 | Blindly accepting "theirs" or "ours" without understanding code | **HIGH** | Carefully inspect both sides of the diff. |
@@ -151,5 +152,6 @@ git merge --abort
 - [ ] Feature branch history is rebased cleanly onto latest `origin/develop`.
 - [ ] Intermediate "wip" or "fixup" commits are squashed.
 - [ ] No conflict markers (`<<<<<<<`) remain in the codebase.
-- [ ] `dart analyze` and `flutter test` pass after resolving conflicts.
+- [ ] Mandatory Pre-Push Quality Gate passed: `dart run import_sorter:main`, `dart format --output=none --set-exit-if-changed .`, `dart analyze --fatal-infos`, and `flutter test`.
 - [ ] Pushing updated rebased history uses `git push --force-with-lease`.
+- [ ] AI Agent received explicit user instruction to push (e.g. "запуш", "push").

@@ -646,7 +646,13 @@ git commit -m &quot;feat(wallet): add balance card widget&quot;
 git fetch origin
 git rebase origin/develop
 
-# 5. Push branch
+# 5. Mandatory Pre-Push Quality Gate
+dart run import_sorter:main
+dart format --output=none --set-exit-if-changed .
+dart analyze --fatal-infos
+flutter test
+
+# 6. Push branch (only if all verification commands succeeded)
 git push -u origin feature/PROJ-12-wallet-balance
 </code></pre>
 </div>
@@ -678,10 +684,16 @@ git tag -a v1.3.0 -m &quot;Release version 1.3.0&quot;
 git checkout develop
 git merge --no-ff release/v1.3.0 -m &quot;chore(release): sync v1.3.0 back to develop&quot;
 
-# 5. Push branches and tags
+# 5. Mandatory Pre-Push Quality Gate
+dart run import_sorter:main
+dart format --output=none --set-exit-if-changed .
+dart analyze --fatal-infos
+flutter test
+
+# 6. Push branches and tags
 git push origin master develop --tags
 
-# 6. Delete release branch
+# 7. Delete release branch
 git branch -d release/v1.3.0
 </code></pre>
 </div>
@@ -713,10 +725,16 @@ git checkout develop
 git pull origin develop
 git merge --no-ff hotfix/v1.3.1 -m &quot;chore(hotfix): sync v1.3.1 to develop&quot;
 
-# 5. Push updates and tags
+# 5. Mandatory Pre-Push Quality Gate
+dart run import_sorter:main
+dart format --output=none --set-exit-if-changed .
+dart analyze --fatal-infos
+flutter test
+
+# 6. Push updates and tags
 git push origin master develop --tags
 
-# 6. Delete hotfix branch
+# 7. Delete hotfix branch
 git branch -d hotfix/v1.3.1
 </code></pre>
 </div>
@@ -736,6 +754,11 @@ git branch -d hotfix/v1.3.1
 <th>Severity</th>
 <th>Corrective Action</th>
 </tr></thead><tbody>
+<tr>
+<td>Pushing branches without passing <code class="inline-code">dart analyze --fatal-infos</code> &amp; tests</td>
+<td><strong>CRITICAL</strong></td>
+<td>Run the mandatory pre-push quality gate before any <code class="inline-code">git push</code>.</td>
+</tr>
 <tr>
 <td>Branching a feature directly from <code class="inline-code">master</code></td>
 <td><strong>CRITICAL</strong></td>
@@ -797,6 +820,20 @@ git branch -d hotfix/v1.3.1
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
     <span class="check-text">Release is tagged with an annotated SemVer tag (<code class="inline-code">git tag -a vX.Y.Z</code>).</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Mandatory Pre-Push Quality Gate passed (<code class="inline-code">dart run import_sorter:main</code>, <code class="inline-code">dart format --output=none --set-exit-if-changed .</code>, <code class="inline-code">dart analyze --fatal-infos</code>, <code class="inline-code">flutter test</code>).</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">AI Agent received explicit user instruction to push (e.g. &quot;запуш&quot;, &quot;push&quot;).</span>
   </label>
 </div>
 

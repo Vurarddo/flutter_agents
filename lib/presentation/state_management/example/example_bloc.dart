@@ -14,8 +14,7 @@ part 'example_state.dart';
 class ExampleBloc extends Bloc<ExampleEvent, ExampleState> {
   final GetExampleItemsUseCase _getExampleItemsUseCase;
 
-  ExampleBloc(this._getExampleItemsUseCase)
-      : super(const ExampleInitialState()) {
+  ExampleBloc(this._getExampleItemsUseCase) : super(const ExampleInitialState()) {
     on<ExampleFetchRequested>(
       _onFetchRequested,
       transformer: restartable(),

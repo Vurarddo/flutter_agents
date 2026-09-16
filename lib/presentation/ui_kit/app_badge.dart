@@ -18,21 +18,21 @@ class AppBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final (bgColor, fgColor) = switch (variant) {
       AppBadgeVariant.success => (
-          context.customColors.success.withValues(alpha: 0.15),
-          context.customColors.success,
-        ),
+        context.customColors.success.withValues(alpha: 0.15),
+        context.customColors.success,
+      ),
       AppBadgeVariant.warning => (
-          context.customColors.warning.withValues(alpha: 0.15),
-          context.customColors.warning,
-        ),
+        context.customColors.warning.withValues(alpha: 0.15),
+        context.customColors.warning,
+      ),
       AppBadgeVariant.info => (
-          context.customColors.info.withValues(alpha: 0.15),
-          context.customColors.info,
-        ),
+        context.customColors.info.withValues(alpha: 0.15),
+        context.customColors.info,
+      ),
       AppBadgeVariant.primary => (
-          context.colorScheme.primaryContainer,
-          context.colorScheme.onPrimaryContainer,
-        ),
+        context.colorScheme.primaryContainer,
+        context.colorScheme.onPrimaryContainer,
+      ),
     };
 
     return Container(

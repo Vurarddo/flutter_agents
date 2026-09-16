@@ -534,6 +534,14 @@ pre {
 <h3 class="doc-h3">🛡️ Golden Repository Safety Rules:</h3>
 <ol class="doc-ordered-list">
 <li><strong>No Automatic <code class="inline-code">git push</code> by AI Agents:</strong> AI agents are <strong>STRICTLY PROHIBITED</strong> from executing <code class="inline-code">git push</code> unless the user gives direct, explicit instruction (e.g. &quot;запуш&quot;, &quot;push&quot;, &quot;запуш зміни&quot;). Local commits (<code class="inline-code">git commit</code>) are allowed when finishing work, but remote pushes require explicit user confirmation.</li>
+<li><strong>Mandatory Pre-Push Quality Gate:</strong> Before ANY <code class="inline-code">git push</code> (whether performed by an AI agent or a developer, even after explicit user confirmation), the codebase MUST successfully pass the complete Flutter verification pipeline:</li>
+<li><code class="inline-code">dart run import_sorter:main</code> (verify all package imports are strictly sorted)</li>
+<li><code class="inline-code">dart format --output=none --set-exit-if-changed .</code> (zero formatting violations)</li>
+<li><code class="inline-code">dart analyze --fatal-infos</code> (zero compilation errors, warnings, or linter infos)</li>
+<li><code class="inline-code">flutter test</code> (100% test pass rate across unit, bloc, and widget tests)</li>
+</ul>
+<p class="doc-p">   If ANY check fails or returns a non-zero exit code, <code class="inline-code">git push</code> is <strong>STRICTLY PROHIBITED</strong> until the issues are resolved.</p>
+<ol class="doc-ordered-list">
 <li><strong>Never Force-Push to Protected Branches:</strong> <code class="inline-code">git push --force</code> or <code class="inline-code">--force-with-lease</code> is <strong>STRICTLY PROHIBITED</strong> on <code class="inline-code">master</code>, <code class="inline-code">main</code>, and <code class="inline-code">develop</code>.</li>
 <li><strong>Zero Secrets in Commits:</strong> Local environment credentials (<code class="inline-code">config/env_<em>.json</code>), signing keystores (<code class="inline-code"></em>.jks</code>, <code class="inline-code">*.keystore</code>), and private tokens must NEVER be committed (enforce via <code class="inline-code">.gitignore</code>).</li>
 <li><strong>Clean Working Tree Before Switching:</strong> Always <code class="inline-code">git stash</code> or commit work before switching branches to prevent unstaged file pollution.</li>
@@ -672,7 +680,8 @@ git rebase origin/develop
 # git rebase --continue
 </code></pre>
 </div>
-<h3 class="doc-h3">Step 5: Push and Open Pull Request</h3>
+<h3 class="doc-h3">Step 5: Execute Mandatory Pre-Push Quality Gate &amp; Push</h3>
+<p class="doc-p">Before executing <code class="inline-code">git push</code> (even after explicit user instruction), you MUST run the full verification suite to ensure remote CI/CD will never receive broken, unformatted, or non-compliant code:</p>
 <div class="code-block-wrapper">
   <div class="code-header">
     <span class="code-lang">bash</span>
@@ -681,9 +690,28 @@ git rebase origin/develop
       <span class="btn-text" data-i18n="copy">Copy</span>
     </button>
   </div>
-  <pre><code class="language-bash">git push -u origin feature/user-profile-screen
+  <pre><code class="language-bash"># 1. Sort package imports
+dart run import_sorter:main
+
+# 2. Check formatting compliance (fails with exit code 1 if unformatted)
+dart format --output=none --set-exit-if-changed .
+
+# 3. Static analysis with fatal infos (treats all errors, warnings, and infos as fatal)
+dart analyze --fatal-infos
+
+# 4. Run automated test suite (100% pass required)
+flutter test
+
+# 5. Push to remote ONLY if all previous commands exited with code 0:
+git push -u origin feature/user-profile-screen
 </code></pre>
 </div>
+<div class="alert-box alert-success"><div class="alert-title">ПОРАДА / TIP</div><div class="alert-content">
+<p><strong>Automated Pre-Push Git Hook:</strong></p>
+<p>To automate these checks on every local <code class="inline-code">git push</code>, enable the project&#039;s native git hooks once:</p>
+<p>```bash</p>
+<p>git config core.hooksPath .githooks</p>
+<p>```</p>
 <hr class="doc-divider">
 <h2 id="5--quality---review-verification-checklist" class="doc-h2"><a href="#5--quality---review-verification-checklist" class="heading-anchor">#</a> 5. Quality &amp; Review Verification Checklist</h2>
 <p class="doc-p">Before pushing code or requesting a PR review:</p>
@@ -705,14 +733,28 @@ git rebase origin/develop
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Static analysis passes cleanly (<a href="../../dart-run-static-analysis/dart-run-static-analysis.html" class="skill-ref-link" title="Execute `dart analyze` to identify warnings and errors, and use `dart fix --apply` to automatically resolve mechanical lint issues. Use during development to ensure code quality and before committing changes.">dart-run-static-analysis <span class="ext-icon">↗</span></a>): <code class="inline-code">dart analyze</code>.</span>
+    <span class="check-text">Package imports are sorted: <code class="inline-code">dart run import_sorter:main</code>.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Unit &amp; widget tests pass (<a href="../../testing/testing-hub/testing-hub.html" class="skill-ref-link" title="Primary coordinator and architecture guide for Testing Strategy across all Flutter platforms (Mobile, Web, Desktop). Enforces the Testing Pyramid (Unit, BLoC, Widget, Integration), deterministic async execution, mocktail isolation, DI reset lifecycle, and cross-platform verification.">testing-hub <span class="ext-icon">↗</span></a>): <code class="inline-code">flutter test</code>.</span>
+    <span class="check-text">Code formatting verified: <code class="inline-code">dart format --output=none --set-exit-if-changed .</code>.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Static analysis passes cleanly: <code class="inline-code">dart analyze --fatal-infos</code>.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Unit &amp; widget tests pass 100%: <code class="inline-code">flutter test</code>.</span>
   </label>
 </div>
 <div class="checklist-item">
@@ -736,23 +778,19 @@ git rebase origin/develop
     <span class="check-text">History is clean of intermediate &quot;wip&quot; or &quot;fix typo&quot; commits via <a href="../git-rebase-conflict-resolution/git-rebase-conflict-resolution.html" class="skill-ref-link" title="Interactive rebase, commit squashing, upstream syncing, and step-by-step merge conflict resolution skill. Use when rebasing feature branches on develop, cleaning up commit history, combining WIP commits, or resolving merge and rebase conflicts.">git-rebase-conflict-resolution <span class="ext-icon">↗</span></a>.</span>
   </label>
 </div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">AI Agent received explicit user instruction to push (e.g. &quot;запуш&quot;, &quot;push&quot;).</span>
+  </label>
+</div>
 
     </article>
 
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
-<a href="../../testing/testing-hub/testing-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-hub ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Primary coordinator and architecture guide for Testing Strategy across all Flutter platforms (Mobile, Web, Des...
-  </div>
-</a>
 <a href="../../code-review-advisor/code-review-advisor.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     code-review-advisor ↗
@@ -762,17 +800,6 @@ git rebase origin/develop
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
     &gt;-
-  </div>
-</a>
-<a href="../../dart-run-static-analysis/dart-run-static-analysis.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    dart-run-static-analysis ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Стандарти Dart" data-cat-en="Dart Best Practices">
-    Стандарти Dart
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Execute `dart analyze` to identify warnings and errors, and use `dart fix --apply` to automatically resolve me...
   </div>
 </a>
 <a href="../git-commit-standards/git-commit-standards.html" class="checklist-item" style="text-decoration: none; display: block;">

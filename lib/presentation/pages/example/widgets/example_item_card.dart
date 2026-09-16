@@ -27,9 +27,7 @@ class ExampleItemCard extends StatelessWidget {
               ),
               AppBadge(
                 text: item.isActive ? 'ACTIVE' : 'INACTIVE',
-                variant: item.isActive
-                    ? AppBadgeVariant.success
-                    : AppBadgeVariant.warning,
+                variant: item.isActive ? AppBadgeVariant.success : AppBadgeVariant.warning,
               ),
             ],
           ),

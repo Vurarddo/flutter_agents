@@ -11,11 +11,17 @@ This skill acts as the central coordinator for all version control, branching, a
 
 ### 🛡️ Golden Repository Safety Rules:
 1. **No Automatic `git push` by AI Agents:** AI agents are **STRICTLY PROHIBITED** from executing `git push` unless the user gives direct, explicit instruction (e.g. "запуш", "push", "запуш зміни"). Local commits (`git commit`) are allowed when finishing work, but remote pushes require explicit user confirmation.
-2. **Never Force-Push to Protected Branches:** `git push --force` or `--force-with-lease` is **STRICTLY PROHIBITED** on `master`, `main`, and `develop`.
-3. **Zero Secrets in Commits:** Local environment credentials (`config/env_*.json`), signing keystores (`*.jks`, `*.keystore`), and private tokens must NEVER be committed (enforce via `.gitignore`).
-4. **Clean Working Tree Before Switching:** Always `git stash` or commit work before switching branches to prevent unstaged file pollution.
-5. **Pre-Commit Quality Gate:** Code must pass `dart format`, `dart analyze`, and unit tests before committing and opening PRs.
-6. **Linear & Clean History:** Feature branches must be rebased on top of the latest `origin/develop` before merging.
+2. **Mandatory Pre-Push Quality Gate:** Before ANY `git push` (whether performed by an AI agent or a developer, even after explicit user confirmation), the codebase MUST successfully pass the complete Flutter verification pipeline:
+   - `dart run import_sorter:main` (verify all package imports are strictly sorted)
+   - `dart format --output=none --set-exit-if-changed .` (zero formatting violations)
+   - `dart analyze --fatal-infos` (zero compilation errors, warnings, or linter infos)
+   - `flutter test` (100% test pass rate across unit, bloc, and widget tests)
+   If ANY check fails or returns a non-zero exit code, `git push` is **STRICTLY PROHIBITED** until the issues are resolved.
+3. **Never Force-Push to Protected Branches:** `git push --force` or `--force-with-lease` is **STRICTLY PROHIBITED** on `master`, `main`, and `develop`.
+4. **Zero Secrets in Commits:** Local environment credentials (`config/env_*.json`), signing keystores (`*.jks`, `*.keystore`), and private tokens must NEVER be committed (enforce via `.gitignore`).
+5. **Clean Working Tree Before Switching:** Always `git stash` or commit work before switching branches to prevent unstaged file pollution.
+6. **Pre-Commit Quality Gate:** Code must pass `dart format`, `dart analyze`, and unit tests before committing and opening PRs.
+7. **Linear & Clean History:** Feature branches must be rebased on top of the latest `origin/develop` before merging.
 
 ---
 
@@ -109,10 +115,32 @@ git rebase origin/develop
 # git rebase --continue
 ```
 
-### Step 5: Push and Open Pull Request
+### Step 5: Execute Mandatory Pre-Push Quality Gate & Push
+Before executing `git push` (even after explicit user instruction), you MUST run the full verification suite to ensure remote CI/CD will never receive broken, unformatted, or non-compliant code:
+
 ```bash
+# 1. Sort package imports
+dart run import_sorter:main
+
+# 2. Check formatting compliance (fails with exit code 1 if unformatted)
+dart format --output=none --set-exit-if-changed .
+
+# 3. Static analysis with fatal infos (treats all errors, warnings, and infos as fatal)
+dart analyze --fatal-infos
+
+# 4. Run automated test suite (100% pass required)
+flutter test
+
+# 5. Push to remote ONLY if all previous commands exited with code 0:
 git push -u origin feature/user-profile-screen
 ```
+
+> [!TIP]
+> **Automated Pre-Push Git Hook:**
+> To automate these checks on every local `git push`, enable the project's native git hooks once:
+> ```bash
+> git config core.hooksPath .githooks
+> ```
 
 ---
 
@@ -121,8 +149,11 @@ git push -u origin feature/user-profile-screen
 Before pushing code or requesting a PR review:
 - [ ] Working branch was created from the latest `origin/develop`.
 - [ ] Code adheres to [code-review-advisor](../../code-review-advisor/SKILL.md) and Clean Architecture rules.
-- [ ] Static analysis passes cleanly ([dart-run-static-analysis](../../dart-run-static-analysis/SKILL.md)): `dart analyze`.
-- [ ] Unit & widget tests pass ([testing-hub](../../testing/testing-hub/SKILL.md)): `flutter test`.
+- [ ] Package imports are sorted: `dart run import_sorter:main`.
+- [ ] Code formatting verified: `dart format --output=none --set-exit-if-changed .`.
+- [ ] Static analysis passes cleanly: `dart analyze --fatal-infos`.
+- [ ] Unit & widget tests pass 100%: `flutter test`.
 - [ ] Code generation is up to date: `flutter pub run build_runner build --delete-conflicting-outputs`.
 - [ ] Commit messages follow [git-commit-standards](../git-commit-standards/SKILL.md).
 - [ ] History is clean of intermediate "wip" or "fix typo" commits via [git-rebase-conflict-resolution](../git-rebase-conflict-resolution/SKILL.md).
+- [ ] AI Agent received explicit user instruction to push (e.g. "запуш", "push").

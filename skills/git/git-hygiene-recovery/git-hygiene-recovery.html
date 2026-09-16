@@ -732,6 +732,26 @@ git clean -fd
 git clean -fdx
 </code></pre>
 </div>
+<h3 class="doc-h3">6.3 Automated Pre-Push Quality Gate via Git Hooks</h3>
+<p class="doc-p">To ensure that broken, unformatted, or non-compliant code is never pushed to remote repositories, configure Git to use the project&#039;s native hooks:</p>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-bash">git config core.hooksPath .githooks
+</code></pre>
+</div>
+<p class="doc-p">This hook automatically executes the mandatory verification pipeline before every push:</p>
+<ol class="doc-ordered-list">
+<li><code class="inline-code">dart run import_sorter:main</code> (verify import sorting)</li>
+<li><code class="inline-code">dart format --output=none --set-exit-if-changed .</code> (zero formatting errors)</li>
+<li><code class="inline-code">dart analyze --fatal-infos</code> (zero compilation warnings/infos)</li>
+<li><code class="inline-code">flutter test</code> (100% test success rate)</li>
+</ul>
 <hr class="doc-divider">
 <h2 id="7--anti-patterns--strictly-prohibited-" class="doc-h2"><a href="#7--anti-patterns--strictly-prohibited-" class="heading-anchor">#</a> 7. Anti-Patterns (Strictly Prohibited)</h2>
 <div class="table-responsive"><table class="doc-table">
@@ -796,6 +816,13 @@ git clean -fdx
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
     <span class="check-text"><code class="inline-code">git reflog</code> is referenced when recovering corrupted local state.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Pre-push quality gate configured via <code class="inline-code">git config core.hooksPath .githooks</code>.</span>
   </label>
 </div>
 

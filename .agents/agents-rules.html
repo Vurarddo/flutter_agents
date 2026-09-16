@@ -818,7 +818,16 @@ pre {
 <li><strong>Router Maintenance &amp; Stale Pointer Policy:</strong></li>
 <li>When a file moves, an architecture folder is reorganized, or a new module is introduced, the agent MUST update the corresponding router (in <code class="inline-code">AGENTS.md</code>, Skill Hubs, or feature index) within the <strong>same turn</strong>.</li>
 <li><em>A stale pointer is worse than no pointer.</em> Always maintain 100% path accuracy and valid relative links.</li>
-<li><strong>Git Push Policy (Strict):</strong> AI agents MUST NEVER automatically execute <code class="inline-code">git push</code> to remote repositories unless the user gives direct, explicit instruction (e.g., &quot;запуш&quot;, &quot;push&quot;, &quot;запуш зміни&quot;). Staging and creating local commits (<code class="inline-code">git add</code>, <code class="inline-code">git commit</code>) can be done as requested, but pushing to the remote repository is strictly forbidden without explicit permission.</li>
+<li><strong>Git Push Policy (Strict):</strong></li>
+<li>AI agents MUST NEVER automatically execute <code class="inline-code">git push</code> to remote repositories unless the user gives direct, explicit instruction (e.g., &quot;запуш&quot;, &quot;push&quot;, &quot;запуш зміни&quot;). Staging and creating local commits (<code class="inline-code">git add</code>, <code class="inline-code">git commit</code>) can be done as requested, but pushing to the remote repository is strictly forbidden without explicit permission.</li>
+<li><strong>Mandatory Pre-Push Quality Gate:</strong> Even upon receiving explicit push instruction, the AI agent MUST ALWAYS execute and verify the following pre-push check sequence BEFORE running <code class="inline-code">git push</code>:</li>
+<li><code class="inline-code">dart run import_sorter:main</code> (ensure import ordering)</li>
+<li><code class="inline-code">dart format --output=none --set-exit-if-changed .</code> (ensure formatting compliance)</li>
+<li><code class="inline-code">dart analyze --fatal-infos</code> (ensure zero errors, warnings, or linter infos)</li>
+<li><code class="inline-code">flutter test</code> (ensure 100% test pass rate)</li>
+</ul>
+<p class="doc-p">    If ANY check fails or reports issues, the push MUST be aborted immediately, the issue resolved, and checks re-verified before pushing.</p>
+<ul class="doc-list">
 <li>Do NOT introduce any unrequested third-party packages or alternative state management solutions (e.g., Riverpod, Provider).</li>
 <li>Always ensure generated code strictly complies with <code class="inline-code">injectable</code>, <code class="inline-code">auto_route</code>, and <code class="inline-code">reactive_forms</code> patterns used in the project.</li>
 <li>Maintain trailing commas in all Dart code snippets to prevent formatting churn.</li>

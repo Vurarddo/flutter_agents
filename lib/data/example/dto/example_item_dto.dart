@@ -19,15 +19,14 @@ class ExampleItemDto {
     required this.isActive,
   });
 
-  factory ExampleItemDto.fromJson(Map<String, dynamic> json) =>
-      _$ExampleItemDtoFromJson(json);
+  factory ExampleItemDto.fromJson(Map<String, dynamic> json) => _$ExampleItemDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ExampleItemDtoToJson(this);
 
   ExampleItem toDomain() => ExampleItem(
-        id: id,
-        title: title,
-        description: description,
-        isActive: isActive,
-      );
+    id: id,
+    title: title,
+    description: description,
+    isActive: isActive,
+  );
 }

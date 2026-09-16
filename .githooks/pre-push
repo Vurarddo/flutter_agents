@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Pre-Push Quality Gate for Flutter & Dart
+# Automatically invoked before git push when core.hooksPath is set to .githooks
+
+set -e
+
+echo ""
+echo "🛡️  ========================================================"
+echo "🛡️  RUNNING MANDATORY PRE-PUSH QUALITY GATE (FLUTTER/DART)"
+echo "🛡️  ========================================================"
+echo ""
+
+echo "📦 [1/4] Verifying package imports sorting..."
+dart run import_sorter:main
+echo "   ✅ Imports sorted and verified."
+echo ""
+
+echo "🎨 [2/4] Verifying code formatting..."
+dart format --output=none --set-exit-if-changed lib test integration_test
+echo "   ✅ Code formatting verified (0 violations)."
+echo ""
+
+echo "🔍 [3/4] Running static analysis with fatal infos..."
+dart analyze --fatal-infos
+echo "   ✅ Analysis passed cleanly (0 errors, warnings, or infos)."
+echo ""
+
+echo "🧪 [4/4] Running automated test suite..."
+flutter test
+echo "   ✅ All tests passed (100%)."
+echo ""
+
+echo "🛡️  ========================================================"
+echo "✅ PRE-PUSH QUALITY GATE PASSED! Proceeding with git push."
+echo "🛡️  ========================================================"
+echo ""
