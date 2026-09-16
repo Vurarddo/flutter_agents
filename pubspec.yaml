@@ -93,6 +93,12 @@ flutter_gen:
 # Continuous import sorting configuration
 import_sorter:
   comments: false
+  ignored_files:
+    - \.g\.dart
+    - \.gr\.dart
+    - \.freezed\.dart
+    - \.config\.dart
+    - lib/l10n/generated/.*
 
 # Localization configuration
 flutter_intl:
