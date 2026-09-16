@@ -472,12 +472,12 @@ pre {
 <body>
   <header class="top-nav">
     <div style="display: flex; align-items: center; gap: 1.5rem;">
-      <a href="../../index.html" class="nav-brand">
+      <a href="../../../index.html" class="nav-brand">
         <div class="brand-logo">AG</div>
         <span>Antigravity Docs</span>
       </a>
       <div class="nav-breadcrumbs">
-        <a href="../../index.html" data-i18n="portal_title">Центр Документації</a>
+        <a href="../../../index.html" data-i18n="portal_title">Центр Документації</a>
         <span>/</span>
         <span data-cat-ua="General" data-cat-en="General">General</span>
         <span>/</span>
@@ -485,7 +485,7 @@ pre {
       </div>
     </div>
     <div class="nav-actions">
-      <a href="../../agents-rules.html" class="btn-icon">
+      <a href="../../../agents-rules.html" class="btn-icon">
         <span>📜</span>
         <span data-i18n="project_rules">Правила AGENTS.md</span>
       </a>
@@ -514,7 +514,7 @@ pre {
 <span class="badge badge-tag">#skills</span>
       </div>
       <h1 class="hero-title">skill-creator</h1>
-      <p class="hero-description">Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.</p>
+      <p class="hero-description">Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Trigger via slash command /v-skill-creator or /skill-creator. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.</p>
     </section>
 
     <div class="progress-card">
@@ -599,7 +599,7 @@ pre {
 </ul>
 <ol class="doc-ordered-list">
 <li><strong>Cross-Cutting / Utility Skill:</strong></li>
-<li>Provides shared workflows or tools utilized across multiple domains (e.g., <code class="inline-code">flutter-widget-preview</code>, <code class="inline-code"><a href="../dart-run-static-analysis/dart-run-static-analysis.html" class="skill-ref-badge" title="Скіл: dart-run-static-analysis (Стандарти Dart)">dart-run-static-analysis</a></code>, <code class="inline-code">flutter-testing</code>).</li>
+<li>Provides shared workflows or tools utilized across multiple domains (e.g., <code class="inline-code">flutter-widget-preview</code>, <code class="inline-code"><a href="../../dart-run-static-analysis/dart-run-static-analysis.html" class="skill-ref-badge" title="Скіл: dart-run-static-analysis (Стандарти Dart)">dart-run-static-analysis</a></code>, <code class="inline-code">flutter-testing</code>).</li>
 </ul>
 <hr class="doc-divider">
 <h2 id="4--skill-directory---folder-organization" class="doc-h2"><a href="#4--skill-directory---folder-organization" class="heading-anchor">#</a> 4. Skill Directory &amp; Folder Organization</h2>
@@ -769,7 +769,7 @@ description: &gt;-
 <li>Every pointer in a router must resolve to an active, valid file path.</li>
 <li><strong>Holistic Tree Audit &amp; De-duplication Rule (Trash &amp; Bloat Pruning):</strong></li>
 <li>Whenever this skill is invoked to create or modify skills, the AI MUST actively audit the entire <code class="inline-code">.agents/skills/</code> tree, verify cross-link integrity, and eliminate redundant or duplicate files.</li>
-<li><strong>Single Source of Truth:</strong> Never duplicate the same concept across multiple skill folders (e.g., domain failure definitions belong strictly in <code class="inline-code"><a href="../domain/domain-failures/domain-failures.html" class="skill-ref-badge" title="Скіл: domain-failures (Шар Domain (Бізнес-логіка))">domain-failures</a></code>, not duplicated in error handling).</li>
+<li><strong>Single Source of Truth:</strong> Never duplicate the same concept across multiple skill folders (e.g., domain failure definitions belong strictly in <code class="inline-code"><a href="../../domain/domain-failures/domain-failures.html" class="skill-ref-badge" title="Скіл: domain-failures (Шар Domain (Бізнес-логіка))">domain-failures</a></code>, not duplicated in error handling).</li>
 <li><strong>Active Pruning:</strong> Do NOT hesitate to delete obsolete, duplicate, or stale skills (<code class="inline-code">rm -rf</code>) to prevent folder bloat and keep the skill repository compact, high-signal, and clean.</li>
 <li><strong>Banned Dependencies Enforcement:</strong> Strictly enforce project prohibitions in all generated skill code (e.g., <strong>CRITICAL</strong> ban on <code class="inline-code">dartz</code>/<code class="inline-code">fpdart</code> <code class="inline-code">Either</code>, <code class="inline-code">provider</code>, <code class="inline-code">riverpod</code>, relative imports, and hardcoded colors).</li>
 <li><strong>Agent Verification Checklist:</strong></li>
@@ -927,7 +927,7 @@ When implementing or reviewing code with this skill:
 <h3 class="doc-h3">Step 5: Post-Flight De-Duplication, Pruning &amp; Mesh Validation</h3>
 <ol class="doc-ordered-list">
 <li><strong>Prune Stale &amp; Duplicate Files:</strong> Delete old monolithic or redundant skill directories (<code class="inline-code">rm -rf</code>) that are superseded by the new tree.</li>
-<li><strong>Sync Cross-Links:</strong> Update parent hubs, <code class="inline-code"><a href="../flutter-clean-architecture/flutter-clean-architecture.html" class="skill-ref-badge" title="Скіл: flutter-clean-architecture (Архітектура Flutter)">flutter-clean-architecture</a></code>, and adjacent layer hubs so all relative markdown links point to active, valid files.</li>
+<li><strong>Sync Cross-Links:</strong> Update parent hubs, <code class="inline-code"><a href="../../flutter-clean-architecture/flutter-clean-architecture.html" class="skill-ref-badge" title="Скіл: flutter-clean-architecture (Архітектура Flutter)">flutter-clean-architecture</a></code>, and adjacent layer hubs so all relative markdown links point to active, valid files.</li>
 <li><strong>Verify Quality Checklist:</strong></li>
 <div class="checklist-item">
   <label class="checkbox-container">
@@ -985,7 +985,7 @@ When implementing or reviewing code with this skill:
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
-<a href="../flutter-clean-architecture/flutter-clean-architecture.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../flutter-clean-architecture/flutter-clean-architecture.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     flutter-clean-architecture ↗
   </div>
@@ -996,7 +996,7 @@ When implementing or reviewing code with this skill:
     Enforces Clean Architecture, DDD, and SOLID with Layer-First packaging (domain, data, presentation, infrastruc...
   </div>
 </a>
-<a href="../domain/domain-failures/domain-failures.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../domain/domain-failures/domain-failures.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     domain-failures ↗
   </div>
@@ -1007,7 +1007,7 @@ When implementing or reviewing code with this skill:
     Standards and patterns for modeling typed domain error states in lib/domain/&lt;feature&gt;/failures/ using Dart 3 s...
   </div>
 </a>
-<a href="../presentation/ui/flutter-ui-hub/flutter-ui-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../presentation/ui/flutter-ui-hub/flutter-ui-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     flutter-ui-hub ↗
   </div>
@@ -1018,7 +1018,7 @@ When implementing or reviewing code with this skill:
     Primary coordinator and architecture guide for Flutter UI development. Use when designing, creating, refactori...
   </div>
 </a>
-<a href="../presentation/ui/flutter-ui-animations/flutter-ui-animations.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../presentation/ui/flutter-ui-animations/flutter-ui-animations.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     flutter-ui-animations ↗
   </div>
@@ -1029,7 +1029,7 @@ When implementing or reviewing code with this skill:
     Multi-tier Flutter animation skill covering Tier 1 (Implicit animations like AnimatedContainer, AnimatedOpacit...
   </div>
 </a>
-<a href="../dart-run-static-analysis/dart-run-static-analysis.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../dart-run-static-analysis/dart-run-static-analysis.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     dart-run-static-analysis ↗
   </div>
@@ -1044,7 +1044,7 @@ When implementing or reviewing code with this skill:
 
 
     <footer class="footer">
-      <p>© 2026 Antigravity Flutter Architecture • Generated automatically with <a href="../documentation/skill-html-doc-generator/skill-html-doc-generator.html" class="doc-link">skill-html-doc-generator</a></p>
+      <p>© 2026 Antigravity Flutter Architecture • Generated automatically with <a href="../../documentation/skill-html-doc-generator/skill-html-doc-generator.html" class="doc-link">skill-html-doc-generator</a></p>
     </footer>
   </main>
 

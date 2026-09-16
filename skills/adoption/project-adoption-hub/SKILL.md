@@ -46,7 +46,7 @@ Invoke [adoption-codebase-analyzer](../adoption-codebase-analyzer/SKILL.md) to i
 Using the `ask_question` tool, ask targeted questions based on the audit findings:
 1. **Flavors Integration:** If flavors are missing or incomplete, ask if the user wants to introduce `dev`, `stage`, and `prod` with `config/env_*.json`.
 2. **Dependency Upgrades:** Ask whether to upgrade outdated dependencies to latest compatible versions.
-3. **Custom Skill Synthesis:** If the project uses unique packages not in the template (e.g. `supabase_flutter`, `realm`, `isar`, `go_router`, `riverpod`, `graphql_flutter`), offer to synthesize dedicated skills via [skill-creator](../../skill-creator/SKILL.md).
+3. **Custom Skill Synthesis:** If the project uses unique packages not in the template (e.g. `supabase_flutter`, `realm`, `isar`, `go_router`, `riverpod`, `graphql_flutter`), offer to synthesize dedicated skills via [skill-creator](../../skill-management/skill-creator/SKILL.md).
 4. **Architecture Refactoring Scope:** Ask whether to perform gradual layer wrapping (safe) or full Clean Architecture restructuring.
 5. **UI Kit & Showcase:** Ask if the user wants an interactive `UiKitPage` created for the existing widget components.
 

@@ -718,7 +718,7 @@ pre {
 
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-val">111</div>
+        <div class="stat-val">113</div>
         <div class="stat-label" data-i18n="stats_total_skills">Всього Скілів</div>
       </div>
       <div class="stat-card">
@@ -1843,7 +1843,7 @@ flowchart TB
     </a>
   </div>
 </div>
-<div class="skill-card" data-category="General" data-search="skill-creator skill-creator guides the creation, structuring, authoring, and validation of high-quality agent skills for antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages. general general guides creation structuring authoring validation high-quality agent skills">
+<div class="skill-card" data-category="General" data-search="skill-creator skill-creator guides the creation, structuring, authoring, and validation of high-quality agent skills for antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. trigger via slash command /v-skill-creator or /skill-creator. use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages. general general guides creation structuring authoring validation high-quality agent skills">
   <div class="card-main-content">
     <div class="card-header">
       <span class="card-category-badge" data-cat-ua="General" data-cat-en="General">
@@ -1853,17 +1853,69 @@ flowchart TB
       <span class="card-refs-badge" title="Зв'язків з іншими скілами">🔗 5</span>
     </div>
     <h3 class="card-title">
-      <a href="skills/skill-creator/skill-creator.html">skill-creator</a>
+      <a href="skills/skill-management/skill-creator/skill-creator.html">skill-creator</a>
     </h3>
     <p class="card-desc">
-      Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.
+      Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Trigger via slash command /v-skill-creator or /skill-creator. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.
     </p>
   </div>
   <div class="card-footer">
     <div class="card-tags">
       <span class="tag">#guides</span> <span class="tag">#creation</span>
     </div>
-    <a href="skills/skill-creator/skill-creator.html" class="card-btn">
+    <a href="skills/skill-management/skill-creator/skill-creator.html" class="card-btn">
+      <span data-i18n="view_docs">Читати</span>
+      <span class="btn-arrow">→</span>
+    </a>
+  </div>
+</div>
+<div class="skill-card" data-category="General" data-search="skill-deleter skill-deleter safely deletes an agent skill from the repository, removes all cross-references across agents.md, workflows, and other skills, cleans up routing tables, regenerates documentation via doc_generator.dart, and verifies project integrity. trigger via slash command /v-delete-skill. use when asked to delete, uninstall, purge, or remove an agent skill. general general safely deletes agent skill repository removes cross-references across">
+  <div class="card-main-content">
+    <div class="card-header">
+      <span class="card-category-badge" data-cat-ua="General" data-cat-en="General">
+        <span class="badge-dot"></span>
+        <span>General</span>
+      </span>
+      <span class="card-refs-badge" title="Зв'язків з іншими скілами">🔗 1</span>
+    </div>
+    <h3 class="card-title">
+      <a href="skills/skill-management/skill-deleter/skill-deleter.html">skill-deleter</a>
+    </h3>
+    <p class="card-desc">
+      Safely deletes an agent skill from the repository, removes all cross-references across AGENTS.md, workflows, and other skills, cleans up routing tables, regenerates documentation via doc_generator.dart, and verifies project integrity. Trigger via slash command /v-delete-skill. Use when asked to delete, uninstall, purge, or remove an agent skill.
+    </p>
+  </div>
+  <div class="card-footer">
+    <div class="card-tags">
+      <span class="tag">#safely</span> <span class="tag">#deletes</span>
+    </div>
+    <a href="skills/skill-management/skill-deleter/skill-deleter.html" class="card-btn">
+      <span data-i18n="view_docs">Читати</span>
+      <span class="btn-arrow">→</span>
+    </a>
+  </div>
+</div>
+<div class="skill-card" data-category="General" data-search="skill-updater skill-updater executes `dart run skills@ get --git https://github.com/vurarddo/flutter_agents` to update agent skills and intelligently synchronizes `agents.md` and ai agent rule files without breaking existing logic, local language settings, or project-specific configurations. trigger via slash command /v-update-skills. use when updating skills from upstream or synchronizing ai agent rules. general general executes `dart skills@ --git https //github com/vurarddo/flutter_agents` update">
+  <div class="card-main-content">
+    <div class="card-header">
+      <span class="card-category-badge" data-cat-ua="General" data-cat-en="General">
+        <span class="badge-dot"></span>
+        <span>General</span>
+      </span>
+      <span class="card-refs-badge" title="Зв'язків з іншими скілами">🔗 0</span>
+    </div>
+    <h3 class="card-title">
+      <a href="skills/skill-management/skill-updater/skill-updater.html">skill-updater</a>
+    </h3>
+    <p class="card-desc">
+      Executes `dart run skills@ get --git https://github.com/Vurarddo/flutter_agents` to update agent skills and intelligently synchronizes `AGENTS.md` and AI agent rule files without breaking existing logic, local language settings, or project-specific configurations. Trigger via slash command /v-update-skills. Use when updating skills from upstream or synchronizing AI agent rules.
+    </p>
+  </div>
+  <div class="card-footer">
+    <div class="card-tags">
+      <span class="tag">#executes</span> <span class="tag">#`dart</span>
+    </div>
+    <a href="skills/skill-management/skill-updater/skill-updater.html" class="card-btn">
       <span data-i18n="view_docs">Читати</span>
       <span class="btn-arrow">→</span>
     </a>

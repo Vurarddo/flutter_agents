@@ -530,7 +530,7 @@ pre {
     <article class="doc-content">
 <h1 class="doc-h1">Project Adoption &amp; Onboarding Hub</h1>
 <h2 id="1--overview---two-phase-adoption-lifecycle" class="doc-h2"><a href="#1--overview---two-phase-adoption-lifecycle" class="heading-anchor">#</a> 1. Overview &amp; Two-Phase Adoption Lifecycle</h2>
-<p class="doc-p">This skill provides a systematic, zero-risk onboarding workflow to audit and adapt <strong>existing Flutter projects</strong> to the production standard: Clean Architecture, multi-environment Flavors (<code class="inline-code">dev</code>, <code class="inline-code">stage</code>, <code class="inline-code">prod</code>), Material 3 design system, dynamic custom skills synthesis via <code class="inline-code"><a href="../../skill-creator/skill-creator.html" class="skill-ref-badge" title="Скіл: skill-creator (General)">skill-creator</a></code>, and automated test suites.</p>
+<p class="doc-p">This skill provides a systematic, zero-risk onboarding workflow to audit and adapt <strong>existing Flutter projects</strong> to the production standard: Clean Architecture, multi-environment Flavors (<code class="inline-code">dev</code>, <code class="inline-code">stage</code>, <code class="inline-code">prod</code>), Material 3 design system, dynamic custom skills synthesis via <code class="inline-code"><a href="../../skill-management/skill-creator/skill-creator.html" class="skill-ref-badge" title="Скіл: skill-creator (General)">skill-creator</a></code>, and automated test suites.</p>
 <p class="doc-p">To guarantee complete alignment and eliminate unwanted regressions, project adoption strictly follows a <strong>Two-Phase Lifecycle</strong>:</p>
 <div class="mermaid-container"><div class="mermaid">graph TD
     subgraph "Phase 1: Deep Audit, Grill-Me Interview & Plan Manifest"
@@ -564,7 +564,7 @@ pre {
 <ol class="doc-ordered-list">
 <li><strong>Flavors Integration:</strong> If flavors are missing or incomplete, ask if the user wants to introduce <code class="inline-code">dev</code>, <code class="inline-code">stage</code>, and <code class="inline-code">prod</code> with <code class="inline-code">config/env_*.json</code>.</li>
 <li><strong>Dependency Upgrades:</strong> Ask whether to upgrade outdated dependencies to latest compatible versions.</li>
-<li><strong>Custom Skill Synthesis:</strong> If the project uses unique packages not in the template (e.g. <code class="inline-code">supabase_flutter</code>, <code class="inline-code">realm</code>, <code class="inline-code">isar</code>, <code class="inline-code">go_router</code>, <code class="inline-code">riverpod</code>, <code class="inline-code">graphql_flutter</code>), offer to synthesize dedicated skills via <a href="../../skill-creator/skill-creator.html" class="skill-ref-link" title="Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.">skill-creator <span class="ext-icon">↗</span></a>.</li>
+<li><strong>Custom Skill Synthesis:</strong> If the project uses unique packages not in the template (e.g. <code class="inline-code">supabase_flutter</code>, <code class="inline-code">realm</code>, <code class="inline-code">isar</code>, <code class="inline-code">go_router</code>, <code class="inline-code">riverpod</code>, <code class="inline-code">graphql_flutter</code>), offer to synthesize dedicated skills via <a href="../../skill-management/skill-creator/skill-creator.html" class="skill-ref-link" title="Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Trigger via slash command /v-skill-creator or /skill-creator. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.">skill-creator <span class="ext-icon">↗</span></a>.</li>
 <li><strong>Architecture Refactoring Scope:</strong> Ask whether to perform gradual layer wrapping (safe) or full Clean Architecture restructuring.</li>
 <li><strong>UI Kit &amp; Showcase:</strong> Ask if the user wants an interactive <code class="inline-code">UiKitPage</code> created for the existing widget components.</li>
 </ul>
@@ -640,7 +640,7 @@ pre {
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Project-specific skills synthesized via <code class="inline-code"><a href="../adoption-skill-synthesizer/adoption-skill-synthesizer.html" class="skill-ref-badge" title="Скіл: adoption-skill-synthesizer (Адаптація Кодової Бази)">adoption-skill-synthesizer</a></code> and <code class="inline-code"><a href="../../skill-creator/skill-creator.html" class="skill-ref-badge" title="Скіл: skill-creator (General)">skill-creator</a></code>.</span>
+    <span class="check-text">Project-specific skills synthesized via <code class="inline-code"><a href="../adoption-skill-synthesizer/adoption-skill-synthesizer.html" class="skill-ref-badge" title="Скіл: adoption-skill-synthesizer (Адаптація Кодової Бази)">adoption-skill-synthesizer</a></code> and <code class="inline-code"><a href="../../skill-management/skill-creator/skill-creator.html" class="skill-ref-badge" title="Скіл: skill-creator (General)">skill-creator</a></code>.</span>
   </label>
 </div>
 <div class="checklist-item">
@@ -684,6 +684,17 @@ pre {
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+<a href="../../skill-management/skill-creator/skill-creator.html" class="checklist-item" style="text-decoration: none; display: block;">
+  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
+    skill-creator ↗
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
+  </div>
+  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+    Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, incl...
+  </div>
+</a>
 <a href="../adoption-skill-synthesizer/adoption-skill-synthesizer.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     adoption-skill-synthesizer ↗
@@ -748,17 +759,6 @@ pre {
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
     Migrates and injects multi-environment Flavors (dev, stage, prod) into existing Flutter projects. Scaffolds co...
-  </div>
-</a>
-<a href="../../skill-creator/skill-creator.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    skill-creator ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
-    General
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, incl...
   </div>
 </a>
 </div></div>

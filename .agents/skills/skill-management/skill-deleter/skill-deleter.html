@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>adoption-skill-synthesizer — Agent Skill Documentation</title>
+  <title>skill-deleter — Agent Skill Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
@@ -479,9 +479,9 @@ pre {
       <div class="nav-breadcrumbs">
         <a href="../../../index.html" data-i18n="portal_title">Центр Документації</a>
         <span>/</span>
-        <span data-cat-ua="Адаптація Кодової Бази" data-cat-en="Project Adoption">Адаптація Кодової Бази</span>
+        <span data-cat-ua="General" data-cat-en="General">General</span>
         <span>/</span>
-        <span style="color: var(--text-primary); font-weight: 600;">adoption-skill-synthesizer</span>
+        <span style="color: var(--text-primary); font-weight: 600;">skill-deleter</span>
       </div>
     </div>
     <div class="nav-actions">
@@ -502,19 +502,19 @@ pre {
   <main class="container">
     <section class="hero">
       <div class="hero-badges">
-        <span class="badge badge-category" data-cat-ua="Адаптація Кодової Бази" data-cat-en="Project Adoption">Адаптація Кодової Бази</span>
+        <span class="badge badge-category" data-cat-ua="General" data-cat-en="General">General</span>
         <span class="badge badge-tag">SKILL</span>
-        <span class="badge badge-tag">#dynamic</span>
+        <span class="badge badge-tag">#safely</span>
+<span class="badge badge-tag">#deletes</span>
 <span class="badge badge-tag">#agent</span>
 <span class="badge badge-tag">#skill</span>
-<span class="badge badge-tag">#generator</span>
-<span class="badge badge-tag">#existing</span>
-<span class="badge badge-tag">#adapter</span>
-<span class="badge badge-tag">#onboarding</span>
-<span class="badge badge-tag">#projects</span>
+<span class="badge badge-tag">#repository</span>
+<span class="badge badge-tag">#removes</span>
+<span class="badge badge-tag">#cross-references</span>
+<span class="badge badge-tag">#across</span>
       </div>
-      <h1 class="hero-title">adoption-skill-synthesizer</h1>
-      <p class="hero-description">Dynamic agent skill generator and existing skill adapter for onboarding projects. Analyzes unique third-party libraries in pubspec.yaml (e.g. Supabase, Realm, Hive, GoRouter, Riverpod, GraphQL, Camera) and invokes skill-creator protocols to generate dedicated, project-specific agent skills while adapting existing template skills to match the target project architecture.</p>
+      <h1 class="hero-title">skill-deleter</h1>
+      <p class="hero-description">Safely deletes an agent skill from the repository, removes all cross-references across AGENTS.md, workflows, and other skills, cleans up routing tables, regenerates documentation via doc_generator.dart, and verifies project integrity. Trigger via slash command /v-delete-skill. Use when asked to delete, uninstall, purge, or remove an agent skill.</p>
     </section>
 
     <div class="progress-card">
@@ -528,119 +528,160 @@ pre {
     </div>
 
     <article class="doc-content">
-<h1 class="doc-h1">Dynamic Skill Synthesizer &amp; Adapter</h1>
-<h2 id="1--purpose---strategy" class="doc-h2"><a href="#1--purpose---strategy" class="heading-anchor">#</a> 1. Purpose &amp; Strategy</h2>
-<p class="doc-p">When onboarding an existing Flutter project, the codebase may rely on libraries and architectural patterns outside the default template (e.g. Supabase instead of Retrofit/REST, Hive instead of HydratedStorage, Riverpod instead of BLoC, GraphQL, Camera, Google Maps).</p>
-<p class="doc-p">This skill dynamically <strong>synthesizes dedicated agent skills</strong> using <a href="../../skill-management/skill-creator/skill-creator.html" class="skill-ref-link" title="Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Trigger via slash command /v-skill-creator or /skill-creator. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.">skill-creator <span class="ext-icon">↗</span></a> and <strong>adapts existing template skills</strong> so AI agents can maintain and extend the project without violating project-specific conventions.</p>
+<h1 class="doc-h1">Skill Deleter &amp; Reference Cleaner</h1>
+<h2 id="1--overview---deletion-safeguards" class="doc-h2"><a href="#1--overview---deletion-safeguards" class="heading-anchor">#</a> 1. Overview &amp; Deletion Safeguards</h2>
+<p class="doc-p">When removing an AI skill from a project, simply deleting the folder is not enough:</p>
+<ul class="doc-list">
+<li>Stale links and dead references in other skills or <code class="inline-code">AGENTS.md</code> cause broken navigation (&quot;stale pointers&quot;).</li>
+<li>The HTML documentation portal (<code class="inline-code">.agents/index.html</code>) still displays the removed skill unless re-generated.</li>
+<li>AI agents may still attempt to route tasks to non-existent skills if routing matrices are not cleaned.</li>
+</ul>
+<p class="doc-p">This skill provides a zero-leakage, safe removal procedure for any skill in the workspace.</p>
 <hr class="doc-divider">
-<h2 id="2--package-to-skill-discovery---mapping-engine" class="doc-h2"><a href="#2--package-to-skill-discovery---mapping-engine" class="heading-anchor">#</a> 2. Package-to-Skill Discovery &amp; Mapping Engine</h2>
-<div class="mermaid-container"><div class="mermaid">graph TD
-    Deps["Discovered pubspec.yaml Packages"] --> Match{"Matched in Template Skills?"}
-    Match -->|Yes| Adapt["Adapt Existing Skills<br/>(Update versions, patterns, paths)"]
-    Match -->|No| Unknown["Identified Custom Packages<br/>(e.g., Supabase, Realm, GraphQL)"]
-    Unknown --> Synthesis["Invoke skill-creator Pipeline"]
-    Synthesis --> NewSkill["Generate .agents/skills/custom/<package-skill>/SKILL.md"]
-</div></div>
-<h3 class="doc-h3">Common Package Categories Requiring Skill Synthesis:</h3>
-<div class="table-responsive"><table class="doc-table">
-<thead><tr>
-<th>Category</th>
-<th>Example Libraries</th>
-<th>Synthesized Skill Name &amp; Purpose</th>
-</tr></thead><tbody>
-<tr>
-<td><strong>BaaS / Backend</strong></td>
-<td><code class="inline-code">supabase_flutter</code>, <code class="inline-code">appwrite</code>, <code class="inline-code">amplify_flutter</code></td>
-<td><code class="inline-code">supabase-client-patterns</code> / <code class="inline-code">appwrite-integration</code></td>
-</tr>
-<tr>
-<td><strong>Local Databases</strong></td>
-<td><code class="inline-code">hive</code>, <code class="inline-code">hive_flutter</code>, <code class="inline-code">isar</code>, <code class="inline-code">realm</code>, <code class="inline-code">objectbox</code>, <code class="inline-code">drift</code></td>
-<td><code class="inline-code">local-storage-&lt;db&gt;-patterns</code></td>
-</tr>
-<tr>
-<td><strong>Alternative State</strong></td>
-<td><code class="inline-code">flutter_riverpod</code>, <code class="inline-code">mobx</code>, <code class="inline-code">signals</code>, <code class="inline-code">get</code></td>
-<td><code class="inline-code">state-management-&lt;framework&gt;</code></td>
-</tr>
-<tr>
-<td><strong>Alternative Routing</strong></td>
-<td><code class="inline-code">go_router</code>, <code class="inline-code">beamer</code>, <code class="inline-code">qlevar_router</code></td>
-<td><code class="inline-code">navigation-&lt;router&gt;-patterns</code></td>
-</tr>
-<tr>
-<td><strong>Networking/APIs</strong></td>
-<td><code class="inline-code">graphql_flutter</code>, <code class="inline-code">ferry</code>, <code class="inline-code">grpc</code>, <code class="inline-code">web_socket_channel</code></td>
-<td><code class="inline-code">api-&lt;protocol&gt;-patterns</code></td>
-</tr>
-<tr>
-<td><strong>Hardware / Media</strong></td>
-<td><code class="inline-code">camera</code>, <code class="inline-code">flutter_sound</code>, <code class="inline-code">audioplayers</code>, <code class="inline-code">google_maps_flutter</code></td>
-<td><code class="inline-code">media-&lt;feature&gt;-patterns</code></td>
-</tr>
-</tbody></table></div>
-<hr class="doc-divider">
-<h2 id="3--skill-synthesis-execution-protocol-via--skill-creator-" class="doc-h2"><a href="#3--skill-synthesis-execution-protocol-via--skill-creator-" class="heading-anchor">#</a> 3. Skill Synthesis Execution Protocol via <code class="inline-code"><a href="../../skill-management/skill-creator/skill-creator.html" class="skill-ref-badge" title="Скіл: skill-creator (General)">skill-creator</a></code></h2>
-<p class="doc-p">For each identified custom package or architectural variation:</p>
-<h3 class="doc-h3">Step 1: Create Destination Directory</h3>
-<p class="doc-p">Create a dedicated subfolder under <code class="inline-code">.agents/skills/</code> or a domain-specific category (e.g. <code class="inline-code">.agents/skills/integrations/&lt;feature-name&gt;/</code>).</p>
-<h3 class="doc-h3">Step 2: Formulate Standard Frontmatter &amp; Instructions</h3>
-<p class="doc-p">Follow strict <a href="../../skill-management/skill-creator/skill-creator.html" class="skill-ref-link" title="Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, including standalone skills, modular skill trees, domain hierarchies, and interlinked skill meshes. Trigger via slash command /v-skill-creator or /skill-creator. Use when asked to create a new skill, author a skill hierarchy/tree from scratch, refactor/improve existing skills, or standardize workflow runbooks and coding conventions into reusable skill packages.">skill-creator <span class="ext-icon">↗</span></a> formatting:</p>
+<h2 id="2--end-to-end-deletion-workflow" class="doc-h2"><a href="#2--end-to-end-deletion-workflow" class="heading-anchor">#</a> 2. End-to-End Deletion Workflow</h2>
+<p class="doc-p">When invoked via <code class="inline-code">/v-delete-skill</code> or requested by the user:</p>
+<h3 class="doc-h3">Step 1: Identify Target Skill &amp; Scan References</h3>
+<p class="doc-p">Identify the skill name to delete (e.g., <code class="inline-code">project-advisor</code> or <code class="inline-code">my-custom-skill</code>). Run a dry-run scan using the automated cleanup utility:</p>
 <div class="code-block-wrapper">
   <div class="code-header">
-    <span class="code-lang">yaml</span>
+    <span class="code-lang">bash</span>
     <button class="copy-btn" onclick="copyCode(this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
       <span class="btn-text" data-i18n="copy">Copy</span>
     </button>
   </div>
-  <pre><code class="language-yaml">---
-name: &lt;kebab-case-skill-name&gt;
-description: &lt;Concise, actionable trigger description with exact library and use-case references&gt;
----
+  <pre><code class="language-bash">dart run skills/skill-management/skill-deleter/scripts/delete_skill.dart --name=&lt;skill-name&gt; --dry-run
 </code></pre>
 </div>
-<h3 class="doc-h3">Step 3: Embed Project-Specific Production Patterns</h3>
-<p class="doc-p">Each synthesized skill MUST contain:</p>
+<p class="doc-p">The script locates the skill directory in both <code class="inline-code">skills/</code> and <code class="inline-code">.agents/skills/</code> and reports all files referencing it.</p>
+<h3 class="doc-h3">Step 2: Delete Skill Folders</h3>
+<p class="doc-p">Execute the deletion script:</p>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-bash">dart run skills/skill-management/skill-deleter/scripts/delete_skill.dart --name=&lt;skill-name&gt;
+</code></pre>
+</div>
+<p class="doc-p">This automatically:</p>
 <ol class="doc-ordered-list">
-<li><strong>Dependency Injection Setup:</strong> How the library is registered via <code class="inline-code">@lazySingleton</code> or <code class="inline-code">@injectable</code>.</li>
-<li><strong>Clean Architecture Placement:</strong></li>
-<li>Client instances &amp; DTOs in <code class="inline-code">data/datasources/</code> and <code class="inline-code">data/repositories/</code>.</li>
-<li>Domain interfaces in <code class="inline-code">domain/repositories/</code>.</li>
-<li>BLoC / UI consumers in <code class="inline-code">presentation/</code>.</li>
-<li><strong>Error Handling &amp; Failure Mapping:</strong> Mapping library-specific exceptions to Domain <code class="inline-code">Failure</code> sealed classes.</li>
-<li><strong>Concrete Abstracted Code Examples:</strong> Working Dart code snippets without hardcoded domain values.</li>
+<li>Deletes <code class="inline-code">skills/<strong>/&lt;skill-name&gt;</code> and <code class="inline-code">.agents/skills/</strong>/&lt;skill-name&gt;</code>.</li>
+<li>Triggers <code class="inline-code">doc_generator.dart</code> to rebuild <code class="inline-code">.agents/index.html</code> without the deleted skill.</li>
 </ul>
-<hr class="doc-divider">
-<h2 id="4--adapting-existing-template-skills" class="doc-h2"><a href="#4--adapting-existing-template-skills" class="heading-anchor">#</a> 4. Adapting Existing Template Skills</h2>
-<p class="doc-p">When the target project has established architectural choices that differ from the template defaults:</p>
+<h3 class="doc-h3">Step 3: Scrub Cross-References</h3>
+<p class="doc-p">Review the referenced files reported by Step 1:</p>
 <ol class="doc-ordered-list">
-<li><strong>State Management Alignment:</strong> If the project exclusively uses Cubits or Riverpod, adapt <code class="inline-code">state-management</code> guidelines to avoid enforcing event-driven BLoCs where unnecessary.</li>
-<li><strong>Routing Alignment:</strong> If the project uses <code class="inline-code">go_router</code>, link navigation patterns to GoRouter declarative config rather than AutoRoute.</li>
-<li><strong>Storage Alignment:</strong> If tokens/preferences use <code class="inline-code">flutter_secure_storage</code> directly without <code class="inline-code">hydrated_bloc</code>, document the existing abstraction layer.</li>
+<li><strong><code class="inline-code">AGENTS.md</code> / <code class="inline-code">GEMINI.md</code>:</strong> Remove skill mentions from Skill Routing tables or rule guidelines.</li>
+<li><strong>Other Skills (<code class="inline-code">SKILL.md</code>):</strong> Remove dependencies, routing links, or checklist items pointing to the deleted skill.</li>
+<li><strong>Workflows (<code class="inline-code">.agents/workflows/</code>):</strong> Delete corresponding slash-command workflow files if any existed for this skill.</li>
 </ul>
+<h3 class="doc-h3">Step 4: Re-Generate HTML Documentation</h3>
+<p class="doc-p">Ensure all HTML landing pages are in sync:</p>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-bash">dart run skills/documentation/skill-html-doc-generator/scripts/doc_generator.dart
+</code></pre>
+</div>
+<h3 class="doc-h3">Step 5: Verify Quality Gate &amp; Tests</h3>
+<p class="doc-p">Ensure the removal introduced no breaking changes or broken dependencies:</p>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-bash">dart analyze --fatal-infos
+flutter test
+</code></pre>
+</div>
 <hr class="doc-divider">
-<h2 id="5--verification---registration" class="doc-h2"><a href="#5--verification---registration" class="heading-anchor">#</a> 5. Verification &amp; Registration</h2>
-<p class="doc-p">After synthesizing new skills:</p>
-<ul class="doc-list">
-<li>Validate markdown links and YAML frontmatter.</li>
-<li>Verify that AI agent instructions reference the newly synthesized skills in the global hub or domain hubs.</li>
-</ul>
+<h2 id="3--anti-patterns--strictly-prohibited-" class="doc-h2"><a href="#3--anti-patterns--strictly-prohibited-" class="heading-anchor">#</a> 3. Anti-Patterns (Strictly Prohibited)</h2>
+<div class="table-responsive"><table class="doc-table">
+<thead><tr>
+<th>Anti-Pattern</th>
+<th>Severity</th>
+<th>Corrective Action</th>
+</tr></thead><tbody>
+<tr>
+<td>Deleting a skill folder without cleaning references in <code class="inline-code">AGENTS.md</code></td>
+<td><strong>CRITICAL</strong></td>
+<td>A stale pointer is worse than no pointer. Always scrub references immediately.</td>
+</tr>
+<tr>
+<td>Forgetting to remove the skill from <code class="inline-code">.agents/index.html</code></td>
+<td><strong>HIGH</strong></td>
+<td>Always run <code class="inline-code">doc_generator.dart</code> after deletion.</td>
+</tr>
+<tr>
+<td>Deleting skills without verifying <code class="inline-code">dart analyze</code> passes</td>
+<td><strong>HIGH</strong></td>
+<td>Run static analysis to catch broken code references.</td>
+</tr>
+</tbody></table></div>
+<hr class="doc-divider">
+<h2 id="4--verification-checklist" class="doc-h2"><a href="#4--verification-checklist" class="heading-anchor">#</a> 4. Verification Checklist</h2>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Skill directory deleted from <code class="inline-code">skills/</code> and <code class="inline-code">.agents/skills/</code>.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">No occurrences of <code class="inline-code">&lt;skill-name&gt;</code> remain in <code class="inline-code">AGENTS.md</code> or other skills.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Documentation portal <code class="inline-code">.agents/index.html</code> regenerated without errors.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text"><code class="inline-code">dart analyze --fatal-infos</code> passes cleanly.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text"><code class="inline-code">flutter test</code> passes 100%.</span>
+  </label>
+</div>
 
     </article>
 
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
-<a href="../../skill-management/skill-creator/skill-creator.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../documentation/skill-html-doc-generator/skill-html-doc-generator.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    skill-creator ↗
+    skill-html-doc-generator ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
-    General
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Документація" data-cat-en="Documentation">
+    Документація
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Guides the creation, structuring, authoring, and validation of high-quality agent skills for Antigravity, incl...
+    Generates unified, interactive, self-contained single-page HTML documentation landing pages for agent skills. ...
   </div>
 </a>
 </div></div>

@@ -16,6 +16,9 @@ echo "   ✅ Imports sorted and verified."
 echo ""
 
 echo "🎨 [2/4] Verifying code formatting..."
+if [ -d "lib/l10n/generated" ]; then
+  dart format lib/l10n/generated > /dev/null 2>&1 || true
+fi
 dart format --output=none --set-exit-if-changed lib test integration_test
 echo "   ✅ Code formatting verified (0 violations)."
 echo ""

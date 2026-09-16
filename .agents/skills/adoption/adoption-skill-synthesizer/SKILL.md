@@ -9,7 +9,7 @@ description: Dynamic agent skill generator and existing skill adapter for onboar
 
 When onboarding an existing Flutter project, the codebase may rely on libraries and architectural patterns outside the default template (e.g. Supabase instead of Retrofit/REST, Hive instead of HydratedStorage, Riverpod instead of BLoC, GraphQL, Camera, Google Maps).
 
-This skill dynamically **synthesizes dedicated agent skills** using [skill-creator](../../skill-creator/SKILL.md) and **adapts existing template skills** so AI agents can maintain and extend the project without violating project-specific conventions.
+This skill dynamically **synthesizes dedicated agent skills** using [skill-creator](../../skill-management/skill-creator/SKILL.md) and **adapts existing template skills** so AI agents can maintain and extend the project without violating project-specific conventions.
 
 ---
 
@@ -45,7 +45,7 @@ For each identified custom package or architectural variation:
 Create a dedicated subfolder under `.agents/skills/` or a domain-specific category (e.g. `.agents/skills/integrations/<feature-name>/`).
 
 ### Step 2: Formulate Standard Frontmatter & Instructions
-Follow strict [skill-creator](../../skill-creator/SKILL.md) formatting:
+Follow strict [skill-creator](../../skill-management/skill-creator/SKILL.md) formatting:
 ```yaml
 ---
 name: <kebab-case-skill-name>
