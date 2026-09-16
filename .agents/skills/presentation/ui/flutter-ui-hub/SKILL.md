@@ -80,7 +80,7 @@ lib/presentation/
 
 ---
 
-## 4. UI Advisor Guidelines (`project-advisor` & `feature-enhancement-advisor`)
+## 4. UI Quality & Completeness Guidelines
 
 Every completed screen or widget must adhere to these product & completeness standards:
 
