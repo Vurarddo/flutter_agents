@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>testing-hub — Agent Skill Documentation</title>
+  <title>figma-mcp-integration — Agent Skill Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
@@ -479,9 +479,9 @@ pre {
       <div class="nav-breadcrumbs">
         <a href="../../../index.html" data-i18n="portal_title">Центр Документації</a>
         <span>/</span>
-        <span data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">Тестування (Unit, Widget, BLoC)</span>
+        <span data-cat-ua="General" data-cat-en="General">General</span>
         <span>/</span>
-        <span style="color: var(--text-primary); font-weight: 600;">testing-hub</span>
+        <span style="color: var(--text-primary); font-weight: 600;">figma-mcp-integration</span>
       </div>
     </div>
     <div class="nav-actions">
@@ -502,19 +502,19 @@ pre {
   <main class="container">
     <section class="hero">
       <div class="hero-badges">
-        <span class="badge badge-category" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">Тестування (Unit, Widget, BLoC)</span>
+        <span class="badge badge-category" data-cat-ua="General" data-cat-en="General">General</span>
         <span class="badge badge-tag">SKILL</span>
-        <span class="badge badge-tag">#primary</span>
-<span class="badge badge-tag">#coordinator</span>
-<span class="badge badge-tag">#architecture</span>
+        <span class="badge badge-tag">#comprehensive</span>
 <span class="badge badge-tag">#guide</span>
-<span class="badge badge-tag">#testing</span>
-<span class="badge badge-tag">#strategy</span>
-<span class="badge badge-tag">#across</span>
-<span class="badge badge-tag">#flutter</span>
+<span class="badge badge-tag">#figma</span>
+<span class="badge badge-tag">#server</span>
+<span class="badge badge-tag">#integration</span>
+<span class="badge badge-tag">#rest</span>
+<span class="badge badge-tag">#mode</span>
+<span class="badge badge-tag">#workflows</span>
       </div>
-      <h1 class="hero-title">testing-hub</h1>
-      <p class="hero-description">Primary coordinator and architecture guide for Testing Strategy across all Flutter platforms (Mobile, Web, Desktop). Enforces the Testing Pyramid (Unit, BLoC, Widget, Integration), deterministic async execution, mocktail isolation, DI reset lifecycle, and cross-platform verification.</p>
+      <h1 class="hero-title">figma-mcp-integration</h1>
+      <p class="hero-description">Comprehensive guide for Figma MCP server integration and Figma REST API / Dev Mode workflows. Covers document node inspection, design token extraction (colors, typography, spacing, radii), component variant mapping, auto-layout translation to Flutter flex widgets, and SVG asset export via flutter_gen. Use when inspecting Figma designs, extracting Figma design tokens, exporting Figma vector assets, or translating Figma component sets into Flutter code.</p>
     </section>
 
     <div class="progress-card">
@@ -528,184 +528,361 @@ pre {
     </div>
 
     <article class="doc-content">
-<h1 class="doc-h1">Testing Strategy &amp; Architecture Hub</h1>
-<h2 id="1--overview---testing-pyramid" class="doc-h2"><a href="#1--overview---testing-pyramid" class="heading-anchor">#</a> 1. Overview &amp; Testing Pyramid</h2>
-<p class="doc-p">In our Clean Architecture Flutter template, testing ensures reliability, regression safety, and high code quality across all deployment targets (<strong>Mobile: Android/iOS, Web, Desktop: macOS/Windows/Linux</strong>).</p>
-<div class="mermaid-container"><div class="mermaid">flowchart TD
-    subgraph TestingPyramid["Testing Pyramid & AI Runtime Inspection"]
-        Marionette["Marionette MCP AI Driving<br/>Live Autonomous Inspection & Interactive Flows"]
-        E2E["Integration Tests (Cross-Platform)<br/>End-to-End User Flows on Mobile / Web / Desktop"]
-        Widget["Widget Tests<br/>UI Rendering, Component Interaction, Keys, Theme/Locale"]
-        Bloc["BLoC / Cubit Tests<br/>Event-State Transitions via bloc_test & Mocktail"]
-        Unit["Pure Dart Unit Tests<br/>UseCases, Repositories, DTO Mappers, Core Utils"]
+<h1 class="doc-h1">Figma MCP Integration: Design Tokens, Auto-Layout &amp; Component Synthesis</h1>
+<h2 id="1--overview---tooling-architecture" class="doc-h2"><a href="#1--overview---tooling-architecture" class="heading-anchor">#</a> 1. Overview &amp; Tooling Architecture</h2>
+<p class="doc-p">The <strong>Figma Integration</strong> skill guides agents in interfacing with Figma through Model Context Protocol (MCP) servers, Figma REST APIs, and Dev Mode metadata. It automates the extraction of design tokens, translates Auto-layout constraints into responsive Flutter layout trees, and exports vector assets directly into the project&#039;s asset pipeline.</p>
+<div class="mermaid-container"><div class="mermaid">graph TD
+    Agent["Antigravity Agent"]
+    
+    subgraph "Figma MCP / REST API Interface"
+        Agent -->|1. Parse File & Node ID| FIG_URL["Figma URL (file_key, node_id)"]
+        FIG_URL -->|2. Inspect Node Tree| FIG_TREE["get_file / get_file_nodes"]
+        FIG_TREE -->|3. Extract Tokens| FIG_TOKENS["Colors, Typography, Spacing, Radii"]
+        FIG_TREE -->|4. Export Assets| FIG_ASSETS["get_image (SVG / PNG)"]
     end
-
-    Unit --> Bloc --> Widget --> E2E --> Marionette
+    
+    FIG_TOKENS -->|ThemeExtension & ColorScheme| Theme["lib/presentation/theme/"]
+    FIG_ASSETS -->|Save to assets/svgs/| AssetGen["flutter_gen (Assets.svgs.*)"]
+    FIG_TREE -->|Auto-Layout to Flex Widgets| UIKit["lib/presentation/ui_kit/"]
 </div></div>
 <hr class="doc-divider">
-<h2 id="2--testing-skill-tree---routing-matrix" class="doc-h2"><a href="#2--testing-skill-tree---routing-matrix" class="heading-anchor">#</a> 2. Testing Skill Tree &amp; Routing Matrix</h2>
+<h2 id="2--prerequisites---related-skills" class="doc-h2"><a href="#2--prerequisites---related-skills" class="heading-anchor">#</a> 2. Prerequisites &amp; Related Skills</h2>
 <div class="table-responsive"><table class="doc-table">
 <thead><tr>
-<th>Level / Focus Area</th>
-<th>Target Skill</th>
-<th>Purpose</th>
+<th>Relation</th>
+<th>Skill</th>
+<th>When to Consult</th>
 </tr></thead><tbody>
 <tr>
-<td><strong>Unit Testing</strong></td>
-<td><a href="../testing-unit/testing-unit.html" class="skill-ref-link" title="Standards and patterns for Pure Dart Unit Tests in test/domain/, test/data/, and test/core/. Covers testing UseCases, Repository implementations with Mocktail, DTO toDomain() mappers, Core utilities/extensions, and edge-case error assertions.">testing-unit <span class="ext-icon">↗</span></a></td>
-<td>Pure Dart testing for UseCases, Repository implementations, DTO mappers, and Core algorithms.</td>
+<td><strong>Parent Hub</strong></td>
+<td><a href="../design-hub/design-hub.html" class="skill-ref-link" title="Primary coordinator and routing guide for UI/UX design, prototyping, Google Stitch AI design generation, and Figma MCP integration. Routes to specialized skills for Google Stitch MCP, Figma MCP tools, and Flutter UI Kit code synthesis. Use when designing, prototyping, translating Figma/Stitch mockups into Flutter code, or managing design tokens.">design-hub <span class="ext-icon">↗</span></a></td>
+<td>For overall design routing and global constraints</td>
 </tr>
 <tr>
-<td><strong>BLoC &amp; Cubit Testing</strong></td>
-<td><a href="../testing-bloc/testing-bloc.html" class="skill-ref-link" title="Standards and patterns for BLoC and Cubit State Transition Testing using package:bloc_test and package:mocktail. Covers mocking UseCases, testing async event-to-state sequences, verifying bloc_concurrency transformers (droppable, restartable), and asserting Failure state emissions.">testing-bloc <span class="ext-icon">↗</span></a></td>
-<td>State transition verification using <code class="inline-code">bloc_test</code>, Mocktail, and async event streams.</td>
+<td><strong>Downstream</strong></td>
+<td><a href="../design-to-flutter-ui/design-to-flutter-ui.html" class="skill-ref-link" title="Guides the synthesis and conversion of visual design specifications, Stitch AI mockups, Figma auto-layouts, and design tokens into production-ready Flutter Clean Architecture UI. Enforces Material 3 ColorScheme, ThemeExtension custom tokens, dual-theme @Preview functions, widget decomposition (&lt;150-200 LOC), and Semantics/Marionette registration. Use when translating UI designs/mockups/Figma/Stitch to Flutter code, creating UI Kit components, or refactoring screens to meet strict UI guidelines.">design-to-flutter-ui <span class="ext-icon">↗</span></a></td>
+<td>For translating extracted tokens and widgets into Flutter Clean Architecture</td>
 </tr>
 <tr>
-<td><strong>Widget Testing</strong></td>
-<td><a href="../testing-widget/testing-widget.html" class="skill-ref-link" title="Standards and patterns for Flutter Widget Testing using WidgetTester and WidgetTestWrapper. Covers Key-first finders, lazy list scrolling (scrollUntilVisible), async frame pumping (avoiding pumpAndSettle timeouts on spinners), mocking BLoCs via Mocktail, and testing responsive/theme variations.">testing-widget <span class="ext-icon">↗</span></a></td>
-<td>Component rendering, <code class="inline-code">ValueKey</code> finders, theme/localization wrappers, and pump mechanics.</td>
+<td><strong>Asset Pipeline</strong></td>
+<td><a href="../../dart-import-sorter/dart-import-sorter.html" class="skill-ref-link" title="Automates and standardizes Dart &amp; Flutter import statement sorting, grouping, and ordering using package:import_sorter. Enforces clean separation between dart:, package:flutter, external packages, internal project imports, and part directives. Use when creating or modifying files, resolving linter warnings, running formatting pipelines, or executing project bootstrap/adoption.">dart-import-sorter <span class="ext-icon">↗</span></a> / <a href="../../flutter-build-runner/flutter-build-runner.html" class="skill-ref-link" title="Manages code generation workflows using build_runner, cache clearing, watch mode execution, and CI/CD generated file verification. Use when executing code generators, clearing conflicting outputs, troubleshooting code gen failures, or validating generated files in CI.">flutter-build-runner <span class="ext-icon">↗</span></a></td>
+<td>For asset generation and import formatting</td>
 </tr>
 <tr>
-<td><strong>Integration Testing</strong></td>
-<td><a href="../testing-integration/testing-integration.html" class="skill-ref-link" title="Standards and patterns for End-to-End Integration Testing across Mobile (Android, iOS), Web (Chrome), and Desktop (macOS, Windows, Linux) using package:integration_test. Covers platform driver setup, responsive viewport sizing, DI resets, complete user journeys, and CI/CD execution.">testing-integration <span class="ext-icon">↗</span></a></td>
-<td>End-to-end user flows across <strong>Mobile (Android/iOS), Web, and Desktop (macOS/Windows/Linux)</strong>.</td>
-</tr>
-<tr>
-<td><strong>Marionette AI Runtime Driving</strong></td>
-<td><a href="../marionette/marionette-hub/marionette-hub.html" class="skill-ref-link" title="Primary coordinator and entry point for Marionette MCP and marionette_flutter AI-driven runtime UI interaction, automated smoke testing, and real-time element inspection. Use when connecting agents to running Flutter apps, performing live visual verification, driving interactive test flows, or configuring Marionette for custom design systems.">marionette-hub <span class="ext-icon">↗</span></a></td>
-<td>AI agent runtime app inspection, tapping, text entry, screenshots, and logs via MCP.</td>
-</tr>
-<tr>
-<td><strong>Marionette Custom Design System</strong></td>
-<td><a href="../marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="skill-ref-link" title="Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text fields, canvas badges, clickable cards) to work seamlessly with Marionette MCP using MarionetteConfiguration, isInteractiveWidget, extractText, and Semantics wrappers.">marionette-custom-widgets <span class="ext-icon">↗</span></a></td>
-<td>Adapting UI Kit components in <code class="inline-code">AppMarionetteConfig</code> with <code class="inline-code">Semantics</code>.</td>
-</tr>
-<tr>
-<td><strong>Clean Architecture Hub</strong></td>
-<td><a href="../../flutter-clean-architecture/flutter-clean-architecture.html" class="skill-ref-link" title="Enforces Clean Architecture, DDD, and SOLID with Layer-First packaging (domain, data, presentation, infrastructure), repository interfaces in Domain, single-responsibility UseCases, DTOs with inline toDomain() mappers in Data, Retrofit clients, sealed class failures, and BLoC state management. Use when creating new features, refactoring layers, reviewing PRs, or implementing architecture logic.">flutter-clean-architecture <span class="ext-icon">↗</span></a></td>
-<td>System-wide layer separation and dependency rules.</td>
+<td><strong>Tooling Hub</strong></td>
+<td><a href="../../tooling/mcp-tooling-hub/mcp-tooling-hub.html" class="skill-ref-link" title="Master catalog and guide for Model Context Protocol (MCP) tooling in Antigravity IDE. Covers dart-mcp-server (hot_reload, hot_restart, widget_inspector, get_runtime_errors, analyze_files, lsp, pub_dev_search, rip_grep_packages, vm_service), stitch (Google Stitch UI generation, edit_screens, design systems), figma MCP tooling, firebase-mcp-server, and android-management-api. Use when choosing between MCP-accelerated IDE actions and CLI commands.">mcp-tooling-hub <span class="ext-icon">↗</span></a></td>
+<td>For MCP server ecosystem reference</td>
 </tr>
 </tbody></table></div>
 <hr class="doc-divider">
-<h2 id="3--core-laws-of-testing" class="doc-h2"><a href="#3--core-laws-of-testing" class="heading-anchor">#</a> 3. Core Laws of Testing</h2>
-<ol class="doc-ordered-list">
-<li><strong>Deterministic Isolation:</strong></li>
-<li>Tests must never depend on live network connections, actual disk databases, or real platform channel delays.</li>
-<li>External dependencies must always be mocked using <code class="inline-code">mocktail</code> or lightweight in-memory stubs.</li>
-<li><strong>GetIt Lifecycle Hygiene:</strong></li>
-<li>If <code class="inline-code">GetIt</code> is used in widget or integration tests, ALWAYS call <code class="inline-code">GetIt.I.reset()</code> in <code class="inline-code">tearDown()</code> to avoid state pollution between test cases.</li>
-<li><strong>Key-First Finders:</strong></li>
-<li>In Widget and Integration tests, locate interactive elements using explicit <code class="inline-code">ValueKey(&#039;identifier&#039;)</code>. Never rely on dynamic localized strings.</li>
-<li><strong>Platform Parity:</strong></li>
-<li>Integration tests must be runnable across Mobile emulators, headless Chrome for Web, and native Desktop runners with configurable screen viewports.</li>
+<h2 id="3--figma-data-structures---extraction-mechanics" class="doc-h2"><a href="#3--figma-data-structures---extraction-mechanics" class="heading-anchor">#</a> 3. Figma Data Structures &amp; Extraction Mechanics</h2>
+<h3 class="doc-h3">3.1 Resolving Figma URLs &amp; Identifiers</h3>
+<p class="doc-p">Figma URLs follow the standard structure:</p>
+<p class="doc-p"><code class="inline-code">https://www.figma.com/design/:file_key/:file_title?node-id=:node_id</code></p>
+<ul class="doc-list">
+<li><strong><code class="inline-code">file_key</code>:</strong> The unique document hash (e.g. <code class="inline-code">aB1cDeFgHiJkLmNoPqRsTu</code>).</li>
+<li><strong><code class="inline-code">node_id</code>:</strong> The target frame, component, or canvas ID. Note: In API calls, URL colons (<code class="inline-code">123:456</code>) are formatted as <code class="inline-code">123:456</code> or <code class="inline-code">123-456</code> depending on endpoint.</li>
 </ul>
 <hr class="doc-divider">
-<h2 id="4--test-directory-standard" class="doc-h2"><a href="#4--test-directory-standard" class="heading-anchor">#</a> 4. Test Directory Standard</h2>
+<h3 class="doc-h3">3.2 Auto-Layout to Flutter Layout Mapping</h3>
+<p class="doc-p">Figma Auto-layout translates directly to Flutter layout primitives:</p>
+<div class="table-responsive"><table class="doc-table">
+<thead><tr>
+<th>Figma Auto-Layout Property</th>
+<th>Figma Value</th>
+<th>Flutter Equivalent</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Layout Direction</strong></td>
+<td><code class="inline-code">HORIZONTAL</code></td>
+<td><code class="inline-code">Row(mainAxisSize: MainAxisSize.min, ...)</code> or <code class="inline-code">Row(children: ...)</code></td>
+</tr>
+<tr>
+<td><strong>Layout Direction</strong></td>
+<td><code class="inline-code">VERTICAL</code></td>
+<td><code class="inline-code">Column(mainAxisSize: MainAxisSize.min, ...)</code> or <code class="inline-code">Column(children: ...)</code></td>
+</tr>
+<tr>
+<td><strong>Layout Wrap</strong></td>
+<td><code class="inline-code">WRAP</code></td>
+<td><code class="inline-code">Wrap(spacing: gap, runSpacing: runGap, ...)</code></td>
+</tr>
+<tr>
+<td><strong>Item Spacing (Gap)</strong></td>
+<td><code class="inline-code">gap: 16</code></td>
+<td><code class="inline-code">SizedBox(width: 16)</code> / <code class="inline-code">SizedBox(height: 16)</code> or <code class="inline-code">spacing: 16</code> in <code class="inline-code">Flex</code></td>
+</tr>
+<tr>
+<td><strong>Padding</strong></td>
+<td><code class="inline-code">top, right, bottom, left</code></td>
+<td><code class="inline-code">EdgeInsets.only(top: ..., right: ..., bottom: ..., left: ...)</code> or <code class="inline-code">EdgeInsets.symmetric(...)</code></td>
+</tr>
+<tr>
+<td><strong>Primary Axis Align</strong></td>
+<td><code class="inline-code">MIN</code> / <code class="inline-code">CENTER</code> / <code class="inline-code">MAX</code> / <code class="inline-code">SPACE_BETWEEN</code></td>
+<td><code class="inline-code">MainAxisAlignment.start</code> / <code class="inline-code">center</code> / <code class="inline-code">end</code> / <code class="inline-code">spaceBetween</code></td>
+</tr>
+<tr>
+<td><strong>Counter Axis Align</strong></td>
+<td><code class="inline-code">MIN</code> / <code class="inline-code">CENTER</code> / <code class="inline-code">MAX</code> / <code class="inline-code">STRETCH</code></td>
+<td><code class="inline-code">CrossAxisAlignment.start</code> / <code class="inline-code">center</code> / <code class="inline-code">end</code> / <code class="inline-code">stretch</code></td>
+</tr>
+<tr>
+<td><strong>Item Sizing</strong></td>
+<td><code class="inline-code">FIXED</code></td>
+<td><code class="inline-code">SizedBox(width: w, height: h)</code> or fixed constraint</td>
+</tr>
+<tr>
+<td><strong>Item Sizing</strong></td>
+<td><code class="inline-code">FILL</code> / <code class="inline-code">HUG</code></td>
+<td><code class="inline-code">Expanded(child: ...)</code> / <code class="inline-code">Flexible(child: ...)</code> / intrinsic content size</td>
+</tr>
+</tbody></table></div>
+<hr class="doc-divider">
+<h3 class="doc-h3">3.3 Design Tokens &amp; Variable Extraction</h3>
+<div class="table-responsive"><table class="doc-table">
+<thead><tr>
+<th>Figma Token</th>
+<th>Figma Source</th>
+<th>Flutter Architecture Destination</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Brand &amp; Surface Colors</strong></td>
+<td>Color Styles / Variables (Light + Dark modes)</td>
+<td><code class="inline-code">context.colorScheme</code> (<code class="inline-code">primary</code>, <code class="inline-code">surface</code>, <code class="inline-code">onSurface</code>, etc.)</td>
+</tr>
+<tr>
+<td><strong>Custom Status / Action Colors</strong></td>
+<td>Custom Variable Collections (<code class="inline-code">trade_call</code>, <code class="inline-code">badge_warning</code>)</td>
+<td><code class="inline-code">AppCustomColors</code> (<code class="inline-code">ThemeExtension</code>) in <code class="inline-code">lib/presentation/theme/</code></td>
+</tr>
+<tr>
+<td><strong>Typography</strong></td>
+<td>Text Styles (<code class="inline-code">fontSize</code>, <code class="inline-code">fontWeight</code>, <code class="inline-code">lineHeight</code>)</td>
+<td><code class="inline-code">context.textTheme</code> (<code class="inline-code">titleMedium</code>, <code class="inline-code">bodyLarge</code>, etc.)</td>
+</tr>
+<tr>
+<td><strong>Corner Radii</strong></td>
+<td><code class="inline-code">cornerRadius</code> / <code class="inline-code">rectangleCornerRadii</code></td>
+<td><code class="inline-code">BorderRadius.circular(12)</code> or <code class="inline-code">ThemeData.shape</code></td>
+</tr>
+<tr>
+<td><strong>Elevation &amp; Drop Shadows</strong></td>
+<td><code class="inline-code">effects: [DROP_SHADOW]</code></td>
+<td><code class="inline-code">BoxShadow(color: ..., blurRadius: ..., offset: ...)</code></td>
+</tr>
+</tbody></table></div>
+<hr class="doc-divider">
+<h2 id="4--step-by-step-workflows" class="doc-h2"><a href="#4--step-by-step-workflows" class="heading-anchor">#</a> 4. Step-by-Step Workflows</h2>
+<h3 class="doc-h3">4.1 Workflow 1: Extract Design Tokens &amp; Color Palettes</h3>
+<ol class="doc-ordered-list">
+<li><strong>Query Variables / Styles:</strong> Inspect color and typography collections in the Figma document.</li>
+<li><strong>Define Custom ThemeExtension:</strong></li>
+</ul>
+<p class="doc-p">   Add domain/custom tokens to <code class="inline-code">AppCustomColors</code> in <code class="inline-code">lib/presentation/theme/app_custom_colors.dart</code>:</p>
 <div class="code-block-wrapper">
   <div class="code-header">
-    <span class="code-lang">text</span>
+    <span class="code-lang">dart</span>
     <button class="copy-btn" onclick="copyCode(this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
       <span class="btn-text" data-i18n="copy">Copy</span>
     </button>
   </div>
-  <pre><code class="language-text">test/
-├── core/                        # Pure Dart unit tests for utils and extensions
-│   ├── extensions/
-│   └── utils/
-├── domain/                      # UseCases and Domain Entity equality tests
-│   └── item/
-│       └── usecases/
-├── data/                        # DTO toDomain mappers &amp; repository tests with mock Dio
-│   └── item/
-│       ├── dto/
-│       └── repositories/
-├── presentation/                # BLoC tests and Widget tests
-│   ├── state_management/
-│   │   └── item/
-│   └── pages/
-│       └── item/
-└── test_utils/                  # Shared test wrappers, fakes, and mock declarations
-    ├── widget_test_wrapper.dart
-    └── mocks.dart
+  <pre><code class="language-dart">   import &#039;package:flutter/material.dart&#039;;
 
-integration_test/
-├── flows/                       # Full end-to-end user journeys
-│   ├── auth_flow_test.dart
-│   └── item_details_flow_test.dart
-└── driver/
-    └── integration_test_driver.dart
+   class AppCustomColors extends ThemeExtension&lt;AppCustomColors&gt; {
+     final Color successSurface;
+     final Color warningSurface;
+     final Color tradeCall;
+     final Color tradePut;
+
+     const AppCustomColors({
+       required this.successSurface,
+       required this.warningSurface,
+       required this.tradeCall,
+       required this.tradePut,
+     });
+
+     @override
+     AppCustomColors copyWith({
+       Color? successSurface,
+       Color? warningSurface,
+       Color? tradeCall,
+       Color? tradePut,
+     }) {
+       return AppCustomColors(
+         successSurface: successSurface ?? this.successSurface,
+         warningSurface: warningSurface ?? this.warningSurface,
+         tradeCall: tradeCall ?? this.tradeCall,
+         tradePut: tradePut ?? this.tradePut,
+       );
+     }
+
+     @override
+     AppCustomColors lerp(ThemeExtension&lt;AppCustomColors&gt;? other, double t) {
+       if (other is! AppCustomColors) return this;
+       return AppCustomColors(
+         successSurface: Color.lerp(successSurface, other.successSurface, t)!,
+         warningSurface: Color.lerp(warningSurface, other.warningSurface, t)!,
+         tradeCall: Color.lerp(tradeCall, other.tradeCall, t)!,
+         tradePut: Color.lerp(tradePut, other.tradePut, t)!,
+       );
+     }
+   }
 </code></pre>
 </div>
+<ol class="doc-ordered-list">
+<li><strong>Register Light and Dark Instances:</strong> Add configured instances to <code class="inline-code">lightTheme</code> and <code class="inline-code">darkTheme</code> in <code class="inline-code">lib/presentation/theme/app_theme.dart</code>.</li>
+</ul>
 <hr class="doc-divider">
-<h2 id="5--master-anti-patterns--strictly-prohibited-" class="doc-h2"><a href="#5--master-anti-patterns--strictly-prohibited-" class="heading-anchor">#</a> 5. Master Anti-Patterns (Strictly Prohibited)</h2>
+<h3 class="doc-h3">4.2 Workflow 2: Export Vector Icons to <code class="inline-code">assets/svgs/</code> with <code class="inline-code">flutter_gen</code></h3>
+<ol class="doc-ordered-list">
+<li><strong>Export SVG Assets:</strong> Save optimized SVG icons into <code class="inline-code">assets/svgs/</code> using lowercase snake_case naming (e.g., <code class="inline-code">ic_arrow_up.svg</code>, <code class="inline-code">ic_wallet.svg</code>).</li>
+<li><strong>Run Asset Generation:</strong></li>
+</ul>
+<p class="doc-p">   Execute build runner or flutter_gen:</p>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-bash">   flutter pub run build_runner build --delete-conflicting-outputs
+</code></pre>
+</div>
+<ol class="doc-ordered-list">
+<li><strong>Consume Generated Asset:</strong></li>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">dart</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-dart">   import &#039;package:flutter_template/presentation/ui_utils/assets/assets.gen.dart&#039;;
+   import &#039;package:flutter_template/presentation/ui_utils/extensions/build_context_x.dart&#039;;
+
+   Widget buildIcon(BuildContext context) {
+     return Assets.svgs.icWallet.svg(
+       width: 24,
+       height: 24,
+       colorFilter: ColorFilter.mode(
+         context.colorScheme.primary,
+         BlendMode.srcIn,
+       ),
+     );
+   }
+</code></pre>
+</div>
+</ul>
+<hr class="doc-divider">
+<h3 class="doc-h3">4.3 Workflow 3: Map Component Sets &amp; Variants to Flutter UI Kit</h3>
+<p class="doc-p">When translating a Figma component with multiple variants (e.g. <code class="inline-code">AppButton</code> with <code class="inline-code">variant: primary | secondary | outline</code>, <code class="inline-code">size: sm | md | lg</code>, <code class="inline-code">state: default | disabled | loading</code>):</p>
+<ol class="doc-ordered-list">
+<li><strong>Model Variant Enums in UI Kit:</strong></li>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">dart</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-dart">   enum AppButtonVariant { primary, secondary, outline }
+   enum AppButtonSize { sm, md, lg }
+</code></pre>
+</div>
+<li><strong>Construct <code class="inline-code">StatelessWidget</code>:</strong></li>
+</ul>
+<p class="doc-p">   Keep file within 150–200 lines in <code class="inline-code">lib/presentation/ui_kit/app_button.dart</code>.</p>
+<ol class="doc-ordered-list">
+<li><strong>Author Dual-Theme <code class="inline-code">@Preview</code> Functions:</strong></li>
+</ul>
+<p class="doc-p">   Create <code class="inline-code">@Preview</code> functions wrapped in <code class="inline-code">PreviewWrapper</code> for both Light and Dark themes.</p>
+<ol class="doc-ordered-list">
+<li><strong>Register in <code class="inline-code">AppMarionetteConfig</code>:</strong></li>
+</ul>
+<p class="doc-p">   Register the component in <code class="inline-code">lib/infrastructure/config/marionette_config.dart</code> or wrap in <code class="inline-code">Semantics</code>.</p>
+<hr class="doc-divider">
+<h2 id="5--anti-patterns---severity-matrix" class="doc-h2"><a href="#5--anti-patterns---severity-matrix" class="heading-anchor">#</a> 5. Anti-Patterns &amp; Severity Matrix</h2>
 <div class="table-responsive"><table class="doc-table">
 <thead><tr>
 <th>Anti-Pattern</th>
 <th>Severity</th>
+<th>Why It Fails</th>
 <th>Corrective Action</th>
 </tr></thead><tbody>
 <tr>
-<td>Real network requests or live database IO during tests</td>
+<td><strong>Hardcoding Raw Hex Values from Figma</strong></td>
 <td><strong>CRITICAL</strong></td>
-<td>Inject Mock API clients or Repository mocks in DI.</td>
+<td>Hardcoded colors (<code class="inline-code">Color(0xFF1E88E5)</code>) break dark theme switching and violate UI guidelines.</td>
+<td>Extract colors into <code class="inline-code">ColorScheme</code> or <code class="inline-code">AppCustomColors</code> <code class="inline-code">ThemeExtension</code>.</td>
 </tr>
 <tr>
-<td>Leaking <code class="inline-code">GetIt</code> registrations across test cases</td>
-<td><strong>CRITICAL</strong></td>
-<td>Call <code class="inline-code">GetIt.I.reset()</code> in <code class="inline-code">tearDown()</code> for every test file.</td>
-</tr>
-<tr>
-<td>Using <code class="inline-code">pumpAndSettle()</code> during infinite spinners</td>
-<td><strong>CRITICAL</strong></td>
-<td>Advance frames using <code class="inline-code">tester.pump(const Duration(milliseconds: 300))</code>.</td>
-</tr>
-<tr>
-<td>Finding target widgets via localized text (<code class="inline-code">find.text(&#039;Submit&#039;)</code>)</td>
+<td><strong>Absolute Coordinate Layout (<code class="inline-code">Positioned</code> Abuse)</strong></td>
 <td><strong>HIGH</strong></td>
-<td>Use explicit <code class="inline-code">ValueKey(&#039;submit_button&#039;)</code>.</td>
+<td>Using fixed X/Y coordinates instead of Auto-layout flex containers breaks multi-screen responsiveness.</td>
+<td>Translate Auto-layout to <code class="inline-code">Row</code>, <code class="inline-code">Column</code>, <code class="inline-code">Wrap</code>, <code class="inline-code">Flex</code>, and <code class="inline-code">Padding</code>.</td>
 </tr>
 <tr>
-<td>Using <code class="inline-code">Future.delayed</code> or <code class="inline-code">sleep</code> in test code</td>
+<td><strong>Skipping <code class="inline-code">flutter_gen</code> for Vector SVGs</strong></td>
 <td><strong>HIGH</strong></td>
-<td>Use <code class="inline-code">tester.pump()</code> or <code class="inline-code">fakeAsync</code> clocks.</td>
+<td>Raw string asset paths (<code class="inline-code">SvgPicture.asset(&#039;assets/...&#039;)</code>) lack compile-time safety.</td>
+<td>Save to <code class="inline-code">assets/svgs/</code> and access via <code class="inline-code">Assets.svgs.&lt;name&gt;.svg()</code>.</td>
+</tr>
+<tr>
+<td><strong>Helper Builder Methods in Large Classes</strong></td>
+<td><strong>MEDIUM</strong></td>
+<td>Deeply nested <code class="inline-code">Widget _buildRow()</code> methods prevent granular element repainting.</td>
+<td>Extract into dedicated <code class="inline-code">StatelessWidget</code> sub-classes.</td>
 </tr>
 </tbody></table></div>
 <hr class="doc-divider">
-<h2 id="6--master-verification-checklist" class="doc-h2"><a href="#6--master-verification-checklist" class="heading-anchor">#</a> 6. Master Verification Checklist</h2>
+<h2 id="6--agent-verification-checklist" class="doc-h2"><a href="#6--agent-verification-checklist" class="heading-anchor">#</a> 6. Agent Verification Checklist</h2>
+<p class="doc-p">When extracting from Figma or building UI from Figma specs:</p>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Pure Dart unit tests run with <code class="inline-code">flutter test test/core/ test/domain/ test/data/</code>.</span>
+    <span class="check-text">Auto-layout translated to responsive Flutter layout primitives (<code class="inline-code">Row</code>, <code class="inline-code">Column</code>, <code class="inline-code">Wrap</code>, <code class="inline-code">Expanded</code>).</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">BLoC tests cover all event-to-state transition sequences via <code class="inline-code">bloc_test</code>.</span>
+    <span class="check-text">All colors route strictly through <code class="inline-code">context.colorScheme</code> or <code class="inline-code">context.customColors</code>.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Widget tests wrap components in <code class="inline-code">WidgetTestWrapper</code> with Theme and Localization.</span>
+    <span class="check-text">Both Light and Dark theme palettes are supported without visual glitches.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Integration tests pass on Mobile, Web (<code class="inline-code">flutter drive -d chrome</code>), and Desktop.</span>
+    <span class="check-text">Icons exported as clean SVGs in <code class="inline-code">assets/svgs/</code> and accessed via <code class="inline-code">Assets.svgs.*</code>.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">CI pipeline executes tests with code coverage analysis.</span>
+    <span class="check-text">Dual-theme <code class="inline-code">@Preview</code> functions included in the UI Kit component file.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Interactive widgets registered with <code class="inline-code">Semantics</code> / <code class="inline-code">AppMarionetteConfig</code>.</span>
   </label>
 </div>
 
@@ -714,81 +891,59 @@ integration_test/
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
-<a href="../marionette/marionette-hub/marionette-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../dart-import-sorter/dart-import-sorter.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    marionette-hub ↗
+    dart-import-sorter ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Стандарти Dart" data-cat-en="Dart Best Practices">
+    Стандарти Dart
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Primary coordinator and entry point for Marionette MCP and marionette_flutter AI-driven runtime UI interaction...
+    Automates and standardizes Dart &amp; Flutter import statement sorting, grouping, and ordering using package:impor...
   </div>
 </a>
-<a href="../marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../design-hub/design-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    marionette-custom-widgets ↗
+    design-hub ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text ...
+    Primary coordinator and routing guide for UI/UX design, prototyping, Google Stitch AI design generation, and F...
   </div>
 </a>
-<a href="../testing-bloc/testing-bloc.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../design-to-flutter-ui/design-to-flutter-ui.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-bloc ↗
+    design-to-flutter-ui ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for BLoC and Cubit State Transition Testing using package:bloc_test and package:mocktai...
+    Guides the synthesis and conversion of visual design specifications, Stitch AI mockups, Figma auto-layouts, an...
   </div>
 </a>
-<a href="../testing-integration/testing-integration.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../tooling/mcp-tooling-hub/mcp-tooling-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-integration ↗
+    mcp-tooling-hub ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for End-to-End Integration Testing across Mobile (Android, iOS), Web (Chrome), and Desk...
+    Master catalog and guide for Model Context Protocol (MCP) tooling in Antigravity IDE. Covers dart-mcp-server (...
   </div>
 </a>
-<a href="../testing-unit/testing-unit.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../flutter-build-runner/flutter-build-runner.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-unit ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for Pure Dart Unit Tests in test/domain/, test/data/, and test/core/. Covers testing Us...
-  </div>
-</a>
-<a href="../testing-widget/testing-widget.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-widget ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for Flutter Widget Testing using WidgetTester and WidgetTestWrapper. Covers Key-first f...
-  </div>
-</a>
-<a href="../../flutter-clean-architecture/flutter-clean-architecture.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    flutter-clean-architecture ↗
+    flutter-build-runner ↗
   </div>
   <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Архітектура Flutter" data-cat-en="Flutter Architecture">
     Архітектура Flutter
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Enforces Clean Architecture, DDD, and SOLID with Layer-First packaging (domain, data, presentation, infrastruc...
+    Manages code generation workflows using build_runner, cache clearing, watch mode execution, and CI/CD generate...
   </div>
 </a>
 </div></div>

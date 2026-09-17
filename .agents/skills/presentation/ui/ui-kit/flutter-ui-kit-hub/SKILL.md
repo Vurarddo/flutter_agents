@@ -15,6 +15,7 @@ This skill serves as the central entry point for the **UI Kit** subsystem (`lib/
 3. **No Direct Hardcoded Colors/Fonts:** ALL colors and text styles must be retrieved dynamically via `context.colorScheme`, `context.customColors` (`ThemeExtension`), or `context.textTheme`.
 4. **Mandatory `@Preview` Coverage:** EVERY UI Kit widget MUST include `@Preview` definitions for both **Light** and **Dark** themes.
 5. **Strict Line Limit:** Keep each UI Kit component file under **150–200 lines**. Extract internal sub-elements into private widget classes if needed.
+6. **Marionette & Semantics Compatibility:** Interactive custom controls (buttons, inputs, clickable cards) MUST be registered in `AppMarionetteConfig` (`isInteractiveWidget` / `extractText`) or wrapped with `Semantics` so AI agents can discover and tap them.
 
 ---
 
@@ -23,6 +24,7 @@ This skill serves as the central entry point for the **UI Kit** subsystem (`lib/
 | Task / Area | Target Skill | Purpose |
 | :--- | :--- | :--- |
 | **Component Authoring** | [flutter-ui-kit-components](../flutter-ui-kit-components/SKILL.md) | Standard recipes for buttons, cards, badges, dialogs, bottom sheets, snackbars. |
+| **Marionette & Custom Design System** | [marionette-custom-widgets](../../../../testing/marionette/marionette-custom-widgets/SKILL.md) | Registering custom UI Kit types in `AppMarionetteConfig` & `Semantics`. |
 | **Widget Previews** | [flutter-ui-kit-preview](../flutter-ui-kit-preview/SKILL.md) | `@Preview` decorators, `PreviewWrapper`, dual-theme verification, state matrices. |
 | **Parent UI Hub** | [flutter-ui-hub](../../flutter-ui-hub/SKILL.md) | Global presentation layer rules and overall UI routing. |
 | **Theming System** | [flutter-ui-theme-hub](../../../theme/flutter-ui-theme-hub/SKILL.md) | Material 3 ColorScheme, TextTheme, and ThemeExtensions. |
@@ -104,4 +106,5 @@ Before adding or updating any UI Kit widget:
 - [ ] Zero BLoC/Domain dependencies exist in the component.
 - [ ] All colors derive from `colorScheme` or `customColors`.
 - [ ] Component includes Light and Dark `@Preview` functions wrapped in `PreviewWrapper`.
+- [ ] Interactive custom controls are registered in `AppMarionetteConfig` or wrapped with `Semantics`.
 - [ ] File length is strictly under 150–200 lines.

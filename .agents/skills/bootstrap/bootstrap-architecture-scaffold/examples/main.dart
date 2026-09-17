@@ -1,16 +1,23 @@
-import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:marionette_flutter/marionette_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter_template/application.dart';
+import 'package:flutter_template/infrastructure/config/marionette_config.dart';
 import 'package:flutter_template/infrastructure/di/injectable.dart';
 
 void main() {
   runZonedGuarded(
     () async {
-      WidgetsFlutterBinding.ensureInitialized();
+      if (kDebugMode) {
+        MarionetteBinding.ensureInitialized(
+          AppMarionetteConfig.create(),
+        );
+      } else {
+        WidgetsFlutterBinding.ensureInitialized();
+      }
 
       // Initialize Hydrated Bloc storage
       HydratedBloc.storage = await HydratedStorage.build(

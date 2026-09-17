@@ -536,7 +536,7 @@ pre {
 <h2 id="2--migration-workflow" class="doc-h2"><a href="#2--migration-workflow" class="heading-anchor">#</a> 2. Migration Workflow</h2>
 <div class="mermaid-container"><div class="mermaid">graph TD
     A["Audit Native & Dart Config"] --> B["1. Create config/env_*.json Templates"]
-    B --> C["2. Implement lib/core/config/app_config.dart"]
+    B --> C["2. Implement lib/infrastructure/config/app_config.dart"]
     C --> D["3. Configure Android productFlavors (build.gradle)"]
     D --> E["4. Configure iOS Schemes & Build Configurations"]
     E --> F["5. Update .gitignore (Protect Secret Credentials)"]
@@ -567,7 +567,7 @@ pre {
 <p>Add <code class="inline-code">config/env_*.json</code> to <code class="inline-code">.gitignore</code> and ensure only <code class="inline-code">config/env_template.json</code> is tracked in git.</p>
 <hr class="doc-divider">
 <h3 class="doc-h3">Step 2: Create Centralized <code class="inline-code">AppConfig</code></h3>
-<p class="doc-p">Scaffold <code class="inline-code">lib/core/config/app_config.dart</code>:</p>
+<p class="doc-p">Scaffold <code class="inline-code">lib/infrastructure/config/app_config.dart</code>:</p>
 <div class="code-block-wrapper">
   <div class="code-header">
     <span class="code-lang">dart</span>

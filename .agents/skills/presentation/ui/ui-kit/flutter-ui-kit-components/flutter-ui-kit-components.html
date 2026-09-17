@@ -566,6 +566,11 @@ pre {
 <td><a href="../../forms/flutter-ui-forms-custom-controls/flutter-ui-forms-custom-controls.html" class="skill-ref-link" title="Standards and patterns for creating custom reactive form components using ControlValueAccessor, ReactiveFormField, custom chip selectors, date pickers, range sliders, and stylized validation messages in Flutter. Use when building custom UI Kit inputs or binding non-standard widgets to reactive_forms.">flutter-ui-forms-custom-controls <span class="ext-icon">↗</span></a></td>
 <td>Wrapping UI Kit inputs with reactive form bindings.</td>
 </tr>
+<tr>
+<td><strong>Marionette Adaptation</strong></td>
+<td><a href="../../../../testing/marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="skill-ref-link" title="Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text fields, canvas badges, clickable cards) to work seamlessly with Marionette MCP using MarionetteConfiguration, isInteractiveWidget, extractText, and Semantics wrappers.">marionette-custom-widgets <span class="ext-icon">↗</span></a></td>
+<td>Registering custom interactive widgets in <code class="inline-code">AppMarionetteConfig</code>.</td>
+</tr>
 </tbody></table></div>
 <hr class="doc-divider">
 <h2 id="3--reference-implementation-recipes---examples---" class="doc-h2"><a href="#3--reference-implementation-recipes---examples---" class="heading-anchor">#</a> 3. Reference Implementation Recipes (<code class="inline-code">examples/</code>)</h2>
@@ -582,7 +587,8 @@ pre {
 <ol class="doc-ordered-list">
 <li><strong>100% Stateless &amp; Pure:</strong> Reusable UI Kit widgets must never inject BLoCs, Cubits, or Repositories directly.</li>
 <li><strong>Zero Hardcoded Colors:</strong> All colors must resolve from <code class="inline-code">context.colorScheme</code> or custom <code class="inline-code">ThemeExtension</code>.</li>
-<li><strong>Mandatory <code class="inline-code">@Preview</code> Decoration:</strong> Every component file in <code class="inline-code">lib/presentation/ui_kit/</code> must include <code class="inline-code">@Preview</code> tests.</li>
+<li><strong>Mandatory <code class="inline-code">@Preview</code> Coverage:</strong> Every component file in <code class="inline-code">lib/presentation/ui_kit/</code> MUST include top-level <code class="inline-code">@Preview</code> functions for both Light and Dark themes wrapped in <code class="inline-code">PreviewWrapper</code>.</li>
+<li><strong>Marionette &amp; Semantics Registration:</strong> Interactive widgets (buttons, fields, clickable cards) must be registered in <code class="inline-code">AppMarionetteConfig</code> (<code class="inline-code">isInteractiveWidget</code>, <code class="inline-code">extractText</code>) in <code class="inline-code">lib/infrastructure/config/marionette_config.dart</code> or wrapped with <code class="inline-code">Semantics</code>.</li>
 </ul>
 <hr class="doc-divider">
 <h2 id="5--verification-checklist" class="doc-h2"><a href="#5--verification-checklist" class="heading-anchor">#</a> 5. Verification Checklist</h2>
@@ -611,7 +617,14 @@ pre {
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text"><code class="inline-code">@Preview</code> function provided for isolated IDE rendering.</span>
+    <span class="check-text">Dual <code class="inline-code">@Preview</code> functions (Light &amp; Dark) provided using <code class="inline-code">PreviewWrapper</code>.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
+    <span class="check-text">Interactive custom controls are registered in <code class="inline-code">AppMarionetteConfig</code>.</span>
   </label>
 </div>
 
@@ -620,6 +633,17 @@ pre {
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+<a href="../../../../testing/marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="checklist-item" style="text-decoration: none; display: block;">
+  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
+    marionette-custom-widgets ↗
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
+    Тестування (Unit, Widget, BLoC)
+  </div>
+  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+    Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text ...
+  </div>
+</a>
 <a href="../flutter-ui-kit-hub/flutter-ui-kit-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     flutter-ui-kit-hub ↗

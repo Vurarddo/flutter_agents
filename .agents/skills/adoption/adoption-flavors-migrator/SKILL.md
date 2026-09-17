@@ -18,7 +18,7 @@ This skill safely introduces a multi-flavor architecture (`dev`, `stage`, `prod`
 ```mermaid
 graph TD
     A["Audit Native & Dart Config"] --> B["1. Create config/env_*.json Templates"]
-    B --> C["2. Implement lib/core/config/app_config.dart"]
+    B --> C["2. Implement lib/infrastructure/config/app_config.dart"]
     C --> D["3. Configure Android productFlavors (build.gradle)"]
     D --> E["4. Configure iOS Schemes & Build Configurations"]
     E --> F["5. Update .gitignore (Protect Secret Credentials)"]
@@ -49,7 +49,7 @@ Create `config/env_stage.json`, `config/env_prod.json`, and `config/env_template
 ---
 
 ### Step 2: Create Centralized `AppConfig`
-Scaffold `lib/core/config/app_config.dart`:
+Scaffold `lib/infrastructure/config/app_config.dart`:
 
 ```dart
 enum EnvironmentType { dev, stage, prod }

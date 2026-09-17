@@ -103,7 +103,10 @@ void main(List<String> args) async {
   }
 
   // Regenerate documentation portal if doc_generator exists
-  final docGenScript = File('${projectDir.path}/skills/documentation/skill-html-doc-generator/scripts/doc_generator.dart');
+  var docGenScript = File('${projectDir.path}/.agents/skills/documentation/skill-html-doc-generator/scripts/doc_generator.dart');
+  if (!docGenScript.existsSync()) {
+    docGenScript = File('${projectDir.path}/skills/documentation/skill-html-doc-generator/scripts/doc_generator.dart');
+  }
   if (docGenScript.existsSync()) {
     print('\n🔄 Regenerating documentation portal without "$skillName"...');
     final result = await Process.run('dart', ['run', docGenScript.path]);

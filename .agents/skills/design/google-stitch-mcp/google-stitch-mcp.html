@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>testing-hub — Agent Skill Documentation</title>
+  <title>google-stitch-mcp — Agent Skill Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
@@ -479,9 +479,9 @@ pre {
       <div class="nav-breadcrumbs">
         <a href="../../../index.html" data-i18n="portal_title">Центр Документації</a>
         <span>/</span>
-        <span data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">Тестування (Unit, Widget, BLoC)</span>
+        <span data-cat-ua="General" data-cat-en="General">General</span>
         <span>/</span>
-        <span style="color: var(--text-primary); font-weight: 600;">testing-hub</span>
+        <span style="color: var(--text-primary); font-weight: 600;">google-stitch-mcp</span>
       </div>
     </div>
     <div class="nav-actions">
@@ -502,19 +502,19 @@ pre {
   <main class="container">
     <section class="hero">
       <div class="hero-badges">
-        <span class="badge badge-category" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">Тестування (Unit, Widget, BLoC)</span>
+        <span class="badge badge-category" data-cat-ua="General" data-cat-en="General">General</span>
         <span class="badge badge-tag">SKILL</span>
-        <span class="badge badge-tag">#primary</span>
-<span class="badge badge-tag">#coordinator</span>
-<span class="badge badge-tag">#architecture</span>
+        <span class="badge badge-tag">#comprehensive</span>
 <span class="badge badge-tag">#guide</span>
-<span class="badge badge-tag">#testing</span>
-<span class="badge badge-tag">#strategy</span>
-<span class="badge badge-tag">#across</span>
-<span class="badge badge-tag">#flutter</span>
+<span class="badge badge-tag">#google</span>
+<span class="badge badge-tag">#stitch</span>
+<span class="badge badge-tag">#server</span>
+<span class="badge badge-tag">#integration</span>
+<span class="badge badge-tag">#covers</span>
+<span class="badge badge-tag">#ai-powered</span>
       </div>
-      <h1 class="hero-title">testing-hub</h1>
-      <p class="hero-description">Primary coordinator and architecture guide for Testing Strategy across all Flutter platforms (Mobile, Web, Desktop). Enforces the Testing Pyramid (Unit, BLoC, Widget, Integration), deterministic async execution, mocktail isolation, DI reset lifecycle, and cross-platform verification.</p>
+      <h1 class="hero-title">google-stitch-mcp</h1>
+      <p class="hero-description">Comprehensive guide for Google Stitch MCP server integration. Covers AI-powered screen generation (generate_screen_from_text), screen iteration (edit_screens), variant generation (generate_variants), design system creation from DESIGN.md (upload_design_md, create_design_system_from_design_md, apply_design_system), and Stitch MCP project management. Use when creating UI designs with Stitch, generating mobile/desktop mockups, editing screens, or applying Stitch design systems.</p>
     </section>
 
     <div class="progress-card">
@@ -528,184 +528,333 @@ pre {
     </div>
 
     <article class="doc-content">
-<h1 class="doc-h1">Testing Strategy &amp; Architecture Hub</h1>
-<h2 id="1--overview---testing-pyramid" class="doc-h2"><a href="#1--overview---testing-pyramid" class="heading-anchor">#</a> 1. Overview &amp; Testing Pyramid</h2>
-<p class="doc-p">In our Clean Architecture Flutter template, testing ensures reliability, regression safety, and high code quality across all deployment targets (<strong>Mobile: Android/iOS, Web, Desktop: macOS/Windows/Linux</strong>).</p>
-<div class="mermaid-container"><div class="mermaid">flowchart TD
-    subgraph TestingPyramid["Testing Pyramid & AI Runtime Inspection"]
-        Marionette["Marionette MCP AI Driving<br/>Live Autonomous Inspection & Interactive Flows"]
-        E2E["Integration Tests (Cross-Platform)<br/>End-to-End User Flows on Mobile / Web / Desktop"]
-        Widget["Widget Tests<br/>UI Rendering, Component Interaction, Keys, Theme/Locale"]
-        Bloc["BLoC / Cubit Tests<br/>Event-State Transitions via bloc_test & Mocktail"]
-        Unit["Pure Dart Unit Tests<br/>UseCases, Repositories, DTO Mappers, Core Utils"]
+<h1 class="doc-h1">Google Stitch MCP: Generative UI Prototyping &amp; Design System Workflows</h1>
+<h2 id="1--overview---tooling-architecture" class="doc-h2"><a href="#1--overview---tooling-architecture" class="heading-anchor">#</a> 1. Overview &amp; Tooling Architecture</h2>
+<p class="doc-p"><strong>Google Stitch</strong> is an AI-powered visual design and frontend prototyping engine. Through the <code class="inline-code">stitch</code> Model Context Protocol (MCP) server, agents can programmatically bootstrap design projects, upload markdown design tokens (<code class="inline-code">DESIGN.md</code>), generate high-fidelity mobile/desktop UI mockups from text prompts, iterate on screen variations, and inspect generated components.</p>
+<div class="mermaid-container"><div class="mermaid">graph TD
+    Agent["Antigravity Agent"]
+    
+    subgraph "Stitch MCP Server (ServerName: stitch)"
+        Agent -->|1. Create Project| CP["create_project"]
+        Agent -->|2. Upload DESIGN.md| UDM["upload_design_md"]
+        UDM -->|3. Init Design System| CDS["create_design_system_from_design_md"]
+        Agent -->|4. Generate Screen| GST["generate_screen_from_text"]
+        Agent -->|5. Inspect Screen| GS["get_screen / list_screens"]
+        Agent -->|6. Refine & Iterate| ES["edit_screens / generate_variants"]
+        Agent -->|7. Re-skin / Theme| ADS["apply_design_system"]
     end
-
-    Unit --> Bloc --> Widget --> E2E --> Marionette
+    
+    GS -->|Generated HTML / CSS / Specs| FlutterBridge["design-to-flutter-ui (Flutter Conversion)"]
 </div></div>
 <hr class="doc-divider">
-<h2 id="2--testing-skill-tree---routing-matrix" class="doc-h2"><a href="#2--testing-skill-tree---routing-matrix" class="heading-anchor">#</a> 2. Testing Skill Tree &amp; Routing Matrix</h2>
+<h2 id="2--prerequisites---related-skills" class="doc-h2"><a href="#2--prerequisites---related-skills" class="heading-anchor">#</a> 2. Prerequisites &amp; Related Skills</h2>
 <div class="table-responsive"><table class="doc-table">
 <thead><tr>
-<th>Level / Focus Area</th>
-<th>Target Skill</th>
-<th>Purpose</th>
+<th>Relation</th>
+<th>Skill</th>
+<th>When to Consult</th>
 </tr></thead><tbody>
 <tr>
-<td><strong>Unit Testing</strong></td>
-<td><a href="../testing-unit/testing-unit.html" class="skill-ref-link" title="Standards and patterns for Pure Dart Unit Tests in test/domain/, test/data/, and test/core/. Covers testing UseCases, Repository implementations with Mocktail, DTO toDomain() mappers, Core utilities/extensions, and edge-case error assertions.">testing-unit <span class="ext-icon">↗</span></a></td>
-<td>Pure Dart testing for UseCases, Repository implementations, DTO mappers, and Core algorithms.</td>
+<td><strong>Parent Hub</strong></td>
+<td><a href="../design-hub/design-hub.html" class="skill-ref-link" title="Primary coordinator and routing guide for UI/UX design, prototyping, Google Stitch AI design generation, and Figma MCP integration. Routes to specialized skills for Google Stitch MCP, Figma MCP tools, and Flutter UI Kit code synthesis. Use when designing, prototyping, translating Figma/Stitch mockups into Flutter code, or managing design tokens.">design-hub <span class="ext-icon">↗</span></a></td>
+<td>For global UI architecture, tokens, and routing</td>
 </tr>
 <tr>
-<td><strong>BLoC &amp; Cubit Testing</strong></td>
-<td><a href="../testing-bloc/testing-bloc.html" class="skill-ref-link" title="Standards and patterns for BLoC and Cubit State Transition Testing using package:bloc_test and package:mocktail. Covers mocking UseCases, testing async event-to-state sequences, verifying bloc_concurrency transformers (droppable, restartable), and asserting Failure state emissions.">testing-bloc <span class="ext-icon">↗</span></a></td>
-<td>State transition verification using <code class="inline-code">bloc_test</code>, Mocktail, and async event streams.</td>
+<td><strong>Sibling Skill</strong></td>
+<td><a href="../figma-mcp-integration/figma-mcp-integration.html" class="skill-ref-link" title="Comprehensive guide for Figma MCP server integration and Figma REST API / Dev Mode workflows. Covers document node inspection, design token extraction (colors, typography, spacing, radii), component variant mapping, auto-layout translation to Flutter flex widgets, and SVG asset export via flutter_gen. Use when inspecting Figma designs, extracting Figma design tokens, exporting Figma vector assets, or translating Figma component sets into Flutter code.">figma-mcp-integration <span class="ext-icon">↗</span></a></td>
+<td>When comparing or integrating Figma components with Stitch mockups</td>
 </tr>
 <tr>
-<td><strong>Widget Testing</strong></td>
-<td><a href="../testing-widget/testing-widget.html" class="skill-ref-link" title="Standards and patterns for Flutter Widget Testing using WidgetTester and WidgetTestWrapper. Covers Key-first finders, lazy list scrolling (scrollUntilVisible), async frame pumping (avoiding pumpAndSettle timeouts on spinners), mocking BLoCs via Mocktail, and testing responsive/theme variations.">testing-widget <span class="ext-icon">↗</span></a></td>
-<td>Component rendering, <code class="inline-code">ValueKey</code> finders, theme/localization wrappers, and pump mechanics.</td>
+<td><strong>Downstream</strong></td>
+<td><a href="../design-to-flutter-ui/design-to-flutter-ui.html" class="skill-ref-link" title="Guides the synthesis and conversion of visual design specifications, Stitch AI mockups, Figma auto-layouts, and design tokens into production-ready Flutter Clean Architecture UI. Enforces Material 3 ColorScheme, ThemeExtension custom tokens, dual-theme @Preview functions, widget decomposition (&lt;150-200 LOC), and Semantics/Marionette registration. Use when translating UI designs/mockups/Figma/Stitch to Flutter code, creating UI Kit components, or refactoring screens to meet strict UI guidelines.">design-to-flutter-ui <span class="ext-icon">↗</span></a></td>
+<td>For translating generated Stitch screens into Flutter widgets &amp; UI Kit</td>
 </tr>
 <tr>
-<td><strong>Integration Testing</strong></td>
-<td><a href="../testing-integration/testing-integration.html" class="skill-ref-link" title="Standards and patterns for End-to-End Integration Testing across Mobile (Android, iOS), Web (Chrome), and Desktop (macOS, Windows, Linux) using package:integration_test. Covers platform driver setup, responsive viewport sizing, DI resets, complete user journeys, and CI/CD execution.">testing-integration <span class="ext-icon">↗</span></a></td>
-<td>End-to-end user flows across <strong>Mobile (Android/iOS), Web, and Desktop (macOS/Windows/Linux)</strong>.</td>
-</tr>
-<tr>
-<td><strong>Marionette AI Runtime Driving</strong></td>
-<td><a href="../marionette/marionette-hub/marionette-hub.html" class="skill-ref-link" title="Primary coordinator and entry point for Marionette MCP and marionette_flutter AI-driven runtime UI interaction, automated smoke testing, and real-time element inspection. Use when connecting agents to running Flutter apps, performing live visual verification, driving interactive test flows, or configuring Marionette for custom design systems.">marionette-hub <span class="ext-icon">↗</span></a></td>
-<td>AI agent runtime app inspection, tapping, text entry, screenshots, and logs via MCP.</td>
-</tr>
-<tr>
-<td><strong>Marionette Custom Design System</strong></td>
-<td><a href="../marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="skill-ref-link" title="Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text fields, canvas badges, clickable cards) to work seamlessly with Marionette MCP using MarionetteConfiguration, isInteractiveWidget, extractText, and Semantics wrappers.">marionette-custom-widgets <span class="ext-icon">↗</span></a></td>
-<td>Adapting UI Kit components in <code class="inline-code">AppMarionetteConfig</code> with <code class="inline-code">Semantics</code>.</td>
-</tr>
-<tr>
-<td><strong>Clean Architecture Hub</strong></td>
-<td><a href="../../flutter-clean-architecture/flutter-clean-architecture.html" class="skill-ref-link" title="Enforces Clean Architecture, DDD, and SOLID with Layer-First packaging (domain, data, presentation, infrastructure), repository interfaces in Domain, single-responsibility UseCases, DTOs with inline toDomain() mappers in Data, Retrofit clients, sealed class failures, and BLoC state management. Use when creating new features, refactoring layers, reviewing PRs, or implementing architecture logic.">flutter-clean-architecture <span class="ext-icon">↗</span></a></td>
-<td>System-wide layer separation and dependency rules.</td>
+<td><strong>Tooling Hub</strong></td>
+<td><a href="../../tooling/mcp-tooling-hub/mcp-tooling-hub.html" class="skill-ref-link" title="Master catalog and guide for Model Context Protocol (MCP) tooling in Antigravity IDE. Covers dart-mcp-server (hot_reload, hot_restart, widget_inspector, get_runtime_errors, analyze_files, lsp, pub_dev_search, rip_grep_packages, vm_service), stitch (Google Stitch UI generation, edit_screens, design systems), figma MCP tooling, firebase-mcp-server, and android-management-api. Use when choosing between MCP-accelerated IDE actions and CLI commands.">mcp-tooling-hub <span class="ext-icon">↗</span></a></td>
+<td>For general Antigravity MCP server catalog and conventions</td>
 </tr>
 </tbody></table></div>
 <hr class="doc-divider">
-<h2 id="3--core-laws-of-testing" class="doc-h2"><a href="#3--core-laws-of-testing" class="heading-anchor">#</a> 3. Core Laws of Testing</h2>
-<ol class="doc-ordered-list">
-<li><strong>Deterministic Isolation:</strong></li>
-<li>Tests must never depend on live network connections, actual disk databases, or real platform channel delays.</li>
-<li>External dependencies must always be mocked using <code class="inline-code">mocktail</code> or lightweight in-memory stubs.</li>
-<li><strong>GetIt Lifecycle Hygiene:</strong></li>
-<li>If <code class="inline-code">GetIt</code> is used in widget or integration tests, ALWAYS call <code class="inline-code">GetIt.I.reset()</code> in <code class="inline-code">tearDown()</code> to avoid state pollution between test cases.</li>
-<li><strong>Key-First Finders:</strong></li>
-<li>In Widget and Integration tests, locate interactive elements using explicit <code class="inline-code">ValueKey(&#039;identifier&#039;)</code>. Never rely on dynamic localized strings.</li>
-<li><strong>Platform Parity:</strong></li>
-<li>Integration tests must be runnable across Mobile emulators, headless Chrome for Web, and native Desktop runners with configurable screen viewports.</li>
-</ul>
+<h2 id="3--stitch-mcp-tools-reference" class="doc-h2"><a href="#3--stitch-mcp-tools-reference" class="heading-anchor">#</a> 3. Stitch MCP Tools Reference</h2>
+<p class="doc-p">All Stitch tools are called via <code class="inline-code">call_mcp_tool</code> with <code class="inline-code">ServerName: &quot;stitch&quot;</code>.</p>
+<h3 class="doc-h3">3.1 Project &amp; Screen Management</h3>
+<div class="table-responsive"><table class="doc-table">
+<thead><tr>
+<th>Tool Name</th>
+<th>Parameters</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline-code">create_project</code></td>
+<td><code class="inline-code">{ &quot;title&quot;: &quot;string&quot; }</code></td>
+<td>Creates a new Stitch container project for UI screens.</td>
+</tr>
+<tr>
+<td><code class="inline-code">get_project</code></td>
+<td><code class="inline-code">{ &quot;projectId&quot;: &quot;string&quot; }</code></td>
+<td>Retrieves project details, screen instances, and linked design systems.</td>
+</tr>
+<tr>
+<td><code class="inline-code">list_projects</code></td>
+<td><code class="inline-code">{}</code></td>
+<td>Lists all active Stitch projects.</td>
+</tr>
+<tr>
+<td><code class="inline-code">delete_project</code></td>
+<td><code class="inline-code">{ &quot;projectId&quot;: &quot;string&quot; }</code></td>
+<td>Deletes a Stitch project.</td>
+</tr>
+<tr>
+<td><code class="inline-code">list_screens</code></td>
+<td><code class="inline-code">{ &quot;projectId&quot;: &quot;string&quot; }</code></td>
+<td>Lists all screens generated within a project.</td>
+</tr>
+<tr>
+<td><code class="inline-code">get_screen</code></td>
+<td><code class="inline-code">{ &quot;name&quot;: &quot;projects/{projectId}/screens/{screenId}&quot; }</code></td>
+<td>Retrieves full screen metadata, component hierarchy, and HTML/CSS representations.</td>
+</tr>
+</tbody></table></div>
+<h3 class="doc-h3">3.2 AI Screen Generation &amp; Iteration</h3>
+<div class="table-responsive"><table class="doc-table">
+<thead><tr>
+<th>Tool Name</th>
+<th>Key Parameters</th>
+<th>Instructions &amp; Nuances</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline-code">generate_screen_from_text</code></td>
+<td><code class="inline-code">projectId</code> (req), <code class="inline-code">prompt</code> (req), <code class="inline-code">deviceType</code> (<code class="inline-code">MOBILE</code>, <code class="inline-code">DESKTOP</code>, <code class="inline-code">TABLET</code>, <code class="inline-code">AGNOSTIC</code>), <code class="inline-code">modelId</code> (<code class="inline-code">GEMINI_3_8_FLASH</code>, <code class="inline-code">GEMINI_3_5_FLASH_LITE</code>), <code class="inline-code">designSystem</code> (opt)</td>
+<td><strong>Timeout Protocol:</strong> Generation may take 1–3 minutes. DO NOT retry immediately. If a timeout occurs, poll <code class="inline-code">get_screen</code> every 30s up to 10 times.&lt;br/&gt;<strong>Output Suggestions:</strong> If <code class="inline-code">output_components</code> contains suggestions (e.g. <em>&quot;Yes, make them all&quot;</em>), present them to the user or accept and re-invoke.</td>
+</tr>
+<tr>
+<td><code class="inline-code">edit_screens</code></td>
+<td><code class="inline-code">projectId</code> (req), <code class="inline-code">selectedScreenIds</code> (req array), <code class="inline-code">prompt</code> (req), <code class="inline-code">deviceType</code> (opt), <code class="inline-code">modelId</code> (opt)</td>
+<td>Edits existing screens in-place based on revision instructions (e.g. <em>&quot;Change header to dark glassmorphism and add transaction filter chips&quot;</em>).</td>
+</tr>
+<tr>
+<td><code class="inline-code">generate_variants</code></td>
+<td><code class="inline-code">projectId</code> (req), <code class="inline-code">selectedScreenIds</code> (req array), <code class="inline-code">prompt</code> (req)</td>
+<td>Generates alternative aesthetic or layout variations for user selection.</td>
+</tr>
+</tbody></table></div>
+<h3 class="doc-h3">3.3 Design System &amp; <code class="inline-code">DESIGN.md</code> Management</h3>
+<div class="table-responsive"><table class="doc-table">
+<thead><tr>
+<th>Tool Name</th>
+<th>Parameters</th>
+<th>Instructions &amp; Nuances</th>
+</tr></thead><tbody>
+<tr>
+<td><code class="inline-code">upload_design_md</code></td>
+<td><code class="inline-code">projectId</code> (req), <code class="inline-code">designMdBase64</code> (req base64 UTF-8)</td>
+<td>Uploads markdown design system specification. Pass base64-encoded UTF-8 string (<code class="inline-code">base64 -w 0 DESIGN.md</code>).</td>
+</tr>
+<tr>
+<td><code class="inline-code">create_design_system_from_design_md</code></td>
+<td><code class="inline-code">projectId</code> (req)</td>
+<td>MUST be called immediately following <code class="inline-code">upload_design_md</code> to parse and activate the design system in Stitch.</td>
+</tr>
+<tr>
+<td><code class="inline-code">list_design_systems</code></td>
+<td><code class="inline-code">{ &quot;projectId&quot;: &quot;string&quot; }</code></td>
+<td>Lists available design systems and returns <code class="inline-code">assetId</code> for screen application.</td>
+</tr>
+<tr>
+<td><code class="inline-code">apply_design_system</code></td>
+<td><code class="inline-code">projectId</code> (req), <code class="inline-code">assetId</code> (req), <code class="inline-code">selectedScreenInstances</code> (req array of <code class="inline-code">{ &quot;id&quot;: &quot;...&quot;, &quot;sourceScreen&quot;: &quot;projects/.../screens/...&quot; }</code>)</td>
+<td>Applies design tokens (colors, typography, radii) from a design system to existing screen instances.</td>
+</tr>
+</tbody></table></div>
 <hr class="doc-divider">
-<h2 id="4--test-directory-standard" class="doc-h2"><a href="#4--test-directory-standard" class="heading-anchor">#</a> 4. Test Directory Standard</h2>
+<h2 id="4--end-to-end-workflows" class="doc-h2"><a href="#4--end-to-end-workflows" class="heading-anchor">#</a> 4. End-to-End Workflows</h2>
+<h3 class="doc-h3">4.1 Workflow 1: Bootstrap Project from <code class="inline-code">DESIGN.md</code></h3>
+<p class="doc-p">When standardizing a project&#039;s design tokens into Stitch:</p>
+<ol class="doc-ordered-list">
+<li><strong>Prepare <code class="inline-code">DESIGN.md</code>:</strong> Structure colors (Light &amp; Dark hex values), typography scales, spacing tokens (4px/8px grid), and border radii.</li>
+<li><strong>Create Stitch Project:</strong></li>
 <div class="code-block-wrapper">
   <div class="code-header">
-    <span class="code-lang">text</span>
+    <span class="code-lang">json</span>
     <button class="copy-btn" onclick="copyCode(this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
       <span class="btn-text" data-i18n="copy">Copy</span>
     </button>
   </div>
-  <pre><code class="language-text">test/
-├── core/                        # Pure Dart unit tests for utils and extensions
-│   ├── extensions/
-│   └── utils/
-├── domain/                      # UseCases and Domain Entity equality tests
-│   └── item/
-│       └── usecases/
-├── data/                        # DTO toDomain mappers &amp; repository tests with mock Dio
-│   └── item/
-│       ├── dto/
-│       └── repositories/
-├── presentation/                # BLoC tests and Widget tests
-│   ├── state_management/
-│   │   └── item/
-│   └── pages/
-│       └── item/
-└── test_utils/                  # Shared test wrappers, fakes, and mock declarations
-    ├── widget_test_wrapper.dart
-    └── mocks.dart
-
-integration_test/
-├── flows/                       # Full end-to-end user journeys
-│   ├── auth_flow_test.dart
-│   └── item_details_flow_test.dart
-└── driver/
-    └── integration_test_driver.dart
+  <pre><code class="language-json">   {
+     &quot;ServerName&quot;: &quot;stitch&quot;,
+     &quot;ToolName&quot;: &quot;create_project&quot;,
+     &quot;Arguments&quot;: { &quot;title&quot;: &quot;App Design System&quot; }
+   }
 </code></pre>
 </div>
+<li><strong>Encode &amp; Upload <code class="inline-code">DESIGN.md</code>:</strong></li>
+</ul>
+<p class="doc-p">   Encode <code class="inline-code">DESIGN.md</code> to base64 and call:</p>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">json</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-json">   {
+     &quot;ServerName&quot;: &quot;stitch&quot;,
+     &quot;ToolName&quot;: &quot;upload_design_md&quot;,
+     &quot;Arguments&quot;: {
+       &quot;projectId&quot;: &quot;4044680601076201931&quot;,
+       &quot;designMdBase64&quot;: &quot;&lt;base64_string&gt;&quot;
+     }
+   }
+</code></pre>
+</div>
+<ol class="doc-ordered-list">
+<li><strong>Instantiate Design System:</strong></li>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">json</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-json">   {
+     &quot;ServerName&quot;: &quot;stitch&quot;,
+     &quot;ToolName&quot;: &quot;create_design_system_from_design_md&quot;,
+     &quot;Arguments&quot;: { &quot;projectId&quot;: &quot;4044680601076201931&quot; }
+   }
+</code></pre>
+</div>
+</ul>
 <hr class="doc-divider">
-<h2 id="5--master-anti-patterns--strictly-prohibited-" class="doc-h2"><a href="#5--master-anti-patterns--strictly-prohibited-" class="heading-anchor">#</a> 5. Master Anti-Patterns (Strictly Prohibited)</h2>
+<h3 class="doc-h3">4.2 Workflow 2: Generate &amp; Iterate High-Fidelity Screens</h3>
+<ol class="doc-ordered-list">
+<li><strong>Invoke <code class="inline-code">generate_screen_from_text</code>:</strong></li>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">json</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-json">   {
+     &quot;ServerName&quot;: &quot;stitch&quot;,
+     &quot;ToolName&quot;: &quot;generate_screen_from_text&quot;,
+     &quot;Arguments&quot;: {
+       &quot;projectId&quot;: &quot;4044680601076201931&quot;,
+       &quot;prompt&quot;: &quot;Modern financial dashboard with total balance card, quick actions row, recent transactions list with status badges, and bottom navigation bar in dark mode&quot;,
+       &quot;deviceType&quot;: &quot;MOBILE&quot;,
+       &quot;modelId&quot;: &quot;GEMINI_3_8_FLASH&quot;
+     }
+   }
+</code></pre>
+</div>
+<li><strong>Handle Async Execution &amp; Polling:</strong></li>
+<li>If the tool completes, inspect the returned screen details.</li>
+<li>If a transient network timeout occurs, call <code class="inline-code">get_screen</code> with the screen resource identifier after 30 seconds.</li>
+<li><strong>Refine Design with <code class="inline-code">edit_screens</code>:</strong></li>
+<div class="code-block-wrapper">
+  <div class="code-header">
+    <span class="code-lang">json</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <span class="btn-text" data-i18n="copy">Copy</span>
+    </button>
+  </div>
+  <pre><code class="language-json">   {
+     &quot;ServerName&quot;: &quot;stitch&quot;,
+     &quot;ToolName&quot;: &quot;edit_screens&quot;,
+     &quot;Arguments&quot;: {
+       &quot;projectId&quot;: &quot;4044680601076201931&quot;,
+       &quot;selectedScreenIds&quot;: [&quot;98b50e2ddc9943efb387052637738f61&quot;],
+       &quot;prompt&quot;: &quot;Increase spacing between transaction items, add avatar icons to each transaction, and style the balance card with a subtle gradient&quot;
+     }
+   }
+</code></pre>
+</div>
+</ul>
+<hr class="doc-divider">
+<h3 class="doc-h3">4.3 Workflow 3: Stitch-to-Flutter Translation Pipeline</h3>
+<p class="doc-p">Once screens are finalized in Stitch:</p>
+<ol class="doc-ordered-list">
+<li><strong>Fetch Screen Details:</strong> Call <code class="inline-code">get_screen</code> to inspect the generated HTML structure, CSS rules, and component hierarchy.</li>
+<li><strong>Extract Design Tokens:</strong> Map Stitch color codes and font sizes into <code class="inline-code">AppCustomColors</code> (<code class="inline-code">ThemeExtension</code>) and Material 3 <code class="inline-code">ColorScheme</code> via <a href="../design-to-flutter-ui/design-to-flutter-ui.html" class="skill-ref-link" title="Guides the synthesis and conversion of visual design specifications, Stitch AI mockups, Figma auto-layouts, and design tokens into production-ready Flutter Clean Architecture UI. Enforces Material 3 ColorScheme, ThemeExtension custom tokens, dual-theme @Preview functions, widget decomposition (&lt;150-200 LOC), and Semantics/Marionette registration. Use when translating UI designs/mockups/Figma/Stitch to Flutter code, creating UI Kit components, or refactoring screens to meet strict UI guidelines.">design-to-flutter-ui <span class="ext-icon">↗</span></a>.</li>
+<li><strong>Decompose Widgets:</strong> Break down HTML sections into focused Flutter widgets (&lt;150–200 LOC per file) inside <code class="inline-code">lib/presentation/pages/&lt;feature&gt;/widgets/</code> or <code class="inline-code">lib/presentation/ui_kit/</code>.</li>
+<li><strong>Generate Dual-Theme Previews:</strong> Wrap all new widgets with <code class="inline-code">@Preview</code> functions using <code class="inline-code">PreviewWrapper</code>.</li>
+</ul>
+<hr class="doc-divider">
+<h2 id="5--anti-patterns---severity-matrix" class="doc-h2"><a href="#5--anti-patterns---severity-matrix" class="heading-anchor">#</a> 5. Anti-Patterns &amp; Severity Matrix</h2>
 <div class="table-responsive"><table class="doc-table">
 <thead><tr>
 <th>Anti-Pattern</th>
 <th>Severity</th>
+<th>Why It Fails</th>
 <th>Corrective Action</th>
 </tr></thead><tbody>
 <tr>
-<td>Real network requests or live database IO during tests</td>
+<td><strong>Immediate Retries on Timeout</strong></td>
 <td><strong>CRITICAL</strong></td>
-<td>Inject Mock API clients or Repository mocks in DI.</td>
+<td>Generates duplicate jobs, wastes compute tokens, and causes concurrent state conflicts.</td>
+<td>Follow timeout protocol: wait 30s and poll <code class="inline-code">get_screen</code> up to 10 times.</td>
 </tr>
 <tr>
-<td>Leaking <code class="inline-code">GetIt</code> registrations across test cases</td>
+<td><strong>Hardcoding Stitch Hex Colors in Flutter</strong></td>
 <td><strong>CRITICAL</strong></td>
-<td>Call <code class="inline-code">GetIt.I.reset()</code> in <code class="inline-code">tearDown()</code> for every test file.</td>
+<td>Violates Clean Architecture &amp; dual-theme rules. Breaks dark mode transitions.</td>
+<td>Map hex tokens into <code class="inline-code">AppCustomColors</code> (<code class="inline-code">ThemeExtension</code>) or Material 3 <code class="inline-code">ColorScheme</code>.</td>
 </tr>
 <tr>
-<td>Using <code class="inline-code">pumpAndSettle()</code> during infinite spinners</td>
-<td><strong>CRITICAL</strong></td>
-<td>Advance frames using <code class="inline-code">tester.pump(const Duration(milliseconds: 300))</code>.</td>
-</tr>
-<tr>
-<td>Finding target widgets via localized text (<code class="inline-code">find.text(&#039;Submit&#039;)</code>)</td>
+<td><strong>Missing <code class="inline-code">create_design_system_from_design_md</code> Call</strong></td>
 <td><strong>HIGH</strong></td>
-<td>Use explicit <code class="inline-code">ValueKey(&#039;submit_button&#039;)</code>.</td>
+<td><code class="inline-code">upload_design_md</code> only stages the file; design tokens will not be parsed or applied without this step.</td>
+<td>ALWAYS call <code class="inline-code">create_design_system_from_design_md</code> immediately after upload.</td>
 </tr>
 <tr>
-<td>Using <code class="inline-code">Future.delayed</code> or <code class="inline-code">sleep</code> in test code</td>
+<td><strong>Monolithic Single-File Flutter Translation</strong></td>
 <td><strong>HIGH</strong></td>
-<td>Use <code class="inline-code">tester.pump()</code> or <code class="inline-code">fakeAsync</code> clocks.</td>
+<td>Translating an entire Stitch screen into a single 500+ line Flutter file violates file size and decomposition rules.</td>
+<td>Split UI into sub-widgets (&lt;150–200 LOC) in dedicated files.</td>
 </tr>
 </tbody></table></div>
 <hr class="doc-divider">
-<h2 id="6--master-verification-checklist" class="doc-h2"><a href="#6--master-verification-checklist" class="heading-anchor">#</a> 6. Master Verification Checklist</h2>
+<h2 id="6--agent-verification-checklist" class="doc-h2"><a href="#6--agent-verification-checklist" class="heading-anchor">#</a> 6. Agent Verification Checklist</h2>
+<p class="doc-p">When using Google Stitch MCP:</p>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Pure Dart unit tests run with <code class="inline-code">flutter test test/core/ test/domain/ test/data/</code>.</span>
+    <span class="check-text">Correct MCP tool parameters supplied (<code class="inline-code">projectId</code> without <code class="inline-code">projects/</code> prefix, <code class="inline-code">selectedScreenIds</code> as arrays).</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">BLoC tests cover all event-to-state transition sequences via <code class="inline-code">bloc_test</code>.</span>
+    <span class="check-text"><code class="inline-code">DESIGN.md</code> base64 encoding is valid UTF-8.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Widget tests wrap components in <code class="inline-code">WidgetTestWrapper</code> with Theme and Localization.</span>
+    <span class="check-text">Polling strategy utilized on long-running generation timeouts.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">Integration tests pass on Mobile, Web (<code class="inline-code">flutter drive -d chrome</code>), and Desktop.</span>
+    <span class="check-text">Generated UI mockups cleanly translated to Flutter Clean Architecture components using <a href="../design-to-flutter-ui/design-to-flutter-ui.html" class="skill-ref-link" title="Guides the synthesis and conversion of visual design specifications, Stitch AI mockups, Figma auto-layouts, and design tokens into production-ready Flutter Clean Architecture UI. Enforces Material 3 ColorScheme, ThemeExtension custom tokens, dual-theme @Preview functions, widget decomposition (&lt;150-200 LOC), and Semantics/Marionette registration. Use when translating UI designs/mockups/Figma/Stitch to Flutter code, creating UI Kit components, or refactoring screens to meet strict UI guidelines.">design-to-flutter-ui <span class="ext-icon">↗</span></a>.</span>
   </label>
 </div>
 <div class="checklist-item">
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
-    <span class="check-text">CI pipeline executes tests with code coverage analysis.</span>
+    <span class="check-text">Dual-theme <code class="inline-code">@Preview</code> functions authored for all extracted UI Kit widgets.</span>
   </label>
 </div>
 
@@ -714,81 +863,48 @@ integration_test/
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
-<a href="../marionette/marionette-hub/marionette-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../design-hub/design-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    marionette-hub ↗
+    design-hub ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Primary coordinator and entry point for Marionette MCP and marionette_flutter AI-driven runtime UI interaction...
+    Primary coordinator and routing guide for UI/UX design, prototyping, Google Stitch AI design generation, and F...
   </div>
 </a>
-<a href="../marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../figma-mcp-integration/figma-mcp-integration.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    marionette-custom-widgets ↗
+    figma-mcp-integration ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text ...
+    Comprehensive guide for Figma MCP server integration and Figma REST API / Dev Mode workflows. Covers document ...
   </div>
 </a>
-<a href="../testing-bloc/testing-bloc.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../design-to-flutter-ui/design-to-flutter-ui.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-bloc ↗
+    design-to-flutter-ui ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for BLoC and Cubit State Transition Testing using package:bloc_test and package:mocktai...
+    Guides the synthesis and conversion of visual design specifications, Stitch AI mockups, Figma auto-layouts, an...
   </div>
 </a>
-<a href="../testing-integration/testing-integration.html" class="checklist-item" style="text-decoration: none; display: block;">
+<a href="../../tooling/mcp-tooling-hub/mcp-tooling-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-integration ↗
+    mcp-tooling-hub ↗
   </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="General" data-cat-en="General">
+    General
   </div>
   <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for End-to-End Integration Testing across Mobile (Android, iOS), Web (Chrome), and Desk...
-  </div>
-</a>
-<a href="../testing-unit/testing-unit.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-unit ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for Pure Dart Unit Tests in test/domain/, test/data/, and test/core/. Covers testing Us...
-  </div>
-</a>
-<a href="../testing-widget/testing-widget.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    testing-widget ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
-    Тестування (Unit, Widget, BLoC)
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Standards and patterns for Flutter Widget Testing using WidgetTester and WidgetTestWrapper. Covers Key-first f...
-  </div>
-</a>
-<a href="../../flutter-clean-architecture/flutter-clean-architecture.html" class="checklist-item" style="text-decoration: none; display: block;">
-  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
-    flutter-clean-architecture ↗
-  </div>
-  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Архітектура Flutter" data-cat-en="Flutter Architecture">
-    Архітектура Flutter
-  </div>
-  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
-    Enforces Clean Architecture, DDD, and SOLID with Layer-First packaging (domain, data, presentation, infrastruc...
+    Master catalog and guide for Model Context Protocol (MCP) tooling in Antigravity IDE. Covers dart-mcp-server (...
   </div>
 </a>
 </div></div>

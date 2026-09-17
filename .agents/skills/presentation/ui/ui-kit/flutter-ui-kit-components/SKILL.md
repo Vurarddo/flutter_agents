@@ -24,6 +24,7 @@ Use this skill whenever:
 | **Widget Previews** | [flutter-ui-kit-preview](../flutter-ui-kit-preview/SKILL.md) | Attaching `@Preview` decorators to components. |
 | **Theming Tokens** | [flutter-ui-theme-hub](../../../theme/flutter-ui-theme-hub/SKILL.md) | Accessing ColorScheme, TextTheme, and CustomColors. |
 | **Custom Controls** | [flutter-ui-forms-custom-controls](../../forms/flutter-ui-forms-custom-controls/SKILL.md) | Wrapping UI Kit inputs with reactive form bindings. |
+| **Marionette Adaptation** | [marionette-custom-widgets](../../../../testing/marionette/marionette-custom-widgets/SKILL.md) | Registering custom interactive widgets in `AppMarionetteConfig`. |
 
 ---
 
@@ -42,7 +43,8 @@ Use this skill whenever:
 
 1. **100% Stateless & Pure:** Reusable UI Kit widgets must never inject BLoCs, Cubits, or Repositories directly.
 2. **Zero Hardcoded Colors:** All colors must resolve from `context.colorScheme` or custom `ThemeExtension`.
-3. **Mandatory `@Preview` Decoration:** Every component file in `lib/presentation/ui_kit/` must include `@Preview` tests.
+3. **Mandatory `@Preview` Coverage:** Every component file in `lib/presentation/ui_kit/` MUST include top-level `@Preview` functions for both Light and Dark themes wrapped in `PreviewWrapper`.
+4. **Marionette & Semantics Registration:** Interactive widgets (buttons, fields, clickable cards) must be registered in `AppMarionetteConfig` (`isInteractiveWidget`, `extractText`) in `lib/infrastructure/config/marionette_config.dart` or wrapped with `Semantics`.
 
 ---
 
@@ -51,4 +53,5 @@ Use this skill whenever:
 - [ ] Widget is pure and stateless with explicit typed properties.
 - [ ] Colors and styles derived strictly from `context.colorScheme`, `context.textTheme`, and `context.customColors`.
 - [ ] Component is decoupled from domain logic and view models.
-- [ ] `@Preview` function provided for isolated IDE rendering.
+- [ ] Dual `@Preview` functions (Light & Dark) provided using `PreviewWrapper`.
+- [ ] Interactive custom controls are registered in `AppMarionetteConfig`.

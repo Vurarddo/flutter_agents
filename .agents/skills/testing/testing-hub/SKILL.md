@@ -11,14 +11,15 @@ In our Clean Architecture Flutter template, testing ensures reliability, regress
 
 ```mermaid
 flowchart TD
-    subgraph TestingPyramid["Testing Pyramid"]
+    subgraph TestingPyramid["Testing Pyramid & AI Runtime Inspection"]
+        Marionette["Marionette MCP AI Driving<br/>Live Autonomous Inspection & Interactive Flows"]
         E2E["Integration Tests (Cross-Platform)<br/>End-to-End User Flows on Mobile / Web / Desktop"]
         Widget["Widget Tests<br/>UI Rendering, Component Interaction, Keys, Theme/Locale"]
         Bloc["BLoC / Cubit Tests<br/>Event-State Transitions via bloc_test & Mocktail"]
-        Unit["Unit Tests (Pure Dart)<br/>UseCases, Repositories, DTO Mappers, Core Utils"]
+        Unit["Pure Dart Unit Tests<br/>UseCases, Repositories, DTO Mappers, Core Utils"]
     end
 
-    Unit --> Bloc --> Widget --> E2E
+    Unit --> Bloc --> Widget --> E2E --> Marionette
 ```
 
 ---
@@ -31,6 +32,8 @@ flowchart TD
 | **BLoC & Cubit Testing** | [testing-bloc](../testing-bloc/SKILL.md) | State transition verification using `bloc_test`, Mocktail, and async event streams. |
 | **Widget Testing** | [testing-widget](../testing-widget/SKILL.md) | Component rendering, `ValueKey` finders, theme/localization wrappers, and pump mechanics. |
 | **Integration Testing** | [testing-integration](../testing-integration/SKILL.md) | End-to-end user flows across **Mobile (Android/iOS), Web, and Desktop (macOS/Windows/Linux)**. |
+| **Marionette AI Runtime Driving** | [marionette-hub](../marionette/marionette-hub/SKILL.md) | AI agent runtime app inspection, tapping, text entry, screenshots, and logs via MCP. |
+| **Marionette Custom Design System** | [marionette-custom-widgets](../marionette/marionette-custom-widgets/SKILL.md) | Adapting UI Kit components in `AppMarionetteConfig` with `Semantics`. |
 | **Clean Architecture Hub** | [flutter-clean-architecture](../../flutter-clean-architecture/SKILL.md) | System-wide layer separation and dependency rules. |
 
 ---

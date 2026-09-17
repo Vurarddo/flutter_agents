@@ -25,6 +25,7 @@ Use this skill whenever:
 | **Input Formatters** | [flutter-ui-utils-formatters](../../../ui-utils/flutter-ui-utils-formatters/SKILL.md) | `TextInputFormatter` classes for phone/card/currency formatting. |
 | **UI Kit Components** | [flutter-ui-kit-components](../../ui-kit/flutter-ui-kit-components/SKILL.md) | Base visual widgets and badges. |
 | **Theming System** | [flutter-ui-theme-hub](../../../theme/flutter-ui-theme-hub/SKILL.md) | Error colors and input decoration styles. |
+| **Marionette Adaptation** | [marionette-custom-widgets](../../../../testing/marionette/marionette-custom-widgets/SKILL.md) | Registering custom reactive controls in `AppMarionetteConfig`. |
 
 ---
 

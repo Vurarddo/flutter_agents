@@ -538,6 +538,7 @@ pre {
 <li><strong>No Direct Hardcoded Colors/Fonts:</strong> ALL colors and text styles must be retrieved dynamically via <code class="inline-code">context.colorScheme</code>, <code class="inline-code">context.customColors</code> (<code class="inline-code">ThemeExtension</code>), or <code class="inline-code">context.textTheme</code>.</li>
 <li><strong>Mandatory <code class="inline-code">@Preview</code> Coverage:</strong> EVERY UI Kit widget MUST include <code class="inline-code">@Preview</code> definitions for both <strong>Light</strong> and <strong>Dark</strong> themes.</li>
 <li><strong>Strict Line Limit:</strong> Keep each UI Kit component file under <strong>150–200 lines</strong>. Extract internal sub-elements into private widget classes if needed.</li>
+<li><strong>Marionette &amp; Semantics Compatibility:</strong> Interactive custom controls (buttons, inputs, clickable cards) MUST be registered in <code class="inline-code">AppMarionetteConfig</code> (<code class="inline-code">isInteractiveWidget</code> / <code class="inline-code">extractText</code>) or wrapped with <code class="inline-code">Semantics</code> so AI agents can discover and tap them.</li>
 </ul>
 <hr class="doc-divider">
 <h2 id="2--ui-kit-subsystem-mesh---routing-matrix" class="doc-h2"><a href="#2--ui-kit-subsystem-mesh---routing-matrix" class="heading-anchor">#</a> 2. UI Kit Subsystem Mesh &amp; Routing Matrix</h2>
@@ -551,6 +552,11 @@ pre {
 <td><strong>Component Authoring</strong></td>
 <td><a href="../flutter-ui-kit-components/flutter-ui-kit-components.html" class="skill-ref-link" title="Authoring standards and implementation recipes for pure UI Kit components in Flutter. Covers design tokens consumption, buttons, cards, status badges, modal dialogs, bottom sheets, snackbars, and typed variant APIs. Use when creating or updating reusable UI Kit widgets.">flutter-ui-kit-components <span class="ext-icon">↗</span></a></td>
 <td>Standard recipes for buttons, cards, badges, dialogs, bottom sheets, snackbars.</td>
+</tr>
+<tr>
+<td><strong>Marionette &amp; Custom Design System</strong></td>
+<td><a href="../../../../testing/marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="skill-ref-link" title="Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text fields, canvas badges, clickable cards) to work seamlessly with Marionette MCP using MarionetteConfiguration, isInteractiveWidget, extractText, and Semantics wrappers.">marionette-custom-widgets <span class="ext-icon">↗</span></a></td>
+<td>Registering custom UI Kit types in <code class="inline-code">AppMarionetteConfig</code> &amp; <code class="inline-code">Semantics</code>.</td>
 </tr>
 <tr>
 <td><strong>Widget Previews</strong></td>
@@ -683,6 +689,13 @@ class AppButton extends StatelessWidget {
   <label class="checkbox-container">
     <input type="checkbox"  onchange="updateChecklistProgress()">
     <span class="checkmark"></span>
+    <span class="check-text">Interactive custom controls are registered in <code class="inline-code">AppMarionetteConfig</code> or wrapped with <code class="inline-code">Semantics</code>.</span>
+  </label>
+</div>
+<div class="checklist-item">
+  <label class="checkbox-container">
+    <input type="checkbox"  onchange="updateChecklistProgress()">
+    <span class="checkmark"></span>
     <span class="check-text">File length is strictly under 150–200 lines.</span>
   </label>
 </div>
@@ -692,6 +705,17 @@ class AppButton extends StatelessWidget {
 <div class="related-skills-section" style="margin-top: 3rem;">
 <h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+<a href="../../../../testing/marionette/marionette-custom-widgets/marionette-custom-widgets.html" class="checklist-item" style="text-decoration: none; display: block;">
+  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
+    marionette-custom-widgets ↗
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
+    Тестування (Unit, Widget, BLoC)
+  </div>
+  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+    Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text ...
+  </div>
+</a>
 <a href="../flutter-ui-kit-components/flutter-ui-kit-components.html" class="checklist-item" style="text-decoration: none; display: block;">
   <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
     flutter-ui-kit-components ↗

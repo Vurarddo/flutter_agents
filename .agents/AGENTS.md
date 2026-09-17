@@ -23,17 +23,18 @@
 
 Strictly adhere to the following layer boundaries and dependency rules without exceptions:
 
-- **Domain Layer:** Contains pure business entities, repository interfaces, and Use Cases. Must be 100% framework-agnostic (pure Dart only; strictly NO Flutter, Dio, Retrofit, SharedPreferences, or UI imports).
-- **Data Layer:** Contains repository implementations, data sources (Retrofit API, local storage), DTOs (Data Transfer Objects with `json_serializable`), and explicit Mappers (converting DTOs <-> Domain Entities).
-- **Presentation Layer:** UI Screens, modular Widgets, UI Kit, Theme, and State Management (BLoC/Cubit). Must ONLY depend on Domain Entities and Use Cases.
-- **Core / Infrastructure Layer:** Dependency Injection setup (`injectable`), network configurations (`Dio`), loggers, global extensions, and constants/utilities.
+- **Domain Layer (`lib/domain/`):** Contains pure business entities, repository interfaces, and Use Cases. Must be 100% framework-agnostic (pure Dart only; strictly NO Flutter, Dio, Retrofit, SharedPreferences, or UI imports).
+- **Data Layer (`lib/data/`):** Contains repository implementations, data sources (Retrofit API, local storage), DTOs (Data Transfer Objects with `json_serializable`), and explicit Mappers (converting DTOs <-> Domain Entities).
+- **Presentation Layer (`lib/presentation/`):** UI Screens (`pages/`), modular Widgets, UI Kit (`ui_kit/`), Theme (`theme/`), UI extensions (`ui_utils/extensions/`), and State Management (`state_management/` via BLoC/Cubit). Must ONLY depend on Domain Entities and Use Cases.
+- **Infrastructure Layer (`lib/infrastructure/`):** External services, platform bridges, and framework setup: Dependency Injection (`di/injectable.dart`), network configurations & Dio interceptors (`network/`), environment & runtime configs (`config/app_config.dart`, `config/marionette_config.dart`), local storage (`storage/`), and logging (`logging/`).
+- **Core Layer (`lib/core/`):** Pure shared primitives, utilities (`utils/`), constants (`constants/`), and framework-agnostic extensions (`extensions/`). Must NEVER contain platform integrations, network logic, or DI configurations.
 
 ### Workspace Action & Skill Routing Guide (Intent & Code Navigator)
 
 Use this quick-routing index to locate target codebase paths and activate relevant skills based on user intent:
 
 - **API Endpoints & Network (REST calls, Retrofit clients, DTOs, Mappers):**
-  - **Target Paths:** `lib/data/datasources/`, `lib/data/models/`, `lib/data/mappers/`, `lib/core/network/`
+  - **Target Paths:** `lib/data/datasources/`, `lib/data/models/`, `lib/data/mappers/`, `lib/infrastructure/network/`
   - **Skills to Activate:** [`infrastructure-network-dio`](skills/infrastructure/infrastructure-network-dio/SKILL.md), [`data-retrofit-clients`](skills/data/data-retrofit-clients/SKILL.md), [`data-dto-mappers`](skills/data/data-dto-mappers/SKILL.md)
 
 - **Business Logic & Domain (New features, Use Cases, Entities, Repository contracts):**
@@ -53,16 +54,20 @@ Use this quick-routing index to locate target codebase paths and activate releva
   - **Skills to Activate:** [`project-bootstrap-hub`](skills/bootstrap/project-bootstrap-hub/SKILL.md), [`bootstrap-architecture-scaffold`](skills/bootstrap/bootstrap-architecture-scaffold/SKILL.md)
 
 - **Flavors & Environments (Env configs, Android Gradle, iOS xcconfig, AppConfig):**
-  - **Target Paths:** `config/env_*.json`, `lib/core/config/`, `android/app/`, `ios/Runner/`
+  - **Target Paths:** `config/env_*.json`, `lib/infrastructure/config/`, `android/app/`, `ios/Runner/`
   - **Skills to Activate:** [`native-flavors-environments`](skills/native/native-flavors-environments/SKILL.md), [`bootstrap-architecture-scaffold`](skills/bootstrap/bootstrap-architecture-scaffold/SKILL.md)
 
 - **Localization & Translations (ARB files, ICU plurals, failure string mappers):**
   - **Target Paths:** `lib/l10n/intl_*.arb`, `lib/l10n/generated/`
   - **Skills to Activate:** [`l10n-arb-icu`](skills/l10n/l10n-arb-icu/SKILL.md), [`l10n-presentation-integration`](skills/l10n/l10n-presentation-integration/SKILL.md)
 
-- **Automated Testing (Unit, Widget, BLoC, and E2E Integration tests):**
-  - **Target Paths:** `test/`, `integration_test/`
-  - **Skills to Activate:** [`testing-unit`](skills/testing/testing-unit/SKILL.md), [`testing-bloc`](skills/testing/testing-bloc/SKILL.md), [`testing-widget`](skills/testing/testing-widget/SKILL.md), [`testing-integration`](skills/testing/testing-integration/SKILL.md)
+- **Automated Testing & AI Runtime Inspection (Unit, Widget, BLoC, E2E Integration & Marionette Driving):**
+  - **Target Paths:** `test/`, `integration_test/`, `lib/infrastructure/config/marionette_config.dart`
+  - **Skills to Activate:** [`testing-unit`](skills/testing/testing-unit/SKILL.md), [`testing-bloc`](skills/testing/testing-bloc/SKILL.md), [`testing-widget`](skills/testing/testing-widget/SKILL.md), [`testing-integration`](skills/testing/testing-integration/SKILL.md), [`marionette-hub`](skills/testing/marionette/marionette-hub/SKILL.md), [`marionette-interaction`](skills/testing/marionette/marionette-interaction/SKILL.md), [`marionette-custom-widgets`](skills/testing/marionette/marionette-custom-widgets/SKILL.md)
+
+- **Design, Prototyping & Stitch/Figma AI Workflows (Google Stitch MCP, Figma MCP, Design Tokens & UI Kit):**
+  - **Target Paths:** `lib/presentation/ui_kit/`, `lib/presentation/theme/`, `assets/svgs/`, `DESIGN.md`
+  - **Skills to Activate:** [`design-hub`](skills/design/design-hub/SKILL.md), [`google-stitch-mcp`](skills/design/google-stitch-mcp/SKILL.md), [`figma-mcp-integration`](skills/design/figma-mcp-integration/SKILL.md), [`design-to-flutter-ui`](skills/design/design-to-flutter-ui/SKILL.md)
 
 ### Strict Inter-Layer Interaction Rules:
 
@@ -83,6 +88,7 @@ Use this quick-routing index to locate target codebase paths and activate releva
 - **Forms:** `reactive_forms`
 - **Data Models & Immutability:** `freezed` + `json_annotation` / `equatable`
 - **Storage:** `shared_preferences`, `flutter_secure_storage`, `path_provider`
+- **AI Runtime Driving & Inspection:** `marionette_flutter` + `marionette_mcp`
 
 ---
 
@@ -105,9 +111,9 @@ Use this quick-routing index to locate target codebase paths and activate releva
     - Flutter & UI-specific extensions (`BuildContext`, UI string formatting, UI context wrappers): `lib/presentation/ui_utils/extensions/`.
     - Pure Dart extensions (`DateTime`, `num`, `String` logic without Flutter SDK dependencies): `lib/core/extensions/`.
 - **UI Kit Standards (`lib/presentation/ui_kit/`):**
-  - All reusable UI Kit widgets MUST be stateless, pure, and completely decoupled from BLoC/domain logic.
-  - EVERY UI Kit component MUST include a `@Preview` decorator and a preview function for isolated IDE rendering.
+  - **Mandatory @Preview Coverage:** EVERY UI Kit component in `lib/presentation/ui_kit/` MUST include top-level `@Preview` functions (from `package:flutter/widget_previews.dart`) wrapped in `PreviewWrapper` for both **Light** and **Dark** themes with explicit `size: Size(width, height)`. Component authoring is strictly incomplete without dual-theme preview functions.
   - Every project must include an interactive showcase page `UiKitPage` displaying all design system components and verified by automated integration tests (`integration_test/uikit_page_test.dart`).
+  - **Marionette & Semantics Registration:** Whenever a new interactive UI Kit widget is created (e.g., buttons, input fields, clickable cards, custom selectors), it MUST be registered in `AppMarionetteConfig` in `lib/infrastructure/config/marionette_config.dart` (`isInteractiveWidget` and `extractText`) or wrapped with `Semantics` to ensure complete agent visibility and tapping support during AI runtime interaction.
 - **Fluent UI Composition:** Chained extension wrappers (e.g., `child.unfocusWrapper()`) are allowed ONLY if the corresponding extension functions exist in `lib/presentation/ui_utils/extensions/`. Otherwise, use standard Flutter widget wrappers.
 - **Sliver Architecture:** Use a sliver-first approach (`CustomScrollView` + `SliverAppBar` + `SliverList`/`SliverGrid`) for complex scrollable screens.
 - **Animations:** Isolate animation logic from business logic and layout. Always properly dispose of `AnimationController` resources.
@@ -255,7 +261,7 @@ lib/presentation/state_management/<feature>/
     - **macOS:** Xcode Build Configurations and shared Schemes matching iOS.
 - **Configuration Injection:** Environment settings (e.g. `BASE_URL`, `API_KEY`, `APP_ENV`) MUST be passed using `--dart-define-from-file=config/env_dev.json` or `--dart-define`.
 - **Git Hygiene:** Local configuration files containing real environment credentials (`config/env_*.json`) MUST be listed in `.gitignore` and NEVER committed to repository. Provide `config/env_template.json` as a template.
-- **Environment Abstraction:** Access values via a centralized, strongly-typed `AppConfig` class in `lib/core/config/app_config.dart` using `String.fromEnvironment`.
+- **Environment Abstraction:** Access values via a centralized, strongly-typed `AppConfig` class in `lib/infrastructure/config/app_config.dart` using `String.fromEnvironment`.
 - **Client Security Rule:** Never store true private server keys (e.g., payment secret keys, private backend signing tokens) inside the mobile client code. All sensitive actions must be authorized via backend APIs.
 
 ---

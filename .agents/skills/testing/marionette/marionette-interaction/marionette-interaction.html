@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>skill-updater — Agent Skill Documentation</title>
+  <title>marionette-interaction — Agent Skill Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
@@ -472,20 +472,20 @@ pre {
 <body>
   <header class="top-nav">
     <div style="display: flex; align-items: center; gap: 1.5rem;">
-      <a href="../../../index.html" class="nav-brand">
+      <a href="../../../../index.html" class="nav-brand">
         <div class="brand-logo">AG</div>
         <span>Antigravity Docs</span>
       </a>
       <div class="nav-breadcrumbs">
-        <a href="../../../index.html" data-i18n="portal_title">Центр Документації</a>
+        <a href="../../../../index.html" data-i18n="portal_title">Центр Документації</a>
         <span>/</span>
-        <span data-cat-ua="General" data-cat-en="General">General</span>
+        <span data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">Тестування (Unit, Widget, BLoC)</span>
         <span>/</span>
-        <span style="color: var(--text-primary); font-weight: 600;">skill-updater</span>
+        <span style="color: var(--text-primary); font-weight: 600;">marionette-interaction</span>
       </div>
     </div>
     <div class="nav-actions">
-      <a href="../../../agents-rules.html" class="btn-icon">
+      <a href="../../../../agents-rules.html" class="btn-icon">
         <span>📜</span>
         <span data-i18n="project_rules">Правила AGENTS.md</span>
       </a>
@@ -502,19 +502,19 @@ pre {
   <main class="container">
     <section class="hero">
       <div class="hero-badges">
-        <span class="badge badge-category" data-cat-ua="General" data-cat-en="General">General</span>
+        <span class="badge badge-category" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">Тестування (Unit, Widget, BLoC)</span>
         <span class="badge badge-tag">SKILL</span>
-        <span class="badge badge-tag">#executes</span>
-<span class="badge badge-tag">#`dart</span>
-<span class="badge badge-tag">#skills@</span>
-<span class="badge badge-tag">#--git</span>
-<span class="badge badge-tag">#https</span>
-<span class="badge badge-tag">#//github</span>
-<span class="badge badge-tag">#com/vurarddo/flutter_agents`</span>
-<span class="badge badge-tag">#update</span>
+        <span class="badge badge-tag">#detailed</span>
+<span class="badge badge-tag">#operational</span>
+<span class="badge badge-tag">#recipes</span>
+<span class="badge badge-tag">#action</span>
+<span class="badge badge-tag">#workflows</span>
+<span class="badge badge-tag">#marionette</span>
+<span class="badge badge-tag">#tools</span>
+<span class="badge badge-tag">#get_interactive_elements</span>
       </div>
-      <h1 class="hero-title">skill-updater</h1>
-      <p class="hero-description">Executes `dart run skills@ get --git https://github.com/Vurarddo/flutter_agents` to update agent skills and intelligently synchronizes `AGENTS.md` and AI agent rule files without breaking existing logic, local language settings, or project-specific configurations. Trigger via slash command /v-update-skills. Use when updating skills from upstream or synchronizing AI agent rules.</p>
+      <h1 class="hero-title">marionette-interaction</h1>
+      <p class="hero-description">Detailed operational recipes and action workflows for Marionette MCP tools (get_interactive_elements, tap, enter_text, scroll_to, take_screenshot, get_logs). Use when driving live Flutter app sessions, performing UI exploratory testing, verifying user flows, capturing screen snapshots, and collecting app logs.</p>
     </section>
 
     <div class="progress-card">
@@ -528,190 +528,135 @@ pre {
     </div>
 
     <article class="doc-content">
-<h1 class="doc-h1">Skill Updater — AI Skills &amp; Rules Synchronizer</h1>
-<h2 id="1--overview---why-this-skill-exists" class="doc-h2"><a href="#1--overview---why-this-skill-exists" class="heading-anchor">#</a> 1. Overview &amp; Why This Skill Exists</h2>
-<p class="doc-p">When updating skills using Dart&#039;s package skills manager:</p>
-<div class="code-block-wrapper">
-  <div class="code-header">
-    <span class="code-lang">bash</span>
-    <button class="copy-btn" onclick="copyCode(this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      <span class="btn-text" data-i18n="copy">Copy</span>
-    </button>
-  </div>
-  <pre><code class="language-bash">dart run skills@ get --git https://github.com/Vurarddo/flutter_agents
-</code></pre>
-</div>
-<p class="doc-p">the CLI tool downloads or updates skill directories in <code class="inline-code">.agents/skills/</code>. </p>
-<p class="doc-p"><strong>The Critical Architectural Problem:</strong></p>
-<ul class="doc-list">
-<li><code class="inline-code">package:skills</code> <strong>only</strong> updates skill folders — it does <strong>NOT</strong> update the central AI rules files (<code class="inline-code">AGENTS.md</code>, <code class="inline-code">CLAUDE.md</code>, <code class="inline-code">.cursorrules</code>, etc.).</li>
-<li>Upstream updates frequently introduce critical quality gates (such as the <strong>Mandatory Pre-Push Quality Gate</strong>, Freezed 3+ constructor rules, and strict BLoC boundaries).</li>
-<li>However, simply overwriting <code class="inline-code">AGENTS.md</code> would destroy the user&#039;s project name, package imports, local language configurations, and custom domain rules.</li>
-</ul>
-<p class="doc-p">This skill automates the complete synchronization flow: it updates package skills, intelligently merges upstream <code class="inline-code">AGENTS.md</code> sections without breaking existing logic, and adapts package imports to the target project.</p>
-<hr class="doc-divider">
-<h2 id="2--end-to-end-synchronization-workflow" class="doc-h2"><a href="#2--end-to-end-synchronization-workflow" class="heading-anchor">#</a> 2. End-to-End Synchronization Workflow</h2>
-<p class="doc-p">When invoked via <code class="inline-code">/v-update-skills</code> or requested by the user:</p>
-<h3 class="doc-h3">Step 1: Update Skills via <code class="inline-code">package:skills</code></h3>
-<p class="doc-p">Run the skills update command to fetch the latest skill definitions from the repository:</p>
-<div class="code-block-wrapper">
-  <div class="code-header">
-    <span class="code-lang">bash</span>
-    <button class="copy-btn" onclick="copyCode(this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      <span class="btn-text" data-i18n="copy">Copy</span>
-    </button>
-  </div>
-  <pre><code class="language-bash">dart run skills@ get --git https://github.com/Vurarddo/flutter_agents
-</code></pre>
-</div>
-<p class="doc-p"><em>(If the repository is not yet tracked locally, run <code class="inline-code">dart run skills@ add https://github.com/Vurarddo/flutter_agents --all --agent antigravity</code>)</em></p>
-<h3 class="doc-h3">Step 2: Intelligently Synchronize <code class="inline-code">AGENTS.md</code> &amp; AI Rules</h3>
-<p class="doc-p">Run the dedicated sync engine script:</p>
-<div class="code-block-wrapper">
-  <div class="code-header">
-    <span class="code-lang">bash</span>
-    <button class="copy-btn" onclick="copyCode(this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      <span class="btn-text" data-i18n="copy">Copy</span>
-    </button>
-  </div>
-  <pre><code class="language-bash">dart run skills/skill-management/skill-updater/scripts/sync_agents_rules.dart
-</code></pre>
-</div>
-<p class="doc-p">To preview changes before applying them without writing to disk:</p>
-<div class="code-block-wrapper">
-  <div class="code-header">
-    <span class="code-lang">bash</span>
-    <button class="copy-btn" onclick="copyCode(this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      <span class="btn-text" data-i18n="copy">Copy</span>
-    </button>
-  </div>
-  <pre><code class="language-bash">dart run skills/skill-management/skill-updater/scripts/sync_agents_rules.dart --dry-run
-</code></pre>
-</div>
-<h3 class="doc-h3">Step 3: Multi-AI Synchronization (Claude, Cursor, Copilot)</h3>
-<p class="doc-p">The sync engine automatically checks for existing AI configurations:</p>
-<ul class="doc-list">
-<li><strong>Antigravity / Generic:</strong> <code class="inline-code">.agents/AGENTS.md</code> (or root <code class="inline-code">AGENTS.md</code>)</li>
-<li><strong>Claude Code:</strong> <code class="inline-code">CLAUDE.md</code></li>
-<li><strong>Cursor:</strong> <code class="inline-code">.cursorrules</code> / <code class="inline-code">.cursor/rules/</code></li>
-<li><strong>GitHub Copilot:</strong> <code class="inline-code">.github/copilot-instructions.md</code></li>
-</ul>
-<h3 class="doc-h3">Step 4: Verify Quality Gates &amp; Test Suite</h3>
-<p class="doc-p">After synchronization, verify that the project is completely intact:</p>
-<div class="code-block-wrapper">
-  <div class="code-header">
-    <span class="code-lang">bash</span>
-    <button class="copy-btn" onclick="copyCode(this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      <span class="btn-text" data-i18n="copy">Copy</span>
-    </button>
-  </div>
-  <pre><code class="language-bash">dart analyze --fatal-infos
-flutter test
-</code></pre>
-</div>
-<hr class="doc-divider">
-<h2 id="3--intelligent-non-destructive-merging-rules" class="doc-h2"><a href="#3--intelligent-non-destructive-merging-rules" class="heading-anchor">#</a> 3. Intelligent Non-Destructive Merging Rules</h2>
-<p class="doc-p">The sync engine follows strict non-destructive merge heuristics:</p>
+<h1 class="doc-h1">Marionette MCP Runtime Interaction &amp; Action Runbook</h1>
+<h2 id="1--overview---tool-capabilities" class="doc-h2"><a href="#1--overview---tool-capabilities" class="heading-anchor">#</a> 1. Overview &amp; Tool Capabilities</h2>
+<p class="doc-p">The <code class="inline-code">marionette_mcp</code> server exposes focused, high-signal tools that allow AI agents to navigate and test a running Flutter application:</p>
 <div class="table-responsive"><table class="doc-table">
 <thead><tr>
-<th>Aspect</th>
-<th>Upstream Behavior</th>
-<th>Local Merge Action</th>
+<th>MCP Tool</th>
+<th>Description</th>
+<th>Common Parameters</th>
 </tr></thead><tbody>
 <tr>
-<td><strong>Package Imports</strong></td>
-<td>References <code class="inline-code">package:flutter_template/</code></td>
-<td>Automatically replaced with target project&#039;s package name from <code class="inline-code">pubspec.yaml</code>.</td>
+<td><code class="inline-code">get_interactive_elements</code></td>
+<td>Returns a structured JSON list of actionable UI elements on screen (buttons, text fields, clickable cards, tabs) with IDs and extracted text.</td>
+<td><code class="inline-code">{}</code></td>
 </tr>
 <tr>
-<td><strong>Language Config</strong></td>
-<td>Default template language</td>
-<td><strong>Preserved:</strong> If local project has configured Ukrainian, English, or custom <code class="inline-code">.agents/rules/local_language.md</code>, it is NEVER overwritten.</td>
+<td><code class="inline-code">tap</code></td>
+<td>Performs a tap action on a target element by its text label, semantics, or element ID.</td>
+<td><code class="inline-code">{&quot;text&quot;: &quot;Login&quot;}</code> or <code class="inline-code">{&quot;id&quot;: &quot;element_id&quot;}</code></td>
 </tr>
 <tr>
-<td><strong>Mandatory Rules</strong></td>
-<td>Pre-Push Quality Gate, Freezed 3+, BLoC standards</td>
-<td><strong>Injected:</strong> Ensures target project receives the latest security &amp; quality gates.</td>
+<td><code class="inline-code">enter_text</code></td>
+<td>Inputs text into a target text field or input control.</td>
+<td><code class="inline-code">{&quot;id&quot;: &quot;field_id&quot;, &quot;text&quot;: &quot;user@example.com&quot;}</code> or <code class="inline-code">{&quot;text&quot;: &quot;user@example.com&quot;}</code></td>
 </tr>
 <tr>
-<td><strong>Skill Routing Matrix</strong></td>
-<td>Latest table of available skills</td>
-<td><strong>Updated:</strong> Reflects newly added skills in the project.</td>
+<td><code class="inline-code">scroll_to</code></td>
+<td>Scrolls the enclosing scrollable viewport until the target element/text is visible.</td>
+<td><code class="inline-code">{&quot;text&quot;: &quot;Submit&quot;}</code></td>
 </tr>
 <tr>
-<td><strong>Custom User Sections</strong></td>
-<td>Not present upstream</td>
-<td><strong>100% Preserved:</strong> Any custom <code class="inline-code">## </code> sections added by the developer are kept intact.</td>
+<td><code class="inline-code">scroll</code></td>
+<td>Scrolls a specified offset in a given direction (<code class="inline-code">up</code>, <code class="inline-code">down</code>, <code class="inline-code">left</code>, <code class="inline-code">right</code>).</td>
+<td><code class="inline-code">{&quot;direction&quot;: &quot;down&quot;, &quot;distance&quot;: 300}</code></td>
 </tr>
 <tr>
-<td><strong>Safety Backup</strong></td>
-<td>—</td>
-<td>Creates <code class="inline-code">.agents/AGENTS.md.bak</code> before making changes.</td>
+<td><code class="inline-code">take_screenshot</code></td>
+<td>Captures the current application screen rendering as an image artifact.</td>
+<td><code class="inline-code">{}</code></td>
+</tr>
+<tr>
+<td><code class="inline-code">get_logs</code></td>
+<td>Fetches application console logs and diagnostic messages collected by <code class="inline-code">LogCollector</code>.</td>
+<td><code class="inline-code">{}</code></td>
 </tr>
 </tbody></table></div>
 <hr class="doc-divider">
-<h2 id="4--verification-checklist" class="doc-h2"><a href="#4--verification-checklist" class="heading-anchor">#</a> 4. Verification Checklist</h2>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text"><code class="inline-code">dart run skills@ get --git https://github.com/Vurarddo/flutter_agents</code> completed successfully.</span>
-  </label>
-</div>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text">Safety backup <code class="inline-code">.agents/AGENTS.md.bak</code> created.</span>
-  </label>
-</div>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text">Target package name in imports matches <code class="inline-code">pubspec.yaml</code>.</span>
-  </label>
-</div>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text">Local communication language setting preserved.</span>
-  </label>
-</div>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text">Mandatory Pre-Push Quality Gate present in Section 12.</span>
-  </label>
-</div>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text"><code class="inline-code">dart analyze --fatal-infos</code> passes with 0 diagnostics.</span>
-  </label>
-</div>
-<div class="checklist-item">
-  <label class="checkbox-container">
-    <input type="checkbox"  onchange="updateChecklistProgress()">
-    <span class="checkmark"></span>
-    <span class="check-text"><code class="inline-code">flutter test</code> passes 100% of tests.</span>
-  </label>
-</div>
+<h2 id="2--interaction-workflows" class="doc-h2"><a href="#2--interaction-workflows" class="heading-anchor">#</a> 2. Interaction Workflows</h2>
+<h3 class="doc-h3">2.1 Standard Flow: Element Discovery &amp; Click Sequence</h3>
+<div class="mermaid-container"><div class="mermaid">sequenceDiagram
+    autonumber
+    participant Agent as AI Agent
+    participant MCP as Marionette MCP
+    participant App as Flutter App
+
+    Agent->>MCP: call get_interactive_elements()
+    MCP->>App: Traverse Element Tree & Filter
+    App-->>MCP: Interactive elements list (IDs, labels, types)
+    MCP-->>Agent: JSON elements summary
+    
+    Agent->>MCP: call enter_text(text: "john@doe.com", id: "input_email")
+    MCP->>App: Inject text into target field
+    App-->>MCP: Success
+    
+    Agent->>MCP: call tap(text: "Continue")
+    MCP->>App: Dispatch pointer event / trigger callback
+    App-->>MCP: Success
+    
+    Agent->>MCP: call take_screenshot()
+    MCP-->>Agent: Screenshot image artifact
+</div></div>
+<hr class="doc-divider">
+<h2 id="3--best-practices-for-reliable-agent-driving" class="doc-h2"><a href="#3--best-practices-for-reliable-agent-driving" class="heading-anchor">#</a> 3. Best Practices for Reliable Agent Driving</h2>
+<ol class="doc-ordered-list">
+<li><strong>Discover Before Action:</strong> Always invoke <code class="inline-code">get_interactive_elements</code> after navigation or page changes to obtain fresh element IDs and visible labels.</li>
+<li><strong>Handle Async &amp; Animations:</strong> Allow transitions to complete before triggering subsequent taps.</li>
+<li><strong>Verify via Screenshots &amp; Logs:</strong> Use <code class="inline-code">take_screenshot</code> at key milestones to visually confirm UI state changes and <code class="inline-code">get_logs</code> to diagnose unhandled exceptions.</li>
+<li><strong>Resilient Matching:</strong> Prefer text-based targeting (<code class="inline-code">tap(text: &quot;...&quot;)</code>) when labels are distinct, or fall back to ID-based targeting when multiple identical labels exist.</li>
+</ul>
+<hr class="doc-divider">
+<h2 id="4--related-skills" class="doc-h2"><a href="#4--related-skills" class="heading-anchor">#</a> 4. Related Skills</h2>
+<ul class="doc-list">
+<li><a href="../marionette-hub/marionette-hub.html" class="skill-ref-link" title="Primary coordinator and entry point for Marionette MCP and marionette_flutter AI-driven runtime UI interaction, automated smoke testing, and real-time element inspection. Use when connecting agents to running Flutter apps, performing live visual verification, driving interactive test flows, or configuring Marionette for custom design systems."><code class="inline-code">marionette-hub</code> <span class="ext-icon">↗</span></a> — Main entry point.</li>
+<li><a href="../marionette-custom-widgets/marionette-custom-widgets.html" class="skill-ref-link" title="Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text fields, canvas badges, clickable cards) to work seamlessly with Marionette MCP using MarionetteConfiguration, isInteractiveWidget, extractText, and Semantics wrappers."><code class="inline-code">marionette-custom-widgets</code> <span class="ext-icon">↗</span></a> — Custom widget text extraction &amp; interactivity.</li>
+<li><a href="../../testing-integration/testing-integration.html" class="skill-ref-link" title="Standards and patterns for End-to-End Integration Testing across Mobile (Android, iOS), Web (Chrome), and Desktop (macOS, Windows, Linux) using package:integration_test. Covers platform driver setup, responsive viewport sizing, DI resets, complete user journeys, and CI/CD execution."><code class="inline-code">testing-integration</code> <span class="ext-icon">↗</span></a> — Automated regression testing.</li>
+</ul>
 
     </article>
 
+<div class="related-skills-section" style="margin-top: 3rem;">
+<h3 class="doc-h3" data-i18n="sub_skills_title">Пов'язані та рекомендовані скіли</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+<a href="../marionette-hub/marionette-hub.html" class="checklist-item" style="text-decoration: none; display: block;">
+  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
+    marionette-hub ↗
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
+    Тестування (Unit, Widget, BLoC)
+  </div>
+  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+    Primary coordinator and entry point for Marionette MCP and marionette_flutter AI-driven runtime UI interaction...
+  </div>
+</a>
+<a href="../marionette-custom-widgets/marionette-custom-widgets.html" class="checklist-item" style="text-decoration: none; display: block;">
+  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
+    marionette-custom-widgets ↗
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
+    Тестування (Unit, Widget, BLoC)
+  </div>
+  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+    Architecture, checklist, and recipes for adapting custom Flutter design systems (UI Kit, custom buttons, text ...
+  </div>
+</a>
+<a href="../../testing-integration/testing-integration.html" class="checklist-item" style="text-decoration: none; display: block;">
+  <div style="font-weight: 700; color: var(--brand-primary); font-family: var(--font-heading); margin-bottom: 0.3rem;">
+    testing-integration ↗
+  </div>
+  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;" data-cat-ua="Тестування (Unit, Widget, BLoC)" data-cat-en="Testing">
+    Тестування (Unit, Widget, BLoC)
+  </div>
+  <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+    Standards and patterns for End-to-End Integration Testing across Mobile (Android, iOS), Web (Chrome), and Desk...
+  </div>
+</a>
+</div></div>
 
 
     <footer class="footer">
-      <p>© 2026 Antigravity Flutter Architecture • Generated automatically with <a href="../../documentation/skill-html-doc-generator/skill-html-doc-generator.html" class="doc-link">skill-html-doc-generator</a></p>
+      <p>© 2026 Antigravity Flutter Architecture • Generated automatically with <a href="../../../documentation/skill-html-doc-generator/skill-html-doc-generator.html" class="doc-link">skill-html-doc-generator</a></p>
     </footer>
   </main>
 
